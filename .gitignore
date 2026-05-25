@@ -1,0 +1,27 @@
+# Pesquisas, briefings e arquivos internos
+*.csv
+*.pdf
+BRIEFING.md
+DEPLOY.md
+*pesquisa*
+index*exemplo*.html
+
+# PNGs/JPGs originais — só comitar WebPs em img/
+img/*.png
+img/*.jpg
+img/*.jpeg
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
