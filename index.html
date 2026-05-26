@@ -856,16 +856,16 @@ vturb-smartplayer video {
   position: relative;
 }
 .bonus-card.timed::before {
-  content: 'Apenas pra quem entra agora';
+  content: 'Bônus somente agora';
   position: absolute;
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(180deg, var(--mint), var(--mint-deep));
   color: #0a1f12;
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   padding: 6px 14px;
   border-radius: 999px;
@@ -935,6 +935,19 @@ vturb-smartplayer video {
   margin-bottom: 22px;
   position: relative;
   overflow: hidden;
+}
+.bonus-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bonus-media.contain {
+  background: linear-gradient(135deg, #0c0e13 0%, #15171d 100%);
+}
+.bonus-media.contain img {
+  object-fit: contain;
+  padding: 12px;
 }
 .bonus-media-placeholder {
   position: absolute; inset: 0;
@@ -1921,7 +1934,7 @@ vturb-smartplayer video {
           <li><span class="arrow-bullet">→</span><span class="item-text">leu sobre CDB, Tesouro, FII e ficou mais confuso ainda</span></li>
           <li><span class="arrow-bullet">→</span><span class="item-text">teve medo de clicar e perder dinheiro</span></li>
           <li><span class="arrow-bullet">→</span><span class="item-text">ouviu dica de amigo e não soube se era pra você</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">comprou curso que era avançado demais e parou</span></li>
+          <li><span class="arrow-bullet">→</span><span class="item-text">comprou um curso avançado demais e parou no meio</span></li>
         </ul>
       </div>
 
@@ -2165,8 +2178,8 @@ vturb-smartplayer video {
 
     <div class="bonuses-grid">
       <div class="bonus-card featured">
-        <div class="bonus-media">
-          <div class="bonus-media-placeholder">Imagem do Técnico<br><small>(IA, mock da interface)</small></div>
+        <div class="bonus-media contain">
+          <img src="/img/bonus-tecnico.webp" alt="O Técnico, IA exclusiva dos alunos" width="540" height="540" loading="lazy">
         </div>
         <div class="bonus-tag">Bônus 01</div>
         <h3 class="bonus-title">O <em>Técnico</em>: IA exclusiva dos alunos</h3>
@@ -2186,7 +2199,7 @@ vturb-smartplayer video {
 
       <div class="bonus-card">
         <div class="bonus-media">
-          <div class="bonus-media-placeholder">Imagem das<br>Carteiras Prontas</div>
+          <img src="/img/bonus-carteiras.webp" alt="4 Carteiras Prontas por perfil" width="600" height="400" loading="lazy">
         </div>
         <div class="bonus-tag">Bônus 03</div>
         <h3 class="bonus-title">4 <em>Carteiras Prontas</em> por perfil</h3>
@@ -2195,8 +2208,8 @@ vturb-smartplayer video {
       </div>
 
       <div class="bonus-card">
-        <div class="bonus-media">
-          <div class="bonus-media-placeholder">Imagem do Suporte<br>30 dias</div>
+        <div class="bonus-media contain">
+          <img src="/img/bonus-suporte.webp" alt="Suporte direto por 30 dias" width="600" height="400" loading="lazy">
         </div>
         <div class="bonus-tag">Bônus 04</div>
         <h3 class="bonus-title"><em>Suporte</em> direto por 30 dias</h3>
@@ -2206,9 +2219,9 @@ vturb-smartplayer video {
 
       <div class="bonus-card timed">
         <div class="bonus-media">
-          <div class="bonus-media-placeholder">Imagem da Imersão<br>Ao Vivo</div>
+          <img src="/img/bonus-aovivo.webp" alt="Imersão Investindo Comigo Ao Vivo" width="528" height="420" loading="lazy">
         </div>
-        <div class="bonus-tag">Bônus de presença</div>
+        <div class="bonus-tag">Bônus somente agora</div>
         <h3 class="bonus-title">Imersão <em>Investindo Comigo Ao Vivo</em></h3>
         <p class="bonus-text">Ingresso VIP pra mentoria ao vivo com o Rian. Conflitos políticos, tarifas, dólar oscilando: o Rian vai te mostrar onde ele mesmo está investindo nesse cenário e o que protege patrimônio agora.</p>
         <span class="bonus-strike"><span class="price">R$ 997</span><span class="free">GRÁTIS</span></span>
@@ -2216,9 +2229,9 @@ vturb-smartplayer video {
 
       <div class="bonus-card timed">
         <div class="bonus-media">
-          <div class="bonus-media-placeholder">Imagem da Imersão<br>Ordem Financeira</div>
+          <img src="/img/bonus-ordem.webp" alt="Imersão Ordem Financeira" width="528" height="420" loading="lazy">
         </div>
-        <div class="bonus-tag">Bônus de presença</div>
+        <div class="bonus-tag">Bônus somente agora</div>
         <h3 class="bonus-title">Imersão <em>Ordem Financeira</em></h3>
         <p class="bonus-text">Antes de investir, organizar. Descubra pra onde seu dinheiro vai todo mês, como quitar dívidas do jeito certo e montar a reserva de emergência. A base correta pra investir com tranquilidade.</p>
         <span class="bonus-strike"><span class="price">R$ 497</span><span class="free">GRÁTIS</span></span>
