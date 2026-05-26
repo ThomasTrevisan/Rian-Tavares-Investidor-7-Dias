@@ -106,11 +106,11 @@
   --paper-warm: #ebe1cc;
   --paper-deep: #e0d4b8;
 
-  /* Terracotta (acento) */
-  --terra-bright: #d27a52;
-  --terra: #b85c38;
-  --terra-deep: #9a4a2a;
-  --terra-dark: #6f3520;
+  /* Azul (acento — estilo editorial financeiro moderno) */
+  --terra-bright: #4dbedb;
+  --terra: #2580bc;
+  --terra-deep: #1a5d8c;
+  --terra-dark: #0e3b5d;
 
   /* Sand (neutros quentes) */
   --sand: #c4a574;
@@ -147,7 +147,8 @@ body {
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
-em { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0; }
+em { font-style: normal; color: var(--terra); }
+.section-dark em, .section-dark-soft em, .section-navy em, .hero em, .section-offer em, .whatsapp-section em { color: var(--terra-bright); }
 strong { font-weight: 700; }
 main { display: block; }
 
@@ -845,7 +846,7 @@ vturb-smartplayer video {
 .bonus-card.featured {
   border-color: var(--terra);
   background: linear-gradient(180deg, var(--paper-light) 0%, var(--paper-warm) 100%);
-  box-shadow: 0 14px 36px rgba(184, 92, 56, 0.12);
+  box-shadow: 0 14px 36px rgba(37, 128, 188, 0.16);
 }
 .bonus-card.featured::before {
   content: 'Bônus principal';
@@ -863,6 +864,28 @@ vturb-smartplayer video {
   border-radius: 999px;
   white-space: nowrap;
 }
+.bonus-card.timed {
+  border-color: rgba(196, 165, 116, 0.45);
+  background: linear-gradient(180deg, #fdf6e7 0%, var(--paper-warm) 100%);
+  position: relative;
+}
+.bonus-card.timed::before {
+  content: '⏱ Apenas pra quem entra agora';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #c89858, #8a6534);
+  color: var(--paper-light);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.bonus-card.timed .bonus-tag { color: #8a6534; }
 .bonus-roman {
   font-family: 'Instrument Serif', Georgia, serif;
   font-style: italic;
@@ -2152,7 +2175,7 @@ vturb-smartplayer video {
 <section class="section section-dark-soft">
   <div class="container">
     <div class="bonuses-eyebrow-wrap">
-      <h2 class="section-headline">Você ainda recebe <em>3 ferramentas</em> pra aplicar enquanto aprende.</h2>
+      <h2 class="section-headline">Você ainda recebe <em>6 bônus</em> que aceleram seu resultado.</h2>
     </div>
 
     <div class="bonuses-grid">
@@ -2162,27 +2185,57 @@ vturb-smartplayer video {
         </div>
         <div class="bonus-tag">Bônus 01</div>
         <h3 class="bonus-title">O <em>Técnico</em>: IA exclusiva dos alunos</h3>
-        <p class="bonus-text">IA treinada com as 4 aulas e a minha metodologia. Como um técnico de futebol: te diz quando defender (renda fixa) e quando atacar (renda variável) com base no cenário atual. Tira dúvida, valida decisão, orienta. É ter um Rian pequeno do lado.</p>
+        <p class="bonus-text">IA treinada com as 4 aulas e a metodologia do Rian. Acompanha tendências da Selic em tempo real, monitora o cenário e te diz quando defender (renda fixa) ou atacar (renda variável). É como ter o Rian do lado, sempre que precisar.</p>
+        <span class="bonus-strike"><span class="price">R$ 1.997</span><span class="free">GRÁTIS</span></span>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-media">
+          <div class="bonus-media-placeholder">Imagem da Imersão<br>Renda em Dólar</div>
+        </div>
+        <div class="bonus-tag">Bônus 02</div>
+        <h3 class="bonus-title">Imersão <em>Renda em Dólar</em></h3>
+        <p class="bonus-text">O segredo dos clientes com os maiores retornos que o Rian assessorou: parte do dinheiro investido em dólar. Aprenda a investir em Apple, Google, Amazon e proteja seu patrimônio da inflação brasileira.</p>
         <span class="bonus-strike"><span class="price">R$ 997</span><span class="free">GRÁTIS</span></span>
       </div>
 
       <div class="bonus-card">
         <div class="bonus-media">
-          <div class="bonus-media-placeholder">Imagem do Bônus 2<br><small>(a definir)</small></div>
+          <div class="bonus-media-placeholder">Imagem das<br>Carteiras Prontas</div>
         </div>
-        <div class="bonus-tag">Bônus 02</div>
-        <h3 class="bonus-title">Bônus 2: a definir</h3>
-        <p class="bonus-text">Espaço reservado pro segundo bônus. Quando você confirmar (ebook, planilha, comunidade, aula extra, etc.), eu adapto a copy e atualizo aqui.</p>
-        <span class="bonus-strike"><span class="price">R$ 297</span><span class="free">GRÁTIS</span></span>
+        <div class="bonus-tag">Bônus 03</div>
+        <h3 class="bonus-title">4 <em>Carteiras Prontas</em> por perfil</h3>
+        <p class="bonus-text">4 carteiras de investimento montadas pelo Rian, uma pra cada perfil. Descobre seu perfil na Aula 1, abre a carteira correspondente e copia. Sem quebrar a cabeça, sem palpite, sem se perder em escolha.</p>
+        <span class="bonus-strike"><span class="price">R$ 1.497</span><span class="free">GRÁTIS</span></span>
       </div>
 
       <div class="bonus-card">
         <div class="bonus-media">
-          <div class="bonus-media-placeholder">Imagem do Bônus 3<br><small>(a definir)</small></div>
+          <div class="bonus-media-placeholder">Imagem do Suporte<br>30 dias</div>
         </div>
-        <div class="bonus-tag">Bônus 03</div>
-        <h3 class="bonus-title">Bônus 3: a definir</h3>
-        <p class="bonus-text">Espaço reservado pro terceiro bônus. Mesmo padrão dos outros, ajusto o título, descrição e valor riscado quando você me passar.</p>
+        <div class="bonus-tag">Bônus 04</div>
+        <h3 class="bonus-title"><em>Suporte</em> direto por 30 dias</h3>
+        <p class="bonus-text">O time inteiro do Rian disponível pelos seus primeiros 30 dias como investidor. Pra te acompanhar de perto e tirar qualquer dúvida enquanto você aplica o método na prática.</p>
+        <span class="bonus-strike"><span class="price">R$ 497</span><span class="free">GRÁTIS</span></span>
+      </div>
+
+      <div class="bonus-card timed">
+        <div class="bonus-media">
+          <div class="bonus-media-placeholder">Imagem da Imersão<br>Ao Vivo</div>
+        </div>
+        <div class="bonus-tag">Bônus de presença</div>
+        <h3 class="bonus-title">Imersão <em>Investindo Comigo Ao Vivo</em></h3>
+        <p class="bonus-text">Ingresso VIP pra mentoria ao vivo com o Rian. Conflitos políticos, tarifas, dólar oscilando: o Rian vai te mostrar onde ele mesmo está investindo nesse cenário e o que protege patrimônio agora.</p>
+        <span class="bonus-strike"><span class="price">R$ 997</span><span class="free">GRÁTIS</span></span>
+      </div>
+
+      <div class="bonus-card timed">
+        <div class="bonus-media">
+          <div class="bonus-media-placeholder">Imagem da Imersão<br>Ordem Financeira</div>
+        </div>
+        <div class="bonus-tag">Bônus de presença</div>
+        <h3 class="bonus-title">Imersão <em>Ordem Financeira</em></h3>
+        <p class="bonus-text">Antes de investir, organizar. Descubra pra onde seu dinheiro vai todo mês, como quitar dívidas do jeito certo e montar a reserva de emergência. A base correta pra investir com tranquilidade.</p>
         <span class="bonus-strike"><span class="price">R$ 497</span><span class="free">GRÁTIS</span></span>
       </div>
     </div>
@@ -2276,16 +2329,19 @@ vturb-smartplayer video {
 
       <ul class="offer-benefits">
         <li><span class="item-text">As 4 aulas completas: corretora, renda fixa, renda variável e carteira</span></li>
-        <li><span class="item-text">Acesso vitalício: pague uma vez, assista quantas vezes quiser <span class="benefit-strike"><span class="price">R$ 497</span><span class="free">GRÁTIS</span></span></span></li>
-        <li><span class="item-text">O Técnico: IA exclusiva dos alunos <span class="benefit-strike"><span class="price">R$ 997</span><span class="free">GRÁTIS</span></span></span></li>
-        <li><span class="item-text">Bônus 02 (a definir) <span class="benefit-strike"><span class="price">R$ 297</span><span class="free">GRÁTIS</span></span></span></li>
-        <li><span class="item-text">Bônus 03 (a definir) <span class="benefit-strike"><span class="price">R$ 497</span><span class="free">GRÁTIS</span></span></span></li>
-        <li><span class="item-text">7 dias de garantia incondicional</span></li>
+        <li><span class="item-text">Acesso vitalício <span class="benefit-strike"><span class="price">R$ 497</span><span class="free">GRÁTIS</span></span></span></li>
+        <li><span class="item-text">O Técnico: IA exclusiva dos alunos <span class="benefit-strike"><span class="price">R$ 1.997</span><span class="free">GRÁTIS</span></span></span></li>
+        <li><span class="item-text">Imersão Renda em Dólar <span class="benefit-strike"><span class="price">R$ 997</span><span class="free">GRÁTIS</span></span></span></li>
+        <li><span class="item-text">4 Carteiras Prontas por perfil <span class="benefit-strike"><span class="price">R$ 1.497</span><span class="free">GRÁTIS</span></span></span></li>
+        <li><span class="item-text">Suporte direto por 30 dias <span class="benefit-strike"><span class="price">R$ 497</span><span class="free">GRÁTIS</span></span></span></li>
+        <li><span class="item-text">Imersão Investindo Comigo Ao Vivo <span class="benefit-strike"><span class="price">R$ 997</span><span class="free">GRÁTIS</span></span></span></li>
+        <li><span class="item-text">Imersão Ordem Financeira <span class="benefit-strike"><span class="price">R$ 497</span><span class="free">GRÁTIS</span></span></span></li>
+        <li><span class="item-text">15 dias de garantia incondicional</span></li>
       </ul>
 
       <div class="offer-price-wrap">
         <div class="offer-price-from">Condição de lançamento</div>
-        <span class="offer-price-old">De R$ 2.288 por apenas</span>
+        <span class="offer-price-old">De R$ 6.979 por apenas</span>
         <div class="offer-price">
           <span class="currency">12x</span><span class="integer">19</span><span class="decimals">,21</span>
         </div>
@@ -2312,14 +2368,14 @@ vturb-smartplayer video {
     <div class="warranty">
       <div class="warranty-seal">
         <div class="warranty-seal-inner">
-          <div class="warranty-seal-days">7</div>
+          <div class="warranty-seal-days">15</div>
           <div class="warranty-seal-label">Dias de garantia</div>
         </div>
       </div>
       <div class="warranty-content">
         <span class="section-eyebrow">Risco zero</span>
-        <h2>Se em 7 dias você não sentir que <em>vale cada centavo</em>, eu devolvo seu dinheiro.</h2>
-        <p>Você entra, assiste as aulas, abre sua conta, faz seu primeiro investimento. Se em qualquer momento dentro dos primeiros 7 dias você sentir que não é pra você, basta um clique. <strong>Sem perguntas, sem burocracia.</strong></p>
+        <h2>Se em 15 dias você não sentir que <em>vale cada centavo</em>, eu devolvo seu dinheiro.</h2>
+        <p>Você entra, assiste as aulas, abre sua conta, faz seu primeiro investimento. Se em qualquer momento dentro dos primeiros 15 dias você sentir que não é pra você, basta um clique. <strong>Sem perguntas, sem burocracia.</strong></p>
         <p>O risco é todo meu. O seu compromisso é simples: assistir e aplicar.</p>
         <a href="https://pay.hub.la/COLOCAR_HASH_HUBLA_AQUI" class="cta cta-bigger">
           ENTRAR COM RISCO ZERO
@@ -2422,7 +2478,7 @@ vturb-smartplayer video {
       <details class="faq-item">
         <summary class="faq-summary">E se eu não gostar do curso?<span class="faq-chevron">+</span></summary>
         <div class="faq-body">
-          <p>Você tem 7 dias de garantia incondicional. Em qualquer momento dentro desse período, basta pedir reembolso com um clique. Sem perguntas, sem burocracia. O dinheiro volta integral.</p>
+          <p>Você tem 15 dias de garantia incondicional. Em qualquer momento dentro desse período, basta pedir reembolso com um clique. Sem perguntas, sem burocracia. O dinheiro volta integral.</p>
         </div>
       </details>
 
@@ -2446,7 +2502,7 @@ vturb-smartplayer video {
         QUERO COMEÇAR A INVESTIR
         <span class="cta-arrow">→</span>
       </a>
-      <span class="cta-microcopy">12x R$ 19,21 ou R$ 189 à vista · Acesso imediato · 7 dias de garantia</span>
+      <span class="cta-microcopy">12x R$ 19,21 ou R$ 189 à vista · Acesso imediato · 15 dias de garantia</span>
     </div>
   </div>
 </section>
