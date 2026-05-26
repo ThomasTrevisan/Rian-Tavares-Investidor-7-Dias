@@ -943,11 +943,16 @@ vturb-smartplayer video {
   display: block;
 }
 .bonus-media.contain {
-  background: linear-gradient(135deg, #0c0e13 0%, #15171d 100%);
+  background: linear-gradient(135deg, var(--paper-light) 0%, var(--paper-warm) 100%);
 }
 .bonus-media.contain img {
   object-fit: contain;
   padding: 12px;
+}
+.bonus-media.contain.align-bottom img {
+  object-position: bottom;
+  padding: 0;
+  height: 110%;
 }
 .bonus-media-placeholder {
   position: absolute; inset: 0;
@@ -2177,7 +2182,7 @@ vturb-smartplayer video {
     </div>
 
     <div class="bonuses-grid">
-      <div class="bonus-card featured">
+      <div class="bonus-card">
         <div class="bonus-media contain">
           <img src="/img/bonus-tecnico.webp" alt="O Técnico, IA exclusiva dos alunos" width="540" height="540" loading="lazy">
         </div>
@@ -2208,7 +2213,7 @@ vturb-smartplayer video {
       </div>
 
       <div class="bonus-card">
-        <div class="bonus-media contain">
+        <div class="bonus-media contain align-bottom">
           <img src="/img/bonus-suporte.webp" alt="Suporte direto por 30 dias" width="600" height="400" loading="lazy">
         </div>
         <div class="bonus-tag">Bônus 04</div>
