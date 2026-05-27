@@ -19,9 +19,15 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://investidor.riantavares.com.br/img/og.webp">
 
+<!-- Preconnect para origens do VTurb (reduz latencia inicial do player) -->
+<link rel="preconnect" href="https://scripts.converteai.net" crossorigin>
+<link rel="preconnect" href="https://cdn.converteai.net" crossorigin>
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+
 <!-- Preload fontes críticas (self-hosted) -->
 <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/instrument-serif-400i-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument-serif-400n-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <style>
 /* ================= FONTES (self-hosted) ================= */
@@ -92,9 +98,9 @@
 
   /* Azul (acento — estilo editorial financeiro moderno) */
   --terra-bright: #4dbedb;
-  --terra: #2580bc;
-  --terra-deep: #1a5d8c;
-  --terra-dark: #0e3b5d;
+  --terra: #1a5d8c;
+  --terra-deep: #0e3b5d;
+  --terra-dark: #06243f;
 
   /* Verde menta (CTA) */
   --mint-bright: #7ce896;
