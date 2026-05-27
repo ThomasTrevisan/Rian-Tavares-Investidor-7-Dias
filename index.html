@@ -1073,8 +1073,10 @@ vturb-smartplayer video {
   color: var(--text-paper);
   position: relative;
   overflow: hidden;
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
+  scroll-margin-top: 0;
 }
-#oferta { scroll-margin-top: 24px; }
 .section-offer::before {
   content: '';
   position: absolute;
@@ -2256,8 +2258,8 @@ vturb-smartplayer video {
 <section class="section section-paper-warm">
   <div class="container">
     <div style="text-align: center; max-width: 820px; margin: 0 auto 50px;">
-      <h2 class="section-headline">Os vídeos do Rian já rodaram o Brasil. <em>+200 milhões de views</em> falando sobre dinheiro.</h2>
-      <p class="section-lede" style="margin: 18px auto 0;">Cada recorte do Rian sobre Selic, dólar, renda fixa ou bolsa faz milhão de brasileiro parar o feed pra ouvir. Mas 60 segundos é só a ponta. O passo a passo completo, do zero até a sua carteira pronta, mora dentro do Investidor em 7 Dias.</p>
+      <h2 class="section-headline">Os vídeos que viralizaram o Brasil todo, somando <em>+200 milhões de views</em>.</h2>
+      <p class="section-lede" style="margin: 18px auto 0;">Cada recorte sobre Selic, dólar, renda fixa ou bolsa que circulou no Instagram, TikTok e YouTube fez milhão de brasileiro parar o feed pra ouvir. Mas 60 segundos é só a ponta. O passo a passo completo, do zero até a sua carteira pronta, está dentro do Investidor em 7 Dias.</p>
     </div>
 
     <div class="virals-grid">
@@ -2315,9 +2317,9 @@ vturb-smartplayer video {
 </section>
 
 <!-- ============================================ OFERTA ============================================ -->
-<section class="section section-offer">
+<section class="section section-offer" id="oferta">
   <div class="offer-wrap">
-    <div class="offer-eyebrow-wrap" id="oferta">
+    <div class="offer-eyebrow-wrap">
       <h2 class="offer-headline">Tudo pra você sair da poupança <em>nos próximos 7 dias</em>.</h2>
       <p class="offer-subheadline">Acesso vitalício às 4 aulas, ao Técnico (IA) e aos demais bônus. Numa condição especial de turma.</p>
     </div>
