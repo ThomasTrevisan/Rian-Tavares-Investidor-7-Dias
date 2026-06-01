@@ -245,34 +245,6 @@ main { display: block; }
 .cta-microcopy { display: block; margin-top: 14px; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.01em; }
 .section-dark .cta-microcopy, .section-dark-soft .cta-microcopy, .section-navy .cta-microcopy { color: var(--text-paper-dim); }
 
-/* ================= URGENCY BAR (escassez) ================= */
-.urgency-bar {
-  background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-deep));
-  color: var(--ink-deep);
-  text-align: center;
-  padding: 10px 24px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  position: relative;
-  z-index: 5;
-}
-.urgency-bar .dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #c1132d;
-  margin-right: 10px;
-  vertical-align: middle;
-  animation: pulse 1.4s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(193, 19, 45, 0.6); }
-  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(193, 19, 45, 0); }
-}
-
 /* ================= HERO ================= */
 .hero {
   position: relative;
@@ -1280,9 +1252,9 @@ vturb-smartplayer iframe, vturb-smartplayer video {
 @media (max-width: 640px) {
   .section { padding: 56px 20px; }
   .hero-headline { font-size: 32px; }
-  .hero-badges { flex-wrap: nowrap; gap: 8px; max-width: 100%; }
-  .hero-badge { padding: 8px 12px; font-size: 10px; letter-spacing: 0.06em; gap: 6px; flex: 0 1 auto; }
-  .hero-badge svg { width: 12px; height: 12px; }
+  .hero-badges { flex-wrap: nowrap; gap: 6px; max-width: 100%; }
+  .hero-badge { padding: 7px 10px; font-size: 9.5px; letter-spacing: 0.04em; gap: 5px; flex: 1 1 0; min-width: 0; line-height: 1.25; }
+  .hero-badge svg { width: 11px; height: 11px; }
   .cta { width: 100%; max-width: 360px; padding: 16px 18px; font-size: 12px; letter-spacing: 0.1em; white-space: normal; text-align: center; line-height: 1.25; }
   .cta.cta-bigger { padding: 18px 20px; font-size: 12.5px; }
   .cta.cta-large { padding: 20px 22px; font-size: 14px; max-width: 380px; }
@@ -1315,10 +1287,6 @@ vturb-smartplayer iframe, vturb-smartplayer video {
 </head>
 <body>
 
-<div class="urgency-bar">
-  <span class="dot"></span>Vagas limitadas · Bônus exclusivos por tempo limitado
-</div>
-
 <main>
 
 <!-- HERO -->
@@ -1340,23 +1308,16 @@ vturb-smartplayer iframe, vturb-smartplayer video {
     <div class="hero-badges">
       <span class="hero-badge">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.75c1.63 0 3.07.39 4.24.9 1.08.48 1.76 1.56 1.76 2.73L18 18H6l.01-1.62c0-1.17.68-2.25 1.76-2.73 1.17-.51 2.6-.9 4.23-.9zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/></svg>
-        +1.500 ALUNOS FORMADOS
+        +1.500 ALUNOS
       </span>
       <span class="hero-badge">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0-6C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" opacity=".25"/><path d="M12 1a11 11 0 1 1 0 22 11 11 0 0 1 0-22zm0 2a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm.5 4v5.25l4.5 2.67-.75 1.23L11 13V7h1.5z"/></svg>
-        +13 ANOS NO MERCADO
+        13 ANOS DE MERCADO
       </span>
       <span class="hero-badge">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M5 8h11.5a2.5 2.5 0 0 1 0 5h-9a2.5 2.5 0 0 0 0 5H19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         R$ 5 BI EM MESA
       </span>
-    </div>
-
-    <div class="hero-video-wrap">
-      <div class="hero-video-placeholder">
-        <div class="play-icon"></div>
-        <p class="ph-text">Espaço reservado pro VSL.<br>Aguardando ID do player VTurb.</p>
-      </div>
     </div>
 
     <div class="hero-cta-row">
@@ -1839,7 +1800,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
 
     <div class="section-cta-wrap">
       <a href="#oferta" class="cta cta-bigger">
-        QUERO TUDO ISSO POR R$ 1.247
+        QUERO TUDO ISSO POR R$ 1.997
         <span class="cta-arrow">→</span>
       </a>
     </div>
@@ -1915,9 +1876,9 @@ vturb-smartplayer iframe, vturb-smartplayer video {
         <div class="offer-price-from">Condição especial</div>
         <span class="offer-price-old">De R$ 5.174 por apenas</span>
         <div class="offer-price">
-          <span class="currency">12x</span><span class="integer">126</span><span class="decimals">,71</span>
+          <span class="currency">12x</span><span class="integer">202</span><span class="decimals">,91</span>
         </div>
-        <div class="offer-price-installments">ou R$ 1.247 à vista</div>
+        <div class="offer-price-installments">ou R$ 1.997 à vista</div>
       </div>
 
       <a href="https://pay.hub.la/COLOCAR_HASH_HUBLA_AQUI" class="cta cta-large">
@@ -2066,7 +2027,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
         QUERO MINHA VAGA AGORA
         <span class="cta-arrow">→</span>
       </a>
-      <span class="cta-microcopy">12x R$ 126,71 ou R$ 1.247 à vista · Acesso imediato · 15 dias de garantia</span>
+      <span class="cta-microcopy">12x R$ 202,91 ou R$ 1.997 à vista · Acesso imediato · 15 dias de garantia</span>
     </div>
   </div>
 </section>
