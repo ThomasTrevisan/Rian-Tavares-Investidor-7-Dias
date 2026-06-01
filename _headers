@@ -8,6 +8,12 @@
 /index.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
+/ipl/
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/ipl/index.html
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
 /img/*
   Cache-Control: public, max-age=31536000, immutable, no-transform
 
