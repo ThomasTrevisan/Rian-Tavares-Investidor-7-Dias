@@ -998,6 +998,45 @@ vturb-smartplayer iframe, vturb-smartplayer video {
 .bio-content p { font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 18px; }
 .bio-cta { margin-top: 32px; }
 
+/* BIO PROOF (gráfico dentro da bio) */
+.bio-proof {
+  margin-top: 28px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(138, 108, 52, 0.22);
+  border-radius: var(--radius-lg);
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 22px;
+  align-items: center;
+}
+.bio-proof img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+.bio-proof-eyebrow {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 10px;
+}
+.bio-proof-text p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 8px !important;
+}
+.bio-proof-text p strong { color: var(--gold-deep); font-weight: 700; }
+.bio-proof-note {
+  font-size: 11px !important;
+  color: var(--ink-faded) !important;
+  line-height: 1.45 !important;
+}
+
 /* ================= OFERTA ================= */
 .section-offer {
   background: var(--ink-deepest);
@@ -1285,6 +1324,8 @@ vturb-smartplayer iframe, vturb-smartplayer video {
   .virals-total-divider { width: 60px; height: 1px; }
   .bio { grid-template-columns: 1fr; gap: 40px; }
   .bio-photo { max-width: 400px; margin: 0 auto; }
+  .bio-proof { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+  .bio-proof img { max-width: 280px; margin: 0 auto; }
   .warranty { grid-template-columns: 1fr; gap: 30px; text-align: center; }
   .warranty-seal { max-width: 240px; margin: 0 auto; }
   .module-body { padding: 0 24px 24px 24px; }
@@ -1564,7 +1605,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
       </div>
       <div class="bio-content">
         <span class="section-eyebrow">Quem é o Rian</span>
-        <h2>A carteira do Rian rendeu <em>155% em 8 anos</em>. O mesmo método está dentro do programa.</h2>
+        <h2>A carteira do Rian <em>quase triplicou em 8 anos</em>. O mesmo método está dentro do programa.</h2>
         <p>Sou Rian Tavares. Economista, 13 anos no mercado financeiro, liderei operações de quase R$ 5 bilhões mensais em uma mesa de renda fixa de assessoria de investimentos. Hoje sou CEO da Hedge Consultoria e autor de 2 livros sobre investimentos: <em>"A Renda é Fixa, o Preço Não"</em> e <em>"Não Existe Almoço Grátis"</em>.</p>
 
         <aside class="stat-stack bio-stat-stack">
@@ -1862,6 +1903,15 @@ vturb-smartplayer iframe, vturb-smartplayer video {
         <p>13 anos no mercado financeiro. Liderei operações de quase R$ 5 bilhões mensais em uma mesa de renda fixa de assessoria de investimentos, aconselhei os maiores empresários do Brasil e cuidei das carteiras das famílias mais ricas do país.</p>
         <p>Sou também atleta. Já fui 2 vezes Ultra Man, fiz Iron Man e outras 5 maratonas. E construir patrimônio é exatamente igual: não é uma corrida de domingo, é uma prova longa. Quem cruza a linha de chegada tem três coisas: o caminho certo, o equipamento certo e um treinador que já correu a prova antes.</p>
         <p>É exatamente isso que o Invista Para a Liberdade entrega: o mapa, o equipamento e o treinador. Pra você não precisar fazer sozinho. Porque sozinho, no mercado, sai caro.</p>
+
+        <div class="bio-proof">
+          <img src="/img/carteira.webp" alt="Gráfico da carteira do Rian de 2018 a 2026" width="772" height="746" loading="lazy">
+          <div class="bio-proof-text">
+            <div class="bio-proof-eyebrow">A carteira do Rian, 2018 a 2026</div>
+            <p>Acumulado de <strong>+195%</strong> contra <strong>+96% do CDI</strong> no mesmo período. Em outras palavras, mais que o dobro do que o mercado entregou de juros, com o mesmo critério que está dentro do Invista Para a Liberdade.</p>
+            <p class="bio-proof-note">Rentabilidade passada não garante rentabilidade futura. Conteúdo educacional, não recomendação personalizada.</p>
+          </div>
+        </div>
 
         <a href="https://pay.hub.la/COLOCAR_HASH_HUBLA_AQUI" class="cta cta-bigger bio-cta">
           QUERO O ECOSSISTEMA COMPLETO
