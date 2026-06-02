@@ -602,6 +602,9 @@ vturb-smartplayer iframe, vturb-smartplayer video {
 .audience-list li > .item-text { flex: 1; min-width: 0; }
 .audience-list strong { font-weight: 600; color: var(--text-paper); }
 
+.audience-list-centered { max-width: 720px; margin: 0 auto; }
+.audience-list-centered li { font-size: 17px; }
+
 .stat-stack {
   background: rgba(255,255,255,0.025);
   border-radius: var(--radius-lg);
@@ -609,6 +612,18 @@ vturb-smartplayer iframe, vturb-smartplayer video {
   border: 1px solid rgba(224, 200, 144, 0.18);
   backdrop-filter: blur(8px);
 }
+.bio-stat-stack {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(224, 200, 144, 0.2);
+  padding: 28px 24px;
+  margin: 26px 0 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 32px;
+}
+.bio-stat-stack .stat-stack-item { padding: 12px 0; border: none; }
+.bio-stat-stack .stat-stack-number { font-size: clamp(28px, 3vw, 36px); }
+.bio-stat-stack .stat-stack-label { font-size: 12.5px; }
 .stat-stack-item { padding: 22px 0; border-bottom: 1px solid rgba(224, 200, 144, 0.12); }
 .stat-stack-item:last-child { border-bottom: none; }
 .stat-stack-number {
@@ -1293,6 +1308,8 @@ vturb-smartplayer iframe, vturb-smartplayer video {
   .footer-links { gap: 14px; }
   .stat-stack { padding: 28px 22px; }
   .stat-stack-number { font-size: 36px; }
+  .bio-stat-stack { grid-template-columns: 1fr 1fr; padding: 22px 18px; gap: 4px 16px; }
+  .bio-stat-stack .stat-stack-number { font-size: 26px; }
   .bio-content h2 { font-size: 28px; }
   .virals-grid { grid-template-columns: 1fr; max-width: 320px; }
   .benefit-card { padding: 30px 26px; }
@@ -1335,7 +1352,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
       </span>
       <span class="hero-badge">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M5 8h11.5a2.5 2.5 0 0 1 0 5h-9a2.5 2.5 0 0 0 0 5H19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        R$ 5 BI EM MESA
+        R$ 5 BI GERIDOS
       </span>
     </div>
 
@@ -1464,111 +1481,23 @@ vturb-smartplayer iframe, vturb-smartplayer video {
   </div>
 </section>
 
-<!-- PROBLEMA -->
-<section class="section section-paper-warm">
-  <div class="container">
-    <div style="text-align: center; max-width: 760px; margin: 0 auto;">
-      <h2 class="section-headline">Você não precisa ganhar mais. Você precisa <em>parar de perder</em>.</h2>
-      <p class="section-lede" style="margin: 18px auto 0;">Dinheiro parado perde para a inflação todo mês. Quem não investe por medo de perder já está perdendo, só não enxerga. A boa notícia é que reverter isso leva poucas semanas e um método na ordem certa.</p>
-    </div>
-
-    <div class="problem-grid">
-      <div class="problem-card">
-        <h3>Você se reconhece em alguma dessas?</h3>
-        <ul class="arrow-list">
-          <li><span class="arrow-bullet">→</span><span class="item-text">Sobra dinheiro todo mês, mas fica parado na conta</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Tem medo de perder se clicar no lugar errado</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Você investe, mas o dinheiro não rende como você esperava</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Já tentou aprender por conta e travou no meio do caminho</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Vê todo mundo falar de patrimônio, mas não sabe por onde começar</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Quer renda passiva pra ter mais liberdade no longo prazo</span></li>
-        </ul>
-      </div>
-
-      <div class="problem-cluster">
-        <p>E mesmo assim continua sentindo que <strong>está deixando dinheiro na mesa todo mês</strong>. Que dá pra fazer mais, mas o caminho não está claro.</p>
-
-        <h3 style="font-weight: 600; font-size: clamp(20px, 2.2vw, 24px); line-height: 1.25; margin: 26px 0 18px; color: var(--ink); letter-spacing: -0.022em;">A maioria dos brasileiros nunca aprendeu:</h3>
-
-        <ul class="arrow-list">
-          <li><span class="arrow-bullet">→</span><span class="item-text">como montar uma carteira por objetivo, não por dica</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">o que olhar antes de comprar qualquer ativo</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">quando faz sentido sair da renda fixa</span></li>
-        </ul>
-
-        <p style="margin-top: 26px; font-size: 17px; line-height: 1.5; color: var(--ink); font-weight: 600; letter-spacing: -0.01em;">Chegou a hora de você mudar a sua história com os investimentos.</p>
-      </div>
-    </div>
-
-    <div class="section-cta-wrap">
-      <a href="#oferta" class="cta cta-bigger">
-        QUERO MUDAR ISSO
-        <span class="cta-arrow">→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- BIO CURTA -->
-<section class="section section-paper-light">
-  <div class="container">
-    <div class="bio">
-      <div class="bio-photo">
-        <img src="/img/rian-cinza.webp" alt="Rian Tavares, CEO da Hedge Consultoria" width="1024" height="1536" loading="lazy">
-      </div>
-      <div class="bio-content">
-        <span class="section-eyebrow">Quem é o Rian</span>
-        <h2>A carteira do Rian rendeu <em>155% em 8 anos</em>. O mesmo método está dentro do programa.</h2>
-        <p>Sou Rian Tavares. Economista, 13 anos no mercado financeiro, liderei operações de quase R$ 5 bilhões mensais em uma mesa de renda fixa de assessoria de investimentos. Hoje sou CEO da Hedge Consultoria e autor de 2 livros sobre investimentos: <em>"A Renda é Fixa, o Preço Não"</em> e <em>"Não Existe Almoço Grátis"</em>.</p>
-        <p>Por dentro do mercado, vi como ele é construído pra parecer complicado. E como isso afasta justamente quem mais precisa entender. Decidi fazer o caminho oposto: pegar o que funciona, descomplicar e ensinar de forma direta. Nos últimos 8 anos, minha própria carteira quase triplicou aplicando o mesmo método que ensino aqui.</p>
-
-        <a href="#oferta" class="cta cta-bigger bio-cta">
-          QUERO APRENDER COM O RIAN
-          <span class="cta-arrow">→</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PARA QUEM É -->
 <section class="section section-dark">
-  <div class="container">
-    <div class="audience-grid">
-      <div>
-        <h2 class="section-headline">Se você está em <em>algum desses cenários</em>, esse curso é pra você.</h2>
-        <p class="section-lede" style="margin-bottom: 8px;">Mais de 1.500 alunos formados, do iniciante absoluto ao investidor com carteira já montada que queria entender o que tinha comprado.</p>
-
-        <ul class="audience-list">
-          <li><span class="arrow-bullet">→</span><span class="item-text">Você tem <strong>dinheiro sobrando</strong> todo mês e não sabe o que fazer com ele.</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Já investe, mas a sensação é que <strong>o dinheiro não rende</strong> como deveria.</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Tem medo de perder e por isso <strong>nunca passou da renda fixa básica</strong>.</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Quer entender investimentos pra <strong>cuidar do futuro da sua família</strong>.</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Sonha com <strong>aposentadoria tranquila</strong>, viagens, sair do aluguel, ajudar os pais.</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Quer um <strong>caminho claro</strong>, não mais um curso longo que você não vai assistir.</span></li>
-          <li><span class="arrow-bullet">→</span><span class="item-text">Já tentou aprender por conta e <strong>travou no meio</strong>. Quer ordem na cabeça.</span></li>
-        </ul>
-      </div>
-
-      <aside class="stat-stack">
-        <div class="stat-stack-item">
-          <div class="stat-stack-number">+1.500</div>
-          <div class="stat-stack-label">alunos formados pelo método</div>
-        </div>
-        <div class="stat-stack-item">
-          <div class="stat-stack-number">R$ 5 bi</div>
-          <div class="stat-stack-label">em operações mensais lideradas na mesa de renda fixa</div>
-        </div>
-        <div class="stat-stack-item">
-          <div class="stat-stack-number">13 anos</div>
-          <div class="stat-stack-label">de mercado financeiro em assessoria de investimentos</div>
-        </div>
-        <div class="stat-stack-item">
-          <div class="stat-stack-number">2 livros</div>
-          <div class="stat-stack-label">publicados sobre investimentos e renda fixa</div>
-        </div>
-      </aside>
+  <div class="container-narrow">
+    <div style="text-align: center; max-width: 760px; margin: 0 auto 36px;">
+      <h2 class="section-headline">Se você está em <em>algum desses cenários</em>, esse programa é pra você.</h2>
+      <p class="section-lede" style="margin: 18px auto 0;">Mais de 1.500 alunos formados, do iniciante absoluto ao investidor com carteira já montada que queria entender o que tinha comprado.</p>
     </div>
+
+    <ul class="audience-list audience-list-centered">
+      <li><span class="arrow-bullet">→</span><span class="item-text">Você tem <strong>dinheiro sobrando</strong> todo mês e não sabe o que fazer com ele.</span></li>
+      <li><span class="arrow-bullet">→</span><span class="item-text">Já investe, mas a sensação é que <strong>o dinheiro não rende</strong> como deveria.</span></li>
+      <li><span class="arrow-bullet">→</span><span class="item-text">Tem medo de perder e por isso <strong>nunca passou da renda fixa básica</strong>.</span></li>
+      <li><span class="arrow-bullet">→</span><span class="item-text">Quer entender investimentos pra <strong>cuidar do futuro da sua família</strong>.</span></li>
+      <li><span class="arrow-bullet">→</span><span class="item-text">Sonha com <strong>aposentadoria tranquila</strong>, viagens, sair do aluguel, ajudar os pais.</span></li>
+      <li><span class="arrow-bullet">→</span><span class="item-text">Quer um <strong>caminho claro</strong>, não mais um curso longo que você não vai assistir.</span></li>
+      <li><span class="arrow-bullet">→</span><span class="item-text">Já tentou aprender por conta e <strong>travou no meio</strong>. Quer ordem na cabeça.</span></li>
+    </ul>
 
     <div class="section-cta-wrap">
       <a href="#oferta" class="cta cta-bigger">
@@ -1619,12 +1548,52 @@ vturb-smartplayer iframe, vturb-smartplayer video {
   </div>
 </section>
 
+<!-- BIO CURTA + STATS -->
+<section class="section section-dark-soft">
+  <div class="container">
+    <div class="bio">
+      <div class="bio-photo">
+        <img src="/img/rian-cinza.webp" alt="Rian Tavares, CEO da Hedge Consultoria" width="1024" height="1536" loading="lazy">
+      </div>
+      <div class="bio-content">
+        <span class="section-eyebrow">Quem é o Rian</span>
+        <h2>A carteira do Rian rendeu <em>155% em 8 anos</em>. O mesmo método está dentro do programa.</h2>
+        <p>Sou Rian Tavares. Economista, 13 anos no mercado financeiro, liderei operações de quase R$ 5 bilhões mensais em uma mesa de renda fixa de assessoria de investimentos. Hoje sou CEO da Hedge Consultoria e autor de 2 livros sobre investimentos: <em>"A Renda é Fixa, o Preço Não"</em> e <em>"Não Existe Almoço Grátis"</em>.</p>
+
+        <aside class="stat-stack bio-stat-stack">
+          <div class="stat-stack-item">
+            <div class="stat-stack-number">+1.500</div>
+            <div class="stat-stack-label">alunos formados pelo método</div>
+          </div>
+          <div class="stat-stack-item">
+            <div class="stat-stack-number">R$ 5 bi</div>
+            <div class="stat-stack-label">geridos em operações mensais de renda fixa</div>
+          </div>
+          <div class="stat-stack-item">
+            <div class="stat-stack-number">13 anos</div>
+            <div class="stat-stack-label">de mercado financeiro em assessoria</div>
+          </div>
+          <div class="stat-stack-item">
+            <div class="stat-stack-number">2 livros</div>
+            <div class="stat-stack-label">publicados sobre investimentos</div>
+          </div>
+        </aside>
+
+        <a href="#oferta" class="cta cta-bigger bio-cta">
+          QUERO APRENDER COM O RIAN
+          <span class="cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 3 PILARES -->
 <section class="section section-dark">
   <div class="container">
     <div style="text-align: center; max-width: 860px; margin: 0 auto 56px;">
-      <h2 class="section-headline">Construir patrimônio é como correr uma <em>maratona</em>.</h2>
-      <p class="section-lede" style="margin: 18px auto 0;">Quem cruza a linha de chegada tem três coisas: o <strong>mapa</strong> da rota certa, o <strong>equipamento</strong> certo pra sua corrida e um <strong>treinador</strong> ao lado. O Invista Para a Liberdade entrega os três. Por isso não é só um curso.</p>
+      <h2 class="section-headline">Veja tudo que você <em>vai receber</em>.</h2>
+      <p class="section-lede" style="margin: 18px auto 0;">Não é só um curso. É um ecossistema completo construído em três pilares: o <strong>conhecimento</strong> que vai te tirar da estaca zero, os <strong>materiais</strong> que vão acelerar sua execução e o <strong>acompanhamento</strong> que faz você nunca estar sozinho.</p>
     </div>
 
     <div class="pillars-grid">
@@ -1796,12 +1765,6 @@ vturb-smartplayer iframe, vturb-smartplayer video {
       </div>
     </div>
 
-    <div class="section-cta-wrap">
-      <a href="#oferta" class="cta cta-bigger">
-        QUERO TUDO ISSO AGORA
-        <span class="cta-arrow">→</span>
-      </a>
-    </div>
   </div>
 </section>
 
@@ -1907,7 +1870,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
   <div class="container">
     <div style="text-align: center; max-width: 820px; margin: 0 auto 50px;">
       <h2 class="section-headline">Os vídeos que viralizaram o Brasil todo, somando <em>+200 milhões de views</em>.</h2>
-      <p class="section-lede" style="margin: 18px auto 0;">Cada recorte sobre Selic, dólar, renda fixa ou bolsa que circulou no Instagram, TikTok e YouTube fez milhão de brasileiro parar o feed pra ouvir. Mas 60 segundos é só a ponta. O caminho completo, do entendimento básico até a estratégia de patrimônio, está dentro do Invista Para a Liberdade.</p>
+      <p class="section-lede" style="margin: 18px auto 0;">Recortes sobre Selic, dólar, renda fixa, bolsa e dividendos que circularam por todo Instagram, TikTok e YouTube. <strong>Foram milhões de brasileiros</strong> que pararam o scroll, salvaram, comentaram, mandaram pra um amigo. Talvez você foi um deles.</p>
     </div>
 
     <div class="virals-grid">
@@ -1929,6 +1892,11 @@ vturb-smartplayer iframe, vturb-smartplayer video {
         <div class="virals-total-num">+200 milhões</div>
         <div class="virals-total-label">views em vídeos educativos sobre dinheiro</div>
       </div>
+    </div>
+
+    <div style="max-width: 820px; margin: 56px auto 0; text-align: center;">
+      <p class="section-lede" style="margin: 0 auto 14px;">Mas se você viu um desses vídeos, achou interessante, salvou no perfil e <strong>voltou pra rotina sem saber o que fazer com aquilo</strong>, você está num lugar que custa caro.</p>
+      <p class="section-lede" style="margin: 0 auto;">É o lugar de quem entendeu que existe um caminho melhor, mas continua deixando o dinheiro perder pra inflação porque não tem método. <strong>Cada mês nesse lugar é mais dinheiro indo embora.</strong> O Invista Para a Liberdade é o que transforma 60 segundos de conteúdo em ação concreta dentro da sua carteira.</p>
     </div>
 
     <div class="section-cta-wrap">
