@@ -64,7 +64,7 @@ em{font-style:normal;color:var(--gold-bright)}
 .wrap-wide{max-width:1160px;margin:0 auto;padding:0 24px}
 
 /* Hero */
-.hero{padding:54px 0 40px;text-align:center;background:radial-gradient(120% 80% at 50% 0%,#15171f 0%,var(--bg) 60%)}
+.hero{position:relative;padding:54px 0 40px;text-align:center;background:radial-gradient(120% 80% at 50% 0%,#15171f 0%,var(--bg) 60%)}
 .brand{font-family:'Instrument Serif',serif;font-size:34px;letter-spacing:.02em;color:var(--gold-bright);margin-bottom:34px}
 .brand span{font-style:italic}
 .brand-logo{display:block;width:196px;height:auto;margin:0 auto 36px}
@@ -101,7 +101,9 @@ em{font-style:normal;color:var(--gold-bright)}
 
 /* Photo placeholder */
 .photo-ph{border:1.5px dashed rgba(203,168,95,.4);border-radius:var(--radius);background:#0e1015;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:20px}
-.hero-photo{margin-top:38px;aspect-ratio:16/10}
+.hero-photo{position:relative;width:100%;margin-top:14px;line-height:0}
+.hero-photo img{width:100%;height:auto;display:block}
+.hero-photo::before{content:"";position:absolute;top:0;left:0;right:0;height:28%;background:linear-gradient(to bottom,#0b0d12,rgba(11,13,18,0));z-index:2;pointer-events:none}
 .sonho-photo{aspect-ratio:4/5;margin-top:24px}
 
 /* Marquee */
@@ -158,7 +160,7 @@ em{font-style:normal;color:var(--gold-bright)}
   .meta{justify-content:flex-start;gap:16px 36px;margin-top:22px}
   .meta-priv{width:auto}
   .added{margin-top:22px}
-  .hero-photo{aspect-ratio:21/9;margin-top:48px}
+  .hero-photo{margin-top:40px}
 
   /* cards 2 + 1 centered */
   .cards{flex-flow:row wrap;justify-content:center;gap:20px;max-width:840px;margin-left:auto;margin-right:auto}
@@ -182,6 +184,16 @@ em{font-style:normal;color:var(--gold-bright)}
   .collage .photo-ph:nth-child(2n){margin-top:36px}
 
   .marquee span{font-size:19px}
+}
+/* hero photo on the right side of the banner, fading into the text on its left */
+@media(min-width:1000px){
+  .hero{overflow:hidden;min-height:600px;display:flex;align-items:center}
+  .hero-grid{position:relative;z-index:2;width:100%}
+  .h1{max-width:520px}
+  .sub{max-width:460px}
+  .hero-photo{position:absolute;top:0;right:0;bottom:0;width:47%;margin:0}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+  .hero-photo::before{top:0;bottom:0;left:0;right:auto;width:62%;height:100%;background:linear-gradient(to right,#0b0d12 0%,rgba(11,13,18,.55) 50%,rgba(11,13,18,0) 100%)}
 }
 @media(max-width:899px){
   .media-first .split-media{order:-1}
@@ -216,7 +228,7 @@ em{font-style:normal;color:var(--gold-bright)}
       </div>
     </div>
   </div>
-  <div class="wrap-wide"><div class="photo-ph hero-photo">FOTO DO RIAN (hero) &middot; enviar depois</div></div>
+  <div class="hero-photo"><img src="/img/rian-hero.webp" alt="Rian Tavares na Imersão O Ano da Virada" width="1080" height="1620"></div>
 </section>
 
 <!-- ================= MARQUEE ================= -->
