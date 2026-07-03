@@ -345,8 +345,8 @@ var telEl = document.querySelector('#telefone');
 telEl.setAttribute('inputmode','numeric');
 telEl.addEventListener('input', function(){ this.value = this.value.replace(/\D/g,''); });
 
-// Para onde mandar o lead depois de gravar na Reportana (entrar no WhatsApp)
-var SUCCESS_REDIRECT = "https://sndflw.com/i/rian-o-ano-da-virada";
+// Para onde ir depois de gravar o lead na Reportana (pagina de inscricao confirmada)
+var SUCCESS_REDIRECT = "/o-ano-da-virada/obrigado/";
 
 function lpSubmit(e){
   e.preventDefault();
