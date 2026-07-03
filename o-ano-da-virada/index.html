@@ -147,17 +147,18 @@ em{font-style:normal;color:var(--gold-bright)}
 @media(min-width:900px){
   .section{padding:96px 0}
 
-  /* hero: two columns (text left, form right) */
-  .hero{padding:52px 0 48px;text-align:left}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
-  .brand-logo{margin:0 0 26px;width:210px}
-  .h1{font-size:clamp(38px,3.4vw,46px);line-height:1.08;max-width:none;margin:0}
-  .sub{margin:20px 0 0;max-width:42ch;font-size:18px}
-  .hero-right .form{max-width:none;margin:0;background:var(--bg-2);border:1px solid var(--line);padding:26px;border-radius:20px}
-  .meta{justify-content:flex-start;gap:20px 40px;margin-top:26px}
+  /* hero: single column, left-aligned, compact (CTA above the fold) */
+  .hero{padding:36px 0 46px;text-align:left}
+  .hero-grid{display:block}
+  .brand-logo{margin:0 0 22px;width:196px}
+  .h1{font-size:clamp(34px,3.4vw,40px);line-height:1.1;max-width:720px;margin:0}
+  .sub{margin:16px 0 0;max-width:560px;font-size:17px}
+  .hero-right{margin-top:24px}
+  .hero-right .form{max-width:460px;margin:0;background:none;border:none;padding:0;border-radius:0}
+  .meta{justify-content:flex-start;gap:16px 36px;margin-top:22px}
   .meta-priv{width:auto}
-  .added{margin-top:24px}
-  .hero-photo{aspect-ratio:21/9;margin-top:56px}
+  .added{margin-top:22px}
+  .hero-photo{aspect-ratio:21/9;margin-top:48px}
 
   /* cards 2 + 1 centered */
   .cards{flex-flow:row wrap;justify-content:center;gap:20px;max-width:840px;margin-left:auto;margin-right:auto}
