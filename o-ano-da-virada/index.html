@@ -38,6 +38,7 @@
 
 <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/instrument-serif-400i-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.min.css">
 
 <style>
 @font-face { font-family:'Geist'; font-style:normal; font-weight:400 700; font-display:swap; src:url('/fonts/geist-latin.woff2') format('woff2'); }
@@ -60,11 +61,14 @@ a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 em{font-style:normal;color:var(--gold-bright)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.wrap-wide{max-width:1160px;margin:0 auto;padding:0 24px}
 
 /* Hero */
 .hero{padding:54px 0 40px;text-align:center;background:radial-gradient(120% 80% at 50% 0%,#15171f 0%,var(--bg) 60%)}
 .brand{font-family:'Instrument Serif',serif;font-size:34px;letter-spacing:.02em;color:var(--gold-bright);margin-bottom:34px}
 .brand span{font-style:italic}
+.brand-logo{display:block;width:196px;height:auto;margin:0 auto 36px}
+.footer-logo{width:172px;height:auto;margin:0 auto 16px}
 .h1{font-size:clamp(34px,8.6vw,52px);font-weight:800;line-height:1.07;letter-spacing:-.035em;margin:0 auto;max-width:16ch}
 .sub{color:var(--text-dim);font-size:clamp(16px,4.2vw,19px);line-height:1.5;margin:20px auto 0;max-width:38ch}
 
@@ -80,6 +84,11 @@ em{font-style:normal;color:var(--gold-bright)}
 .cta:active{transform:translateY(1px)}
 .cta-arrow{font-size:18px}
 .form-note{color:var(--text-faint);font-size:12.5px;text-align:center;margin-top:12px}
+.iti{width:100%}
+.iti input#telefone{padding-left:52px}
+.iti--separate-dial-code input#telefone{padding-left:98px}
+.iti__selected-flag{border-radius:var(--radius-sm) 0 0 var(--radius-sm)}
+.iti__country-list{color:#17130c;text-align:left}
 
 /* Event meta */
 .meta{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 30px;margin-top:30px}
@@ -93,6 +102,7 @@ em{font-style:normal;color:var(--gold-bright)}
 /* Photo placeholder */
 .photo-ph{border:1.5px dashed rgba(203,168,95,.4);border-radius:var(--radius);background:#0e1015;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:20px}
 .hero-photo{margin-top:38px;aspect-ratio:16/10}
+.sonho-photo{aspect-ratio:4/5;margin-top:24px}
 
 /* Marquee */
 .marquee{background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-deep));padding:16px 0;overflow:hidden;white-space:nowrap}
@@ -103,7 +113,7 @@ em{font-style:normal;color:var(--gold-bright)}
 /* Sections */
 .section{padding:64px 0}
 .section.alt{background:var(--bg-2)}
-.h2{font-size:clamp(26px,6vw,40px);font-weight:700;line-height:1.14;letter-spacing:-.025em;text-align:center}
+.h2{font-size:clamp(26px,6vw,40px);font-weight:800;line-height:1.14;letter-spacing:-.025em;text-align:center}
 .lede{color:var(--text-dim);font-size:clamp(15px,4vw,18px);line-height:1.55;text-align:center;margin:18px auto 0;max-width:40ch}
 .eyebrow{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 
@@ -115,26 +125,64 @@ em{font-style:normal;color:var(--gold-bright)}
 .cta-wrap{text-align:center;margin-top:40px}
 .cta-wrap .cta{width:auto;max-width:100%}
 
-/* Depoimentos */
+/* Splits (mobile = stacked) */
+.split{display:flex;flex-direction:column;gap:28px}
+.split-text{text-align:center}
 .proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
 .proof-ph{aspect-ratio:9/16}
+.gold-line{height:2px;width:180px;background:var(--gold);margin:22px auto 0}
 
 /* Bio */
-.bio-photo{aspect-ratio:4/5;max-width:340px;margin:0 auto 30px}
-.bio-name{font-family:'Instrument Serif',serif;font-style:italic;font-size:40px;text-align:center;color:var(--gold-bright);margin:44px 0 26px}
+.bio{text-align:left;margin-top:26px}
 .bio p{color:var(--text-dim);font-size:16px;line-height:1.6;margin-bottom:16px}
-
-/* Gallery */
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}
-.gallery .photo-ph{aspect-ratio:1}
+.bio-name{font-family:'Instrument Serif',serif;font-style:italic;font-size:40px;text-align:center;color:var(--gold-bright);margin:36px 0 26px}
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.collage .photo-ph{aspect-ratio:4/5}
 
 .footer{background:#08090d;text-align:center;padding:44px 24px;color:var(--text-faint);font-size:13px;line-height:1.8}
 .footer .brand{font-size:26px;margin-bottom:14px}
 .footer a{color:var(--gold-bright)}
 
-@media(min-width:720px){
-  .cards{flex-direction:row}
-  .card{flex:1}
+/* ================= DESKTOP ================= */
+@media(min-width:900px){
+  .section{padding:96px 0}
+
+  /* hero left-aligned */
+  .hero{padding:66px 0 50px;text-align:left}
+  .brand-logo{margin:0 0 44px;width:230px}
+  .h1{font-size:clamp(46px,5.2vw,62px);max-width:15ch;margin:0}
+  .sub{margin:24px 0 0;max-width:46ch;font-size:20px}
+  .form{max-width:600px;margin:34px 0 0}
+  .meta{justify-content:flex-start;gap:24px 46px}
+  .meta-priv{width:auto}
+  .added{margin-top:36px}
+  .hero-photo{aspect-ratio:21/9;margin-top:60px}
+
+  /* cards 2 + 1 centered */
+  .cards{flex-flow:row wrap;justify-content:center;gap:20px;max-width:840px;margin-left:auto;margin-right:auto}
+  .card{flex:0 1 380px}
+
+  /* two-column story sections */
+  .split{flex-direction:row;align-items:center;gap:64px}
+  .split.reverse{flex-direction:row-reverse}
+  .split-text{flex:1;text-align:left}
+  .split-media{flex:1;min-width:0}
+  .split .h2{text-align:left}
+  .split .eyebrow{text-align:left}
+  .split .bio-name{text-align:left}
+  .split .cta-wrap{text-align:left;margin-top:32px}
+  .gold-line{margin-left:0;margin-right:auto}
+  .proof-grid{margin-top:0}
+  .sonho-photo{margin-top:0}
+
+  /* bio: collage right, text left; on mobile collage was on top */
+  .media-first .split-media{order:0}
+  .collage .photo-ph:nth-child(2n){margin-top:36px}
+
+  .marquee span{font-size:19px}
+}
+@media(max-width:899px){
+  .media-first .split-media{order:-1}
 }
 </style>
 </head>
@@ -142,8 +190,8 @@ em{font-style:normal;color:var(--gold-bright)}
 
 <!-- ================= HERO ================= -->
 <section class="hero">
-  <div class="wrap">
-    <div class="brand">O Ano da <span>Virada</span></div>
+  <div class="wrap-wide">
+    <img class="brand-logo" src="/img/logo-imersao.webp" alt="O Ano da Virada" width="982" height="401">
 
     <h1 class="h1">Aprenda do zero a fazer o seu dinheiro <em>trabalhar por você</em> e conquiste a sua liberdade financeira com investimentos.</h1>
 
@@ -151,10 +199,8 @@ em{font-style:normal;color:var(--gold-bright)}
 
     <form class="form" id="inscricao" onsubmit="return lpSubmit(event)">
       <input type="email" name="email" placeholder="Seu e-mail principal" autocomplete="email" required>
-      <div class="phone-row">
-        <span class="ddi">🇧🇷 +55</span>
-        <input type="tel" name="telefone" placeholder="Seu WhatsApp com DDD" autocomplete="tel" required>
-      </div>
+      <input type="tel" id="telefone" name="telefone" placeholder="Seu WhatsApp com DDD" autocomplete="tel" required>
+
       <button type="submit" class="cta">Quero participar <span class="cta-arrow">&rarr;</span></button>
       <p class="form-note">É 100% gratuito. Você recebe o convite no seu WhatsApp.</p>
     </form>
@@ -192,7 +238,7 @@ em{font-style:normal;color:var(--gold-bright)}
 
 <!-- ================= VOCÊ VAI SAIR COM ================= -->
 <section class="section alt">
-  <div class="wrap">
+  <div class="wrap-wide">
     <h2 class="h2">Você vai sair da imersão <em>sabendo</em>:</h2>
     <div class="cards">
       <div class="card">
@@ -214,65 +260,89 @@ em{font-style:normal;color:var(--gold-bright)}
 
 <!-- ================= DEPOIMENTOS ================= -->
 <section class="section">
-  <div class="wrap">
-    <h2 class="h2">É isso que acontece com quem <em>aprende a investir</em>.</h2>
-    <div class="proof-grid">
-      <div class="photo-ph proof-ph">PRINT DE ALUNO 1 &middot; enviar depois</div>
-      <div class="photo-ph proof-ph">PRINT DE ALUNO 2 &middot; enviar depois</div>
+  <div class="wrap-wide split">
+    <div class="split-text">
+      <h2 class="h2">É isso que acontece com quem <em>aprende a investir</em>.</h2>
+    </div>
+    <div class="split-media">
+      <div class="proof-grid">
+        <div class="photo-ph proof-ph">PRINT DE ALUNO 1 &middot; enviar depois</div>
+        <div class="photo-ph proof-ph">PRINT DE ALUNO 2 &middot; enviar depois</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ================= SONHOS ================= -->
 <section class="section alt">
-  <div class="wrap">
-    <h2 class="h2">Os seus sonhos estão a <em>um plano de investimentos</em> de distância.</h2>
-    <div class="photo-ph hero-photo" style="margin-top:32px">FOTO ASPIRACIONAL &middot; enviar depois</div>
+  <div class="wrap-wide split reverse">
+    <div class="split-text">
+      <h2 class="h2">Os seus sonhos estão a <em>um plano de investimentos</em> de distância.</h2>
+    </div>
+    <div class="split-media">
+      <div class="photo-ph sonho-photo">FOTO ASPIRACIONAL &middot; enviar depois</div>
+    </div>
   </div>
 </section>
 
 <!-- ================= BIO ================= -->
 <section class="section">
-  <div class="wrap">
-    <div class="photo-ph bio-photo">FOTO DO RIAN (bio) &middot; enviar depois</div>
-    <span class="eyebrow">Quem vai te ensinar</span>
-    <h2 class="h2">Por que você deveria ouvir o <em>Rian Tavares</em></h2>
-    <div style="height:2px;width:180px;background:var(--gold);margin:22px auto 0"></div>
-    <div class="bio" style="margin-top:26px">
-      <p>Rian Tavares é economista, com 13 anos de mercado financeiro. Liderou uma mesa de renda fixa com mais de R$5 bilhões geridos por mês, é CEO da Hedge Consultoria e autor de 2 livros sobre investimentos.</p>
-      <p>Professor de MBA, ele traduz o mundo dos investimentos de um jeito que qualquer pessoa entende, mesmo começando do zero.</p>
-      <p>Hoje, com mais de 2 milhões de seguidores, o propósito dele é ensinar o máximo de pessoas possível a fazer o próprio dinheiro trabalhar por elas.</p>
+  <div class="wrap-wide split media-first">
+    <div class="split-text">
+      <span class="eyebrow">Quem vai te ensinar</span>
+      <h2 class="h2">Por que você deveria ouvir o <em>Rian Tavares</em></h2>
+      <div class="gold-line"></div>
+      <div class="bio">
+        <p>Rian Tavares é economista, com 13 anos de mercado financeiro. Liderou uma mesa de renda fixa com mais de R$5 bilhões geridos por mês, é CEO da Hedge Consultoria e autor de 2 livros sobre investimentos.</p>
+        <p>Professor de MBA, ele traduz o mundo dos investimentos de um jeito que qualquer pessoa entende, mesmo começando do zero.</p>
+        <p>Hoje, com mais de 2 milhões de seguidores, o propósito dele é ensinar o máximo de pessoas possível a fazer o próprio dinheiro trabalhar por elas.</p>
+      </div>
+      <div class="bio-name">Rian Tavares</div>
+      <div class="cta-wrap"><a href="#inscricao" class="cta">Quero conquistar minha liberdade financeira <span class="cta-arrow">&rarr;</span></a></div>
     </div>
-
-    <div class="gallery">
-      <div class="photo-ph">FOTO 1 &middot; depois</div>
-      <div class="photo-ph">FOTO 2 &middot; depois</div>
-      <div class="photo-ph">FOTO 3 &middot; depois</div>
-      <div class="photo-ph">FOTO 4 &middot; depois</div>
+    <div class="split-media">
+      <div class="collage">
+        <div class="photo-ph">FOTO 1 &middot; depois</div>
+        <div class="photo-ph">FOTO 2 &middot; depois</div>
+        <div class="photo-ph">FOTO 3 &middot; depois</div>
+        <div class="photo-ph">FOTO 4 &middot; depois</div>
+      </div>
     </div>
-
-    <div class="bio-name">Rian Tavares</div>
-    <div class="cta-wrap" style="margin-top:0"><a href="#inscricao" class="cta">Quero conquistar minha liberdade financeira <span class="cta-arrow">&rarr;</span></a></div>
   </div>
 </section>
 
 <!-- ================= FOOTER ================= -->
 <footer class="footer">
-  <div class="brand">O Ano da <span style="font-style:italic">Virada</span></div>
+  <img class="footer-logo" src="/img/logo-imersao.webp" alt="O Ano da Virada" width="982" height="401">
   <p>Evento educacional e gratuito. Nenhum conteúdo aqui é recomendação de investimento.</p>
   <p><a href="https://www.instagram.com/falecomrian/" target="_blank" rel="noopener">@falecomrian</a></p>
 </footer>
 
 <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script>
+// Seletor de pais no telefone (adapta bandeira + DDI por pais)
+var iti = window.intlTelInput(document.querySelector('#telefone'), {
+  initialCountry: "br",
+  preferredCountries: ["br","pt","us"],
+  separateDialCode: true,
+  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
+});
+
 // TODO: preencher com o webhook de captacao (ManyChat / Zapier / CRM)
 var WEBHOOK_URL = "";
 function lpSubmit(e){
   e.preventDefault();
   var f = e.target;
+  var telefone = "";
+  try { telefone = iti.getNumber(); } catch(err) {}
+  if(!telefone){
+    var cd = iti.getSelectedCountryData().dialCode || "55";
+    telefone = "+" + cd + " " + f.telefone.value.replace(/\D/g,"");
+  }
   var data = {
     email: f.email.value.trim(),
-    telefone: "+55" + f.telefone.value.replace(/\D/g,""),
+    telefone: telefone,
     url: window.location.href,
     utm: window.location.search
   };
