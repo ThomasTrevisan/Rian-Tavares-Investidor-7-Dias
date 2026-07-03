@@ -213,7 +213,7 @@ em{font-style:normal;color:var(--gold-bright)}
 
     <div class="added">
       <p>Não conseguiu se inscrever? Toque no botão abaixo para ser adicionado manualmente.</p>
-      <a class="btn-ghost" href="https://www.instagram.com/falecomrian/" target="_blank" rel="noopener">Ser adicionado</a>
+      <a class="btn-ghost" href="https://sndflw.com/i/rian-o-ano-da-virada" target="_blank" rel="noopener">Ser adicionado</a>
     </div>
 
     <div class="photo-ph hero-photo">FOTO DO RIAN (hero) &middot; enviar depois</div>
@@ -328,6 +328,11 @@ var iti = window.intlTelInput(document.querySelector('#telefone'), {
   separateDialCode: true,
   utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
 });
+
+// Celular: apenas numeros (e teclado numerico no mobile)
+var telEl = document.querySelector('#telefone');
+telEl.setAttribute('inputmode','numeric');
+telEl.addEventListener('input', function(){ this.value = this.value.replace(/\D/g,''); });
 
 // TODO: preencher com o webhook de captacao (ManyChat / Zapier / CRM)
 var WEBHOOK_URL = "";
