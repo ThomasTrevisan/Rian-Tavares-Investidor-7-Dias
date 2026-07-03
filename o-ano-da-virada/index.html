@@ -345,27 +345,33 @@ var telEl = document.querySelector('#telefone');
 telEl.setAttribute('inputmode','numeric');
 telEl.addEventListener('input', function(){ this.value = this.value.replace(/\D/g,''); });
 
-// TODO: preencher com o webhook de captacao (ManyChat / Zapier / CRM)
-var WEBHOOK_URL = "";
+// Para onde mandar o lead depois de gravar na Reportana (entrar no WhatsApp)
+var SUCCESS_REDIRECT = "https://sndflw.com/i/rian-o-ano-da-virada";
+
 function lpSubmit(e){
   e.preventDefault();
   var f = e.target;
+  var btn = f.querySelector(".cta");
   var telefone = "";
   try { telefone = iti.getNumber(); } catch(err) {}
   if(!telefone){
-    var cd = iti.getSelectedCountryData().dialCode || "55";
+    var cd = (iti.getSelectedCountryData && iti.getSelectedCountryData().dialCode) || "55";
     telefone = "+" + cd + " " + f.telefone.value.replace(/\D/g,"");
   }
   var data = {
+    name: "",
     email: f.email.value.trim(),
-    telefone: telefone,
+    phone: telefone,
     url: window.location.href,
     utm: window.location.search
   };
-  if(!WEBHOOK_URL){ alert("Formulario pronto. Falta conectar o webhook de captacao."); return false; }
-  fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)})
-    .then(function(){ window.location.href="/obrigado/"; })
-    .catch(function(){ window.location.href="/obrigado/"; });
+  if(btn){ btn.disabled = true; btn.dataset.html = btn.innerHTML; btn.textContent = "Enviando..."; }
+  fetch("/api/lead", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)})
+    .then(function(r){ if(!r.ok) throw new Error("fail"); window.location.href = SUCCESS_REDIRECT; })
+    .catch(function(){
+      if(btn){ btn.disabled = false; btn.innerHTML = btn.dataset.html; }
+      alert("Não conseguimos enviar agora. Confira os dados e tente novamente.");
+    });
   return false;
 }
 </script>
