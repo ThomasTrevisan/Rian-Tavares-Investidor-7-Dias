@@ -65,16 +65,16 @@ em{font-style:normal;color:var(--gold-bright)}
 .hero{padding:54px 0 40px;text-align:center;background:radial-gradient(120% 80% at 50% 0%,#15171f 0%,var(--bg) 60%)}
 .brand{font-family:'Instrument Serif',serif;font-size:34px;letter-spacing:.02em;color:var(--gold-bright);margin-bottom:34px}
 .brand span{font-style:italic}
-.h1{font-size:clamp(30px,7vw,46px);font-weight:700;line-height:1.1;letter-spacing:-.03em;margin:0 auto;max-width:15ch}
+.h1{font-size:clamp(34px,8.6vw,52px);font-weight:800;line-height:1.07;letter-spacing:-.035em;margin:0 auto;max-width:16ch}
 .sub{color:var(--text-dim);font-size:clamp(16px,4.2vw,19px);line-height:1.5;margin:20px auto 0;max-width:38ch}
 
 /* Form */
 .form{max-width:440px;margin:30px auto 0;text-align:left}
-.form input{width:100%;font-family:inherit;font-size:16px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius-sm);background:#0e1015;color:var(--text);outline:none;margin-bottom:12px}
-.form input::placeholder{color:var(--text-faint)}
-.form input:focus{border-color:var(--gold)}
+.form input{width:100%;font-family:inherit;font-size:16px;padding:16px 18px;border:1px solid #d8cfbf;border-radius:var(--radius-sm);background:#faf5ec;color:#17130c;outline:none;margin-bottom:12px}
+.form input::placeholder{color:#8a8272}
+.form input:focus{border-color:var(--gold-deep)}
 .phone-row{display:flex;margin-bottom:12px}
-.phone-row .ddi{display:flex;align-items:center;gap:6px;padding:0 14px;font-size:15px;font-weight:600;color:var(--text-dim);background:#0e1015;border:1px solid var(--line);border-right:none;border-radius:var(--radius-sm) 0 0 var(--radius-sm)}
+.phone-row .ddi{display:flex;align-items:center;gap:6px;padding:0 14px;font-size:15px;font-weight:700;color:#17130c;background:#efe7d6;border:1px solid #d8cfbf;border-right:none;border-radius:var(--radius-sm) 0 0 var(--radius-sm)}
 .phone-row input{border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:0}
 .cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;background:linear-gradient(180deg,var(--gold-bright),var(--gold),var(--gold-deep));color:#241a08;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:15px;padding:18px 28px;border-radius:999px;box-shadow:0 12px 34px rgba(203,168,95,.28),inset 0 1px 0 rgba(255,255,255,.35)}
 .cta:active{transform:translateY(1px)}
@@ -97,7 +97,7 @@ em{font-style:normal;color:var(--gold-bright)}
 /* Marquee */
 .marquee{background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-deep));padding:16px 0;overflow:hidden;white-space:nowrap}
 .marquee-track{display:inline-block;animation:scroll 22s linear infinite}
-.marquee span{font-family:'Instrument Serif',serif;font-style:italic;font-size:26px;color:#241a08;margin:0 26px;letter-spacing:.02em}
+.marquee span{font-family:'Geist',sans-serif;font-weight:800;text-transform:uppercase;font-size:17px;color:#241a08;margin:0 20px;letter-spacing:.06em}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* Sections */
@@ -109,11 +109,9 @@ em{font-style:normal;color:var(--gold-bright)}
 
 /* Cards */
 .cards{display:flex;flex-direction:column;gap:16px;margin-top:40px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-.card-ic{width:44px;height:44px;border-radius:12px;background:rgba(203,168,95,.12);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.card-ic svg{width:24px;height:24px;stroke:var(--gold-bright);fill:none;stroke-width:1.6}
-.card h3{font-size:19px;font-weight:700;margin-bottom:8px}
-.card p{color:var(--text-dim);font-size:15px;line-height:1.5}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px 26px;text-align:center}
+.card h3{font-size:19px;font-weight:700;margin-bottom:10px;color:var(--gold-bright)}
+.card p{color:var(--text-dim);font-size:15px;line-height:1.55}
 .cta-wrap{text-align:center;margin-top:40px}
 .cta-wrap .cta{width:auto;max-width:100%}
 
@@ -154,7 +152,7 @@ em{font-style:normal;color:var(--gold-bright)}
     <form class="form" id="inscricao" onsubmit="return lpSubmit(event)">
       <input type="email" name="email" placeholder="Seu e-mail principal" autocomplete="email" required>
       <div class="phone-row">
-        <span class="ddi">+55</span>
+        <span class="ddi">🇧🇷 +55</span>
         <input type="tel" name="telefone" placeholder="Seu WhatsApp com DDD" autocomplete="tel" required>
       </div>
       <button type="submit" class="cta">Quero participar <span class="cta-arrow">&rarr;</span></button>
@@ -198,17 +196,14 @@ em{font-style:normal;color:var(--gold-bright)}
     <h2 class="h2">Você vai sair da imersão <em>sabendo</em>:</h2>
     <div class="cards">
       <div class="card">
-        <div class="card-ic"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 4l9 5.5"/><path d="M5 10v9h14v-9"/></svg></div>
         <h3>Onde colocar o seu dinheiro</h3>
         <p>Onde investir pra o dinheiro render com segurança, em vez de ficar parado perdendo valor todo mês.</p>
       </div>
       <div class="card">
-        <div class="card-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>Como começar do zero</h3>
         <p>O passo a passo pra dar o primeiro passo mesmo sem entender nada e sem depender de ninguém.</p>
       </div>
       <div class="card">
-        <div class="card-ic"><svg viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>Proteger e construir patrimônio</h3>
         <p>Como proteger o seu dinheiro e construir patrimônio, rumo à tranquilidade de cuidar de quem você ama.</p>
       </div>
@@ -242,6 +237,7 @@ em{font-style:normal;color:var(--gold-bright)}
     <div class="photo-ph bio-photo">FOTO DO RIAN (bio) &middot; enviar depois</div>
     <span class="eyebrow">Quem vai te ensinar</span>
     <h2 class="h2">Por que você deveria ouvir o <em>Rian Tavares</em></h2>
+    <div style="height:2px;width:180px;background:var(--gold);margin:22px auto 0"></div>
     <div class="bio" style="margin-top:26px">
       <p>Rian Tavares é economista, com 13 anos de mercado financeiro. Liderou uma mesa de renda fixa com mais de R$5 bilhões geridos por mês, é CEO da Hedge Consultoria e autor de 2 livros sobre investimentos.</p>
       <p>Professor de MBA, ele traduz o mundo dos investimentos de um jeito que qualquer pessoa entende, mesmo começando do zero.</p>
