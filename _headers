@@ -32,10 +32,10 @@
 /o-ano-da-virada/index.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
-/o-ano-da-virada/obrigado/
+/obrigado-adv/
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
-/o-ano-da-virada/obrigado/index.html
+/obrigado-adv/index.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
 /img/*
