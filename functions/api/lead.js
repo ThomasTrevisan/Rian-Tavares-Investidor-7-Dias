@@ -1,14 +1,10 @@
-// Cloudflare Pages Function — recebe o lead do formulario da LP e repassa
-// para o webhook da Reportana. O token/URL da Reportana fica na variavel de
-// ambiente REPORTANA_WEBHOOK_URL (Cloudflare Pages > Settings > Environment
-// variables), nunca no repositorio publico.
+// Cloudflare Pages Function — recebe o lead do formulario da LP.
+// 1) Grava no banco proprio (Cloudflare D1, binding "DB") = fonte de verdade,
+//    independente da Reportana.
+// 2) Repassa pro webhook da Reportana (best-effort), URL em REPORTANA_WEBHOOK_URL.
+// O lead so e considerado perdido se as DUAS coisas falharem.
 
 export async function onRequestPost({ request, env }) {
-  const webhook = env.REPORTANA_WEBHOOK_URL;
-  if (!webhook) {
-    return json({ ok: false, error: "missing_webhook_config" }, 500);
-  }
-
   let body;
   try {
     body = await request.json();
@@ -16,18 +12,10 @@ export async function onRequestPost({ request, env }) {
     return json({ ok: false, error: "invalid_body" }, 400);
   }
 
-  const email = String(body.email || "").trim();
-  const phone = String(body.phone || body.telefone || "").trim();
-  const name = String(body.name || "").trim();
-
-  if (!email && !phone) {
-    return json({ ok: false, error: "missing_fields" }, 400);
-  }
-
-  const payload = {
-    name: name,
-    email: email,
-    phone: phone,
+  const lead = {
+    name: String(body.name || "").trim(),
+    email: String(body.email || "").trim(),
+    phone: String(body.phone || body.telefone || "").trim(),
     source: "lp-o-ano-da-virada",
     url: String(body.url || ""),
     utm: String(body.utm || ""),
@@ -38,19 +26,45 @@ export async function onRequestPost({ request, env }) {
     utm_term: String(body.utm_term || "")
   };
 
-  try {
-    const resp = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    if (!resp.ok) {
-      return json({ ok: false, error: "reportana_error", status: resp.status }, 502);
-    }
-    return json({ ok: true });
-  } catch (e) {
-    return json({ ok: false, error: "fetch_failed" }, 502);
+  if (!lead.email && !lead.phone) {
+    return json({ ok: false, error: "missing_fields" }, 400);
   }
+
+  // 1) Salva local no D1 (se o binding estiver configurado)
+  let savedLocal = false;
+  if (env.DB) {
+    try {
+      await env.DB.prepare(
+        "INSERT INTO leads (created_at, name, email, phone, source, url, utm, utm_source, utm_medium, utm_campaign, utm_content, utm_term) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
+      ).bind(
+        new Date().toISOString(),
+        lead.name, lead.email, lead.phone, lead.source, lead.url,
+        lead.utm, lead.utm_source, lead.utm_medium, lead.utm_campaign, lead.utm_content, lead.utm_term
+      ).run();
+      savedLocal = true;
+    } catch (e) {
+      // nao derruba o fluxo; segue pra Reportana
+    }
+  }
+
+  // 2) Repassa pra Reportana (best-effort)
+  let reportanaOk = false;
+  if (env.REPORTANA_WEBHOOK_URL) {
+    try {
+      const resp = await fetch(env.REPORTANA_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lead)
+      });
+      reportanaOk = resp.ok;
+    } catch (e) {}
+  }
+
+  // Sucesso se guardamos em algum lugar (local OU Reportana) = nao perde lead
+  if (savedLocal || reportanaOk) {
+    return json({ ok: true, savedLocal: savedLocal, reportanaOk: reportanaOk });
+  }
+  return json({ ok: false, error: "not_saved", savedLocal: savedLocal, reportanaOk: reportanaOk }, 502);
 }
 
 function json(obj, status) {
