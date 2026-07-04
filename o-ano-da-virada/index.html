@@ -133,6 +133,8 @@ em{font-style:normal;color:var(--gold-bright)}
 .split-text{text-align:center}
 .proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
 .proof-ph{aspect-ratio:9/16}
+.chart-card{background:#fff;border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);margin-top:32px}
+.chart-card img{width:100%;height:auto;display:block;border-radius:8px}
 .gold-line{height:2px;width:180px;background:var(--gold);margin:22px auto 0}
 
 /* Bio */
@@ -174,10 +176,12 @@ em{font-style:normal;color:var(--gold-bright)}
   .split-media{flex:1;min-width:0}
   .split .h2{text-align:left}
   .split .eyebrow{text-align:left}
+  .split .lede{text-align:left;margin-left:0;margin-right:0;max-width:44ch}
   .split .bio-name{text-align:left}
   .split .cta-wrap{text-align:left;margin-top:32px}
   .gold-line{margin-left:0;margin-right:auto}
   .proof-grid{margin-top:0}
+  .chart-card{margin-top:0}
   .sonho-photo{margin-top:0}
 
   /* bio: collage right, text left; on mobile collage was on top */
@@ -270,17 +274,16 @@ em{font-style:normal;color:var(--gold-bright)}
   </div>
 </section>
 
-<!-- ================= DEPOIMENTOS ================= -->
+<!-- ================= CARTEIRA (prova de autoridade) ================= -->
 <section class="section">
   <div class="wrap-wide split">
     <div class="split-text">
-      <h2 class="h2">É isso que acontece com quem <em>aprende a investir</em>.</h2>
+      <span class="eyebrow">A carteira do Rian &middot; 2018 a 2026</span>
+      <h2 class="h2">O dinheiro do Rian rendeu <em>mais que o dobro</em> do comum.</h2>
+      <p class="lede">Nesses anos, os investimentos mais conhecidos renderam 96% (o famoso CDI). No mesmo período, a carteira do Rian rendeu 195%: mais que o dobro. E com o mesmo jeito simples de investir que você vai aprender na imersão.</p>
     </div>
     <div class="split-media">
-      <div class="proof-grid">
-        <div class="photo-ph proof-ph">PRINT DE ALUNO 1 &middot; enviar depois</div>
-        <div class="photo-ph proof-ph">PRINT DE ALUNO 2 &middot; enviar depois</div>
-      </div>
+      <div class="chart-card"><img src="/img/carteira.webp" alt="Rentabilidade da carteira do Rian: 195% contra 96% do CDI, de 2018 a 2026" width="772" height="746" loading="lazy"></div>
     </div>
   </div>
 </section>
