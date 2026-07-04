@@ -17,36 +17,63 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <style>
 @font-face { font-family:'Geist'; font-style:normal; font-weight:400 700; font-display:swap; src:url('/fonts/geist-latin.woff2') format('woff2'); }
 @font-face { font-family:'Geist'; font-style:normal; font-weight:400 700; font-display:swap; src:url('/fonts/geist-latin-ext.woff2') format('woff2'); unicode-range:U+0100-024F,U+1E00-1EFF; }
-:root{--bg:#0b0d12;--card:#171a21;--line:rgba(255,255,255,.09);--text:#f4ecdd;--text-dim:#a7a99f;--gold-bright:#e6cf96;--gold:#cba85f;--gold-deep:#a5823c}
+:root{--bg:#0b0d12;--text:#f4ecdd;--text-dim:#c4c4bd;--gold-bright:#e6cf96;--gold:#cba85f;--gold-deep:#a5823c;--radius:14px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Geist',system-ui,sans-serif;background:linear-gradient(rgba(8,10,14,.64),rgba(8,10,14,.82)),url('/img/obrigado-bg.webp') center/cover no-repeat;color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 24px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:520px}
-.logo{width:190px;height:auto;margin:0 auto 40px;display:block}
-.check{width:78px;height:78px;margin:0 auto 26px;border-radius:50%;background:rgba(203,168,95,.14);display:flex;align-items:center;justify-content:center}
-.check svg{width:40px;height:40px;stroke:var(--gold-bright);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-h1{font-size:clamp(28px,7vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
-h1 em{font-style:normal;color:var(--gold-bright)}
-p{color:var(--text-dim);font-size:clamp(16px,4.2vw,18px);margin:18px auto 0;max-width:40ch}
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:30px 0 0}
-.badge{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:11px 20px;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
-.badge svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.7}
-.insta{display:inline-block;margin-top:32px;color:var(--gold-bright);font-weight:700;font-size:15px;border-bottom:1px solid rgba(203,168,95,.4);padding-bottom:2px}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* Bloco principal com a foto de fundo escurecida */
+.hero{position:relative;padding:118px 22px 92px;text-align:center;background:linear-gradient(rgba(8,10,14,.7),rgba(8,10,14,.85)),url('/img/obrigado-bg.webp') center 20%/cover no-repeat}
+.wrap{max-width:520px;margin:0 auto}
+.h1{font-size:clamp(26px,6.4vw,44px);font-weight:800;line-height:1.1;letter-spacing:-.03em}
+.lead{color:var(--text-dim);font-size:clamp(15px,3.9vw,18px);margin:20px auto 0;max-width:42ch}
+.btn{display:block;width:100%;max-width:520px;margin:28px auto 0;text-align:center;padding:19px 24px;border-radius:var(--radius);font-weight:700;font-size:clamp(17px,4.4vw,20px);letter-spacing:.01em}
+.btn:active{transform:translateY(1px)}
+.btn-green{background:#37c964;color:#fff;box-shadow:0 12px 30px rgba(55,201,100,.32)}
+.btn-gold{background:linear-gradient(180deg,#e6cf96,#cba85f,#a5823c);color:#3a2c0e;box-shadow:0 12px 30px rgba(203,168,95,.28)}
+.h2{font-size:clamp(21px,5.3vw,34px);font-weight:800;line-height:1.12;letter-spacing:-.025em;margin-top:52px}
+.lead-sm{color:var(--text-dim);font-size:clamp(15px,4vw,17px);margin:14px auto 0;max-width:40ch}
+
+/* Footer */
+.footer{background:#08090d;text-align:center;padding:40px 24px}
+.footer-logo{width:150px;height:auto;margin:0 auto 18px;display:block}
+.footer p{color:#7a7c74;font-size:13px;line-height:1.9}
+.footer a{color:#9a9c94;border-bottom:1px solid rgba(255,255,255,.12)}
+
+/* ---------- Desktop: conteudo a esquerda, foto aparece a direita ---------- */
+@media(min-width:900px){
+  .hero{display:flex;align-items:center;justify-content:flex-start;min-height:100vh;text-align:left;padding:0;background:linear-gradient(to right,rgba(8,10,14,.94) 0%,rgba(8,10,14,.82) 42%,rgba(8,10,14,.35) 100%),url('/img/obrigado-bg.webp') center/cover no-repeat}
+  .wrap{max-width:1160px;margin:0 auto;width:100%;min-width:0;padding:0 40px}
+  .h1{max-width:16ch;margin:0}
+  .lead{margin:22px 0 0;max-width:52ch}
+  .btn{margin-left:0;margin-right:0}
+  .lead-sm{margin-left:0;margin-right:0}
+}
 </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2WP6WNT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<section class="hero">
   <div class="wrap">
-    <img class="logo" src="/img/logo-imersao.webp" alt="O Ano da Virada" width="982" height="401">
-    <div class="check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
-    <h1>Inscrição <em>confirmada</em>!</h1>
-    <p>Você está na lista da Imersão O Ano da Virada. No dia, o link do evento entra no seu WhatsApp e e-mail. Fique de olho.</p>
-    <div class="badges">
-      <span class="badge"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg> Dia 23 de julho</span>
-      <span class="badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Às 20:00</span>
-    </div>
-    <a class="insta" href="https://www.instagram.com/falecomrian/" target="_blank" rel="noopener">Enquanto isso, siga o Rian no Instagram</a>
+    <h1 class="h1">Falta só mais um passo para garantir o seu lugar!</h1>
+    <p class="lead">Entre no grupo oficial da Imersão O Ano da Virada para receber o link da aula e todos os avisos. Clique no botão abaixo e entre:</p>
+    <a class="btn btn-green" href="https://sndflw.com/i/rian-o-ano-da-virada" target="_blank" rel="noopener">Entrar no Grupo VIP</a>
+
+    <h2 class="h2">Não consegue entrar no grupo?</h2>
+    <p class="lead-sm">Não se preocupe, clique no botão abaixo e vamos adicionar você manualmente:</p>
+    <a class="btn btn-gold" href="https://sndflw.com/i/rian-o-ano-da-virada" target="_blank" rel="noopener">Ser adicionado</a>
   </div>
+</section>
+
+<footer class="footer">
+  <img class="footer-logo" src="/img/logo-imersao.webp" alt="O Ano da Virada" width="982" height="401">
+  <p>Copyright &copy; Rian Tavares. Todos os direitos reservados.</p>
+  <p><a href="#">Termos de Uso</a> &nbsp;|&nbsp; <a href="#">Políticas de Privacidade</a> &nbsp;|&nbsp; <a href="#">Políticas de Cookies</a></p>
+</footer>
+
 </body>
 </html>
