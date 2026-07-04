@@ -113,7 +113,7 @@ em{font-style:normal;color:var(--gold-bright)}
 .hero-photo{position:relative;width:100%;margin-top:14px;line-height:0;aspect-ratio:4/3;overflow:hidden}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;display:block}
 .hero-photo::before{content:"";position:absolute;top:0;left:0;right:0;height:30%;background:linear-gradient(to bottom,#0b0d12,rgba(11,13,18,0));z-index:2;pointer-events:none}
-.sonho-photo{aspect-ratio:4/5;margin-top:24px}
+.sonho-photo{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 22%;border-radius:var(--radius);display:block;margin-top:24px}
 
 /* Marquee */
 .marquee{background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-deep));padding:16px 0;overflow:hidden;white-space:nowrap}
@@ -151,7 +151,7 @@ em{font-style:normal;color:var(--gold-bright)}
 .bio p{color:var(--text-dim);font-size:16px;line-height:1.6;margin-bottom:16px}
 .bio-name{font-family:'Instrument Serif',serif;font-style:italic;font-size:40px;text-align:center;color:var(--gold-bright);margin:36px 0 26px}
 .collage{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.collage .photo-ph{aspect-ratio:4/5}
+.collage img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%;border-radius:var(--radius);display:block}
 
 .footer{background:#08090d;text-align:center;padding:44px 24px;color:var(--text-faint);font-size:13px;line-height:1.8}
 .footer .brand{font-size:26px;margin-bottom:14px}
@@ -195,7 +195,7 @@ em{font-style:normal;color:var(--gold-bright)}
 
   /* bio: collage right, text left; on mobile collage was on top */
   .media-first .split-media{order:0}
-  .collage .photo-ph:nth-child(2n){margin-top:36px}
+  .collage img:nth-child(2n){margin-top:36px}
 
   .marquee span{font-size:19px}
 }
@@ -307,7 +307,7 @@ em{font-style:normal;color:var(--gold-bright)}
       <h2 class="h2">Os seus sonhos estão a <em>um plano de investimentos</em> de distância.</h2>
     </div>
     <div class="split-media">
-      <div class="photo-ph sonho-photo">FOTO ASPIRACIONAL &middot; enviar depois</div>
+      <img class="sonho-photo" src="/img/rian-sonhos.webp" alt="Rian Tavares" width="960" height="1021" loading="lazy">
     </div>
   </div>
 </section>
@@ -328,10 +328,10 @@ em{font-style:normal;color:var(--gold-bright)}
     </div>
     <div class="split-media">
       <div class="collage">
-        <div class="photo-ph">FOTO 1 &middot; depois</div>
-        <div class="photo-ph">FOTO 2 &middot; depois</div>
-        <div class="photo-ph">FOTO 3 &middot; depois</div>
-        <div class="photo-ph">FOTO 4 &middot; depois</div>
+        <img src="/img/rian-sentado.webp" alt="Rian Tavares" width="816" height="992" loading="lazy" style="object-position:50% 12%">
+        <img src="/img/rian-g4.webp" alt="Rian Tavares palestrando no G4 Scale" width="798" height="958" loading="lazy" style="object-position:50% 16%">
+        <img src="/img/rian-eag.webp" alt="Rian Tavares palestrando no Programa EAG" width="1100" height="779" loading="lazy" style="object-position:50% 30%">
+        <img src="/img/rian-grupo.webp" alt="Rian Tavares" width="1100" height="813" loading="lazy" style="object-position:74% 32%">
       </div>
     </div>
   </div>
