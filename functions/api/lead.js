@@ -30,7 +30,12 @@ export async function onRequestPost({ request, env }) {
     phone: phone,
     source: "lp-o-ano-da-virada",
     url: String(body.url || ""),
-    utm: String(body.utm || "")
+    utm: String(body.utm || ""),
+    utm_source: String(body.utm_source || ""),
+    utm_medium: String(body.utm_medium || ""),
+    utm_campaign: String(body.utm_campaign || ""),
+    utm_content: String(body.utm_content || ""),
+    utm_term: String(body.utm_term || "")
   };
 
   try {

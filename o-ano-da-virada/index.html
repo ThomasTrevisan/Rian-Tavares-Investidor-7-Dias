@@ -374,12 +374,18 @@ function lpSubmit(e){
     var cd = (iti.getSelectedCountryData && iti.getSelectedCountryData().dialCode) || "55";
     telefone = "+" + cd + " " + f.telefone.value.replace(/\D/g,"");
   }
+  var q = new URLSearchParams(window.location.search);
   var data = {
     name: "",
     email: f.email.value.trim(),
     phone: telefone,
     url: window.location.href,
-    utm: window.location.search
+    utm: window.location.search,
+    utm_source: q.get("utm_source") || "",
+    utm_medium: q.get("utm_medium") || "",
+    utm_campaign: q.get("utm_campaign") || "",
+    utm_content: q.get("utm_content") || "",
+    utm_term: q.get("utm_term") || ""
   };
   if(btn){ btn.disabled = true; btn.dataset.html = btn.innerHTML; btn.textContent = "Enviando..."; }
   fetch("/api/lead", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)})
