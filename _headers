@@ -20,6 +20,12 @@
 /downsell-1/index.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
+/downsell-2/
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/downsell-2/index.html
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
 /obrigado/
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
