@@ -50,6 +50,12 @@
 /painel-oadv/index.html
   Cache-Control: no-store
 
+/painel-rian/
+  Cache-Control: no-store
+
+/painel-rian/index.html
+  Cache-Control: no-store
+
 /img/*
   Cache-Control: public, max-age=31536000, immutable, no-transform
 
