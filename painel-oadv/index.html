@@ -135,10 +135,11 @@ function render(d){
   html += '<section><h2>Por origem ('+lbl+')</h2>' + tableHead(["Origem","Visitas","Cadastros","Taxa"]);
   if(!d.porOrigem.length) html += emptyRow(4);
 
+  // Pago = utm_medium pago/paid/ads. Organico = todo o resto que tem origem real
+  // (ManyChat mcreels/presentepatrimonio/etc + bio), menos "direto" (sem UTM).
   const isPago = o => { const m=(o.origem.split(" / ")[1]||"").toLowerCase(); return m==="pago"||m==="paid"||m==="ads"; };
-  const isManychat = o => /manychat/i.test(o.origem);
-  const isBio = o => (o.origem.split(" / ")[0]||"").toLowerCase()==="bio";
-  const isOrganico = o => isManychat(o) || isBio(o);
+  const srcOf = o => (o.origem.split(" / ")[0]||"").toLowerCase();
+  const isOrganico = o => !isPago(o) && srcOf(o)!=="direto";
   html += totalRow("Orgânico (ManyChat + bio)", d.porOrigem.filter(isOrganico));
   html += totalRow("Pago (Ads)", d.porOrigem.filter(isPago));
   for(const o of d.porOrigem){
