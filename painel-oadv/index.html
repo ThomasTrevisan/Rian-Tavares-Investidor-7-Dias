@@ -128,7 +128,7 @@ function render(d){
   html += '<div class="ritmo">Ritmo de cadastros: hoje <b>'+fmt(p.hoje)+'</b> (parcial) · ontem <b>'+fmt(p.ontem)+'</b> '+arrow+' · media <b>'+fmt(p.media)+'</b>/dia</div>';
 
   const ts = d.trackStartLabel || (d.trackStart ? diaBonito(d.trackStart) : "o inicio do rastreio");
-  html += '<div class="note">Este painel e o <b>funil rastreado</b> a partir de '+ts+' (quando o contador de visitas entrou no ar): visitas, cadastros e taxa contam desse momento pra frente, pareados. Hoje e um dia parcial (o rastreio comecou no meio do dia), entao a partir de amanha cada dia e um dia cheio. O <b>volume total de cadastros por dia</b> (inclusive antes do rastreio) esta no <b>ritmo</b> logo acima.</div>';
+  html += '<div class="note">Os <b>cadastros</b> mostram o <b>total real</b> (histórico completo). A <b>taxa/conversão</b> conta só a partir de '+ts+' (quando o contador de visitas entrou no ar), pareando cadastro com visita. Por isso hoje as visitas aparecem menores que os cadastros: o rastreio começou no meio do dia. A partir de amanhã cada dia é um dia cheio.</div>';
 
   // por origem (com total ManyChat e Meta pago)
   const maxV = Math.max(1, ...d.porOrigem.map(o=>o.visitas));
@@ -190,8 +190,8 @@ function tableHead(cols){ return '<table><tr>'+cols.map(c=>'<th>'+c+'</th>').joi
 function emptyRow(n){ return '<tr><td colspan="'+n+'" class="muted" style="text-align:center;padding:22px">Ainda sem registros nesse periodo.</td></tr>'; }
 function totalRow(label, arr){
   if(!arr.length) return "";
-  const v=arr.reduce((a,b)=>a+b.visitas,0), c=arr.reduce((a,b)=>a+b.cadastros,0);
-  const tx=v?Math.round(c/v*1000)/10:null;
+  const v=arr.reduce((a,b)=>a+b.visitas,0), c=arr.reduce((a,b)=>a+b.cadastros,0), ct=arr.reduce((a,b)=>a+(b.cadTrk||0),0);
+  const tx=v?Math.round(ct/v*1000)/10:null; // cadastros exibidos = total real; taxa = rastreados/visitas
   return '<tr class="tr-total"><td>'+label+'</td><td>'+fmt(v)+'</td><td>'+fmt(c)+'</td><td class="taxa">'+pct(tx)+'</td></tr>';
 }
 
