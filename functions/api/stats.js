@@ -29,14 +29,17 @@ export async function onRequestGet({ request, env }) {
     catch (e) { return []; }
   };
 
-  const vDay = await q(`SELECT date(created_at,'-3 hours') d, COUNT(*) c FROM visits WHERE page LIKE ? ${dc} GROUP BY d`, PAGE_MATCH);
-  const lDay = await q(`SELECT date(created_at,'-3 hours') d, COUNT(*) c FROM leads WHERE source LIKE ? ${dc} GROUP BY d`, LEAD_MATCH);
-  const vOri = await q(`SELECT COALESCE(NULLIF(utm_source,''),'direto') s, COALESCE(NULLIF(utm_medium,''),'-') m, COUNT(*) c FROM visits WHERE page LIKE ? ${dc} GROUP BY s,m`, PAGE_MATCH);
-  const lOri = await q(`SELECT COALESCE(NULLIF(utm_source,''),'direto') s, COALESCE(NULLIF(utm_medium,''),'-') m, COUNT(*) c FROM leads WHERE source LIKE ? ${dc} GROUP BY s,m`, LEAD_MATCH);
-  const vPage = await q(`SELECT page p, COUNT(*) c FROM visits WHERE page LIKE ? ${dc} GROUP BY p`, PAGE_MATCH);
-  const lPage = await q(`SELECT source p, COUNT(*) c FROM leads WHERE source LIKE ? ${dc} GROUP BY p`, LEAD_MATCH);
+  // Todas as agregacoes do funil contam a partir de TRACK_START (quando o beacon entrou
+  // no ar), pra visita e cadastro ficarem pareados e a taxa fazer sentido. Excecao:
+  // lDayAll (ritmo) usa o historico COMPLETO de cadastros, incluindo antes do rastreio.
+  const vDay = await q(`SELECT date(created_at,'-3 hours') d, COUNT(*) c FROM visits WHERE page LIKE ? AND created_at >= ? ${dc} GROUP BY d`, PAGE_MATCH, TRACK_START);
+  const lDay = await q(`SELECT date(created_at,'-3 hours') d, COUNT(*) c FROM leads WHERE source LIKE ? AND created_at >= ? ${dc} GROUP BY d`, LEAD_MATCH, TRACK_START);
+  const vOri = await q(`SELECT COALESCE(NULLIF(utm_source,''),'direto') s, COALESCE(NULLIF(utm_medium,''),'-') m, COUNT(*) c FROM visits WHERE page LIKE ? AND created_at >= ? ${dc} GROUP BY s,m`, PAGE_MATCH, TRACK_START);
+  const lOri = await q(`SELECT COALESCE(NULLIF(utm_source,''),'direto') s, COALESCE(NULLIF(utm_medium,''),'-') m, COUNT(*) c FROM leads WHERE source LIKE ? AND created_at >= ? ${dc} GROUP BY s,m`, LEAD_MATCH, TRACK_START);
+  const vPage = await q(`SELECT page p, COUNT(*) c FROM visits WHERE page LIKE ? AND created_at >= ? ${dc} GROUP BY p`, PAGE_MATCH, TRACK_START);
+  const lPage = await q(`SELECT source p, COUNT(*) c FROM leads WHERE source LIKE ? AND created_at >= ? ${dc} GROUP BY p`, LEAD_MATCH, TRACK_START);
   const lDayAll = await q("SELECT date(created_at,'-3 hours') d, COUNT(*) c FROM leads WHERE source LIKE ? GROUP BY d", LEAD_MATCH);
-  const hora = await q(`SELECT strftime('%H', datetime(created_at,'-3 hours')) h, COUNT(*) c FROM leads WHERE source LIKE ? ${dc} GROUP BY h`, LEAD_MATCH);
+  const hora = await q(`SELECT strftime('%H', datetime(created_at,'-3 hours')) h, COUNT(*) c FROM leads WHERE source LIKE ? AND created_at >= ? ${dc} GROUP BY h`, LEAD_MATCH, TRACK_START);
 
   // por dia
   const mapDay = {};
@@ -67,13 +70,10 @@ export async function onRequestGet({ request, env }) {
   const totCad = lDay.reduce((a, b) => a + b.c, 0);
   const hoje = new Date(Date.now() - 3 * 3600 * 1000).toISOString().slice(0, 10);
 
-  // Conversao da LP: conta visita E cadastro juntos a partir de TRACK_START (instante
-  // exato em que o contador entrou no ar). Antes disso nao havia visita pareada, entao
-  // contar aquele periodo so inflaria a taxa. Respeita tambem o filtro de periodo (dc).
-  const cvRow = await q(`SELECT COUNT(*) c FROM visits WHERE page LIKE ? AND created_at >= ? ${dc}`, PAGE_MATCH, TRACK_START);
-  const ccRow = await q(`SELECT COUNT(*) c FROM leads WHERE source LIKE ? AND created_at >= ? ${dc}`, LEAD_MATCH, TRACK_START);
-  const convVis = (cvRow[0] && cvRow[0].c) || 0;
-  const convCad = (ccRow[0] && ccRow[0].c) || 0;
+  // Como visitas e cadastros ja contam a partir de TRACK_START, a conversao do periodo
+  // e simplesmente o total (visita e cadastro pareados na mesma janela).
+  const convVis = totVis;
+  const convCad = totCad;
   const convLP = convVis ? round1(convCad / convVis * 100) : null;
 
   // ritmo de cadastros (dia a dia, historico completo, independente do filtro)

@@ -128,7 +128,7 @@ function render(d){
   html += '<div class="ritmo">Ritmo de cadastros: hoje <b>'+fmt(p.hoje)+'</b> (parcial) · ontem <b>'+fmt(p.ontem)+'</b> '+arrow+' · media <b>'+fmt(p.media)+'</b>/dia</div>';
 
   const ts = d.trackStartLabel || (d.trackStart ? diaBonito(d.trackStart) : "o inicio do rastreio");
-  html += '<div class="note">A <b>conversao</b> conta visita e cadastro juntos a partir de '+ts+' (quando o contador entrou no ar). Antes disso nao havia visita pareada, entao esse periodo fica de fora e a taxa so cresce daqui pra frente. A coluna <b>cadastros</b> segue mostrando o historico completo.</div>';
+  html += '<div class="note">Este painel e o <b>funil rastreado</b> a partir de '+ts+' (quando o contador de visitas entrou no ar): visitas, cadastros e taxa contam desse momento pra frente, pareados. Hoje e um dia parcial (o rastreio comecou no meio do dia), entao a partir de amanha cada dia e um dia cheio. O <b>volume total de cadastros por dia</b> (inclusive antes do rastreio) esta no <b>ritmo</b> logo acima.</div>';
 
   // por origem (com total ManyChat e Meta pago)
   const maxV = Math.max(1, ...d.porOrigem.map(o=>o.visitas));
