@@ -135,10 +135,12 @@ function render(d){
   html += '<section><h2>Por origem ('+lbl+')</h2>' + tableHead(["Origem","Visitas","Cadastros","Taxa"]);
   if(!d.porOrigem.length) html += emptyRow(4);
 
-  const isManychat = o => /manychat/i.test(o.origem);
   const isPago = o => { const m=(o.origem.split(" / ")[1]||"").toLowerCase(); return m==="pago"||m==="paid"||m==="ads"; };
-  html += totalRow("Organico (ManyChat)", d.porOrigem.filter(isManychat));
-  html += totalRow("Pago (Meta Ads)", d.porOrigem.filter(isPago));
+  const isManychat = o => /manychat/i.test(o.origem);
+  const isBio = o => (o.origem.split(" / ")[0]||"").toLowerCase()==="bio";
+  const isOrganico = o => isManychat(o) || isBio(o);
+  html += totalRow("Orgânico (ManyChat + bio)", d.porOrigem.filter(isOrganico));
+  html += totalRow("Pago (Ads)", d.porOrigem.filter(isPago));
   for(const o of d.porOrigem){
     const w = Math.round(o.visitas/maxV*100);
     html += '<tr><td class="ori"><span class="bar" style="width:'+w+'%"></span><span>'+o.origem+'</span></td>'
