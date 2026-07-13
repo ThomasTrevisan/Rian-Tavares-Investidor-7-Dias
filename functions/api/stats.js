@@ -10,7 +10,8 @@
 const KEY_DEFAULT = "oadv-painel-9k4x7r2m"; // senha padrao do painel (troca depois via env.PANEL_KEY, opcional)
 const LEAD_MATCH = "lp-o-ano-da-virada%";
 const PAGE_MATCH = "%o-ano-da-virada%";
-const TRACK_START = "2026-07-14"; // 1o dia cheio do beacon no ar (CONFIRMAR com o go-live)
+const TRACK_START = "2026-07-13T12:51:30.000Z"; // instante exato em que a conversao passou a contar (relogio Cloudflare/D1, UTC)
+const TRACK_START_LABEL = "13/07 às 09h51"; // rotulo amigavel (Brasilia) do TRACK_START
 
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
@@ -66,11 +67,13 @@ export async function onRequestGet({ request, env }) {
   const totCad = lDay.reduce((a, b) => a + b.c, 0);
   const hoje = new Date(Date.now() - 3 * 3600 * 1000).toISOString().slice(0, 10);
 
-  // Conversao da LP: so o periodo em que visita E cadastro sao contados juntos
-  // (a partir de TRACK_START, 1o dia cheio do contador). Antes disso os cadastros
-  // nao tem visita par, entao entrariam so inflando a taxa.
-  const convCad = lDay.filter(r => r.d >= TRACK_START).reduce((a, b) => a + b.c, 0);
-  const convVis = vDay.filter(r => r.d >= TRACK_START).reduce((a, b) => a + b.c, 0);
+  // Conversao da LP: conta visita E cadastro juntos a partir de TRACK_START (instante
+  // exato em que o contador entrou no ar). Antes disso nao havia visita pareada, entao
+  // contar aquele periodo so inflaria a taxa. Respeita tambem o filtro de periodo (dc).
+  const cvRow = await q(`SELECT COUNT(*) c FROM visits WHERE page LIKE ? AND created_at >= ? ${dc}`, PAGE_MATCH, TRACK_START);
+  const ccRow = await q(`SELECT COUNT(*) c FROM leads WHERE source LIKE ? AND created_at >= ? ${dc}`, LEAD_MATCH, TRACK_START);
+  const convVis = (cvRow[0] && cvRow[0].c) || 0;
+  const convCad = (ccRow[0] && ccRow[0].c) || 0;
   const convLP = convVis ? round1(convCad / convVis * 100) : null;
 
   // ritmo de cadastros (dia a dia, historico completo, independente do filtro)
@@ -89,6 +92,7 @@ export async function onRequestGet({ request, env }) {
     range,
     hoje,
     trackStart: TRACK_START,
+    trackStartLabel: TRACK_START_LABEL,
     totais: { visitas: totVis, cadastros: totCad, taxa: convLP, convCad, convVis },
     pacing, porHora, porDia, porOrigem, porVersao
   }, 200);

@@ -127,8 +127,8 @@ function render(d){
   const arrow = p.ontem>=p.media ? '<span class="up">▲</span>' : '<span class="down">▼</span>';
   html += '<div class="ritmo">Ritmo de cadastros: hoje <b>'+fmt(p.hoje)+'</b> (parcial) · ontem <b>'+fmt(p.ontem)+'</b> '+arrow+' · media <b>'+fmt(p.media)+'</b>/dia</div>';
 
-  const ts = d.trackStart ? diaBonito(d.trackStart) : "o inicio do rastreio";
-  html += '<div class="note">A <b>conversao</b> usa so o periodo em que visita e cadastro sao contados juntos (a partir de '+ts+', 1o dia cheio do contador). Antes disso os cadastros tem historico sem visita par, entao a taxa fica "—". A coluna <b>cadastros</b> segue mostrando o historico completo.</div>';
+  const ts = d.trackStartLabel || (d.trackStart ? diaBonito(d.trackStart) : "o inicio do rastreio");
+  html += '<div class="note">A <b>conversao</b> conta visita e cadastro juntos a partir de '+ts+' (quando o contador entrou no ar). Antes disso nao havia visita pareada, entao esse periodo fica de fora e a taxa so cresce daqui pra frente. A coluna <b>cadastros</b> segue mostrando o historico completo.</div>';
 
   // por origem (com total ManyChat e Meta pago)
   const maxV = Math.max(1, ...d.porOrigem.map(o=>o.visitas));
