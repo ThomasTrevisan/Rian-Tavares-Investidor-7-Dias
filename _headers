@@ -44,6 +44,12 @@
 /obrigado-adv/index.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
+/painel-oadv/
+  Cache-Control: no-store
+
+/painel-oadv/index.html
+  Cache-Control: no-store
+
 /img/*
   Cache-Control: public, max-age=31536000, immutable, no-transform
 

@@ -16,7 +16,7 @@ export async function onRequestPost({ request, env }) {
     name: String(body.name || "").trim(),
     email: String(body.email || "").trim(),
     phone: String(body.phone || body.telefone || "").trim(),
-    source: "lp-o-ano-da-virada",
+    source: String(body.source || "").trim() || "lp-o-ano-da-virada",
     url: String(body.url || ""),
     utm: String(body.utm || ""),
     utm_source: String(body.utm_source || ""),

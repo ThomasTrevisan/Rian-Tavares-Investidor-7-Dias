@@ -394,5 +394,19 @@ function lpSubmit(e){
   return false;
 }
 </script>
+<!-- contador de visitas (painel-oadv) -->
+<script>
+(function(){try{
+  if(sessionStorage.getItem('oadv_hit'))return;
+  sessionStorage.setItem('oadv_hit','1');
+  var p=new URLSearchParams(location.search);
+  fetch('/api/hit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    page:location.pathname,
+    utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',
+    utm_campaign:p.get('utm_campaign')||'',utm_content:p.get('utm_content')||'',
+    utm_term:p.get('utm_term')||'',ref:document.referrer||''
+  }),keepalive:true}).catch(function(){});
+}catch(e){}})();
+</script>
 </body>
 </html>
