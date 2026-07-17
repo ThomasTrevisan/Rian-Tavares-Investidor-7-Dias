@@ -99,6 +99,20 @@ export async function onRequestGet({ request, env }) {
   const mapHora = {}; for (const r of hora) mapHora[r.h] = r.c;
   const porHora = []; for (let i = 0; i < 24; i++) { const hh = String(i).padStart(2, "0"); porHora.push({ hora: hh, c: mapHora[hh] || 0 }); }
 
+  // META DO LANCAMENTO (sempre da captacao inteira, independe do filtro de periodo)
+  const META_LEADS = 8000;
+  const CAPT_FIM = "2026-07-23"; // ultimo dia de captacao (dia do CPL)
+  const totalLanc = lDayAll.reduce((a, b) => a + b.c, 0);
+  const cadHoje = byDayAll[hoje] || 0;
+  const dias7 = lDayAll.filter(r => r.d !== hoje).sort((a, b) => (a.d < b.d ? 1 : -1)).slice(0, 7);
+  const ritmo7d = dias7.length ? Math.round(dias7.reduce((a, b) => a + b.c, 0) / dias7.length) : 0;
+  const diasRestantes = Math.max(0, Math.round((new Date(CAPT_FIM) - new Date(hoje)) / 86400000) + 1);
+  const faltam = Math.max(0, META_LEADS - totalLanc);
+  const necessarioDia = diasRestantes > 0 ? Math.ceil(faltam / diasRestantes) : null;
+  // projecao: total atual + ritmo dos ultimos 7 dias nos dias cheios restantes + o que ainda cabe hoje
+  const projecao = diasRestantes > 0 ? totalLanc + ritmo7d * (diasRestantes - 1) + Math.max(0, ritmo7d - cadHoje) : totalLanc;
+  const meta = { metaLeads: META_LEADS, fim: CAPT_FIM, total: totalLanc, pct: round1(totalLanc / META_LEADS * 100), faltam, diasRestantes, necessarioDia, ritmo7d, projecao };
+
   return json({
     ok: true,
     range,
@@ -106,7 +120,7 @@ export async function onRequestGet({ request, env }) {
     trackStart: TRACK_START,
     trackStartLabel: TRACK_START_LABEL,
     totais: { visitas: totVis, cadastros: totCad, taxa: convLP, convCad, convVis },
-    pacing, porHora, porDia, porOrigem, porVersao
+    meta, pacing, porHora, porDia, porOrigem, porVersao
   }, 200);
 }
 
