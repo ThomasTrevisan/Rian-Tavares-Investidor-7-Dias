@@ -62,6 +62,24 @@
 /painel-rian/index.html
   Cache-Control: no-store
 
+/cronograma/
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/cronograma/index.html
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/cronograma/trailer-16x9.mp4
+  Cache-Control: public, max-age=31536000, immutable, no-transform
+
+/cronograma/trailer-9x16.mp4
+  Cache-Control: public, max-age=31536000, immutable, no-transform
+
+/cronograma/trailer-poster-16x9.jpg
+  Cache-Control: public, max-age=31536000, immutable, no-transform
+
+/cronograma/trailer-poster-9x16.jpg
+  Cache-Control: public, max-age=31536000, immutable, no-transform
+
 /img/*
   Cache-Control: public, max-age=31536000, immutable, no-transform
 
