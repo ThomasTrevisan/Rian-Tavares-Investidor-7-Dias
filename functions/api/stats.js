@@ -111,7 +111,15 @@ export async function onRequestGet({ request, env }) {
   const necessarioDia = diasRestantes > 0 ? Math.ceil(faltam / diasRestantes) : null;
   // projecao: total atual + ritmo dos ultimos 7 dias nos dias cheios restantes + o que ainda cabe hoje
   const projecao = diasRestantes > 0 ? totalLanc + ritmo7d * (diasRestantes - 1) + Math.max(0, ritmo7d - cadHoje) : totalLanc;
-  const meta = { metaLeads: META_LEADS, fim: CAPT_FIM, total: totalLanc, pct: round1(totalLanc / META_LEADS * 100), faltam, diasRestantes, necessarioDia, ritmo7d, projecao };
+  // projecao de vendas/faturamento NAS PREMISSAS DA META (3% de conversao, ticket R$1.247),
+  // aplicadas sobre a projecao de leads nos dados atuais. Vira dado real so no carrinho.
+  const CONV_META = 0.03, TICKET_MEDIO = 1247, META_VENDAS = 241, META_FAT = 300527;
+  const COMP_CPL = 0.20, META_CPL = 1600;
+  const vendasProj = Math.round(projecao * CONV_META);
+  const fatProj = vendasProj * TICKET_MEDIO;
+  const cplProj = Math.round(projecao * COMP_CPL);
+  const meta = { metaLeads: META_LEADS, fim: CAPT_FIM, total: totalLanc, pct: round1(totalLanc / META_LEADS * 100), faltam, diasRestantes, necessarioDia, ritmo7d, projecao,
+    cplProj, metaCpl: META_CPL, vendasProj, fatProj, metaVendas: META_VENDAS, metaFat: META_FAT, pctFat: round1(fatProj / META_FAT * 100) };
 
   return json({
     ok: true,

@@ -139,8 +139,8 @@ function render(d){
       +   '<span style="position:absolute;top:3px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700;white-space:nowrap">'+fmt(m.total)+' / '+fmt(m.metaLeads)+' ('+m.pct.toLocaleString("pt-BR")+'%)</span>'
       + '</div>'
       + '<div class="ritmo" style="margin-top:10px">Faltam <b>'+fmt(m.faltam)+'</b> em <b>'+m.diasRestantes+'</b> dias (contando hoje) · precisa de <b>'+fmt(m.necessarioDia)+'</b>/dia · ritmo dos últimos 7 dias: <b>'+fmt(m.ritmo7d)+'</b>/dia</div>'
-      + '<div class="ritmo">Projeção no ritmo atual: <b style="color:'+(onTrack?'var(--green)':'#b3402c')+'">'+fmt(m.projecao)+' leads</b> '+(onTrack?'<span class="up">▲ bate a meta</span>':'<span class="down">▼ abaixo da meta</span>')+'</div>'
-      + '<div class="muted" style="font-size:12px;padding:4px 2px 8px;line-height:1.6">Metas do lançamento: <b>241 vendas</b> · <b>R$ 300.527</b> · ticket R$ 1.247 · conversão 3% dos 8.000 leads · CPL único: 20% de comparecimento (1.600 no pico) e 8% de conversão = 128 vendas (R$ 159.616) · carrinho até 30/07: 113 vendas (R$ 140.911)</div>'
+      + metaTable(m)
+      + '<div class="muted" style="font-size:12px;padding:6px 2px 8px;line-height:1.6">As projeções aplicam as premissas da meta (20% de comparecimento no CPL, 3% de conversão, ticket R$ 1.247) sobre os leads projetados no ritmo dos últimos 7 dias. Viram dado real no carrinho. Na meta, as vendas se dividem em CPL (128 · R$ 159.616) + carrinho até 30/07 (113 · R$ 140.911).</div>'
       + '</div></section>';
   }
 
@@ -202,6 +202,26 @@ function render(d){
 
 function card(lbl, big, cap){
   return '<div class="card"><div class="lbl">'+lbl+'</div><div class="big">'+big+'</div><div class="cap">'+(cap||"")+'</div></div>';
+}
+// tabela lado a lado: como vai ser no ritmo atual x onde queriamos chegar
+function metaTable(m){
+  const rows = [
+    ['Leads',            fmt(m.projecao),        fmt(m.metaLeads)],
+    ['Pico no CPL (20%)', fmt(m.cplProj),        fmt(m.metaCpl)],
+    ['Vendas (3%)',      fmt(m.vendasProj),      fmt(m.metaVendas)],
+    ['Faturamento',      'R$ '+fmt(m.fatProj),   'R$ '+fmt(m.metaFat)],
+  ];
+  const pcts = [m.projecao/m.metaLeads, m.cplProj/m.metaCpl, m.vendasProj/m.metaVendas, m.fatProj/m.metaFat];
+  let h = '<table style="margin-top:12px"><tr><th></th><th>📉 Como vai ser (ritmo atual)</th><th>🎯 Onde queríamos chegar</th><th>% da meta</th></tr>';
+  rows.forEach(function(r, i){
+    const pc = Math.round(pcts[i]*100);
+    const cor = pc >= 100 ? 'var(--green)' : '#b3402c';
+    h += '<tr><td>'+r[0]+'</td>'
+      + '<td style="font-weight:700;color:'+cor+'">'+r[1]+'</td>'
+      + '<td>'+r[2]+'</td>'
+      + '<td style="font-weight:700;color:'+cor+'">'+pc+'%</td></tr>';
+  });
+  return h + '</table>';
 }
 function tableHead(cols){ return '<table><tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr>'; }
 function emptyRow(n){ return '<tr><td colspan="'+n+'" class="muted" style="text-align:center;padding:22px">Ainda sem registros nesse periodo.</td></tr>'; }
