@@ -6,7 +6,7 @@
 // entao o painel separa A x B sozinho.
 
 export async function onRequest(context) {
-  const { request, next } = context;
+  const { request, next, env } = context;
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, "") || "/";
 
@@ -16,9 +16,12 @@ export async function onRequest(context) {
   const ua = (request.headers.get("user-agent") || "").toLowerCase();
   const isBot = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegram|discordbot|linkedinbot|embedly|quora|pinterest|preview|headless|lighthouse|pingdom|gtmetrix|uptimerobot|ahrefs|semrush|petalbot/.test(ua);
 
-  // Serve a variante A (LP atual) marcando no-store pra o edge nunca "fixar" uma versao pra todos.
+  // Serve a variante A (LP atual) buscando o HTML real direto no store de assets, COM barra.
+  // env.ASSETS.fetch nao passa pelo middleware, entao nao ha loop nem o 308 de normalizacao de barra:
+  // devolve 200 na hora e o Set-Cookie cola de verdade. no-store evita o edge "fixar" uma versao pra todos.
   async function serveA(setCookie) {
-    const resp = await next();
+    const assetReq = new Request(new URL("/o-ano-da-virada/", url.origin).toString(), request);
+    const resp = await env.ASSETS.fetch(assetReq);
     const out = new Response(resp.body, resp);
     if (setCookie) out.headers.append("Set-Cookie", setCookie);
     out.headers.set("Cache-Control", "no-store");
