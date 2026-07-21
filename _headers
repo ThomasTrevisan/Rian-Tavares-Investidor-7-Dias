@@ -38,6 +38,12 @@
 /o-ano-da-virada/index.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
+/o-ano-da-virada-b/
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/o-ano-da-virada-b/index.html
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
 /obrigado-adv/
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
 
