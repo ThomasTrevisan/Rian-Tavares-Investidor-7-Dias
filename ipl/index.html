@@ -63,7 +63,8 @@
 
 <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/instrument-serif-400i-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/img/ipp-hero.webp" as="image" fetchpriority="high">
+<link rel="preload" href="/img/ipp-hero.webp" as="image" fetchpriority="high" media="(max-width: 980px)">
+<link rel="preload" href="/img/ipp-hero-pc.webp" as="image" fetchpriority="high" media="(min-width: 981px)">
 
 <style>
 /* ================= FONTES ================= */
@@ -310,13 +311,6 @@ main { display: block; }
   background: linear-gradient(to bottom, rgba(10, 8, 5, 0) 0%, var(--ink-deepest) 94%);
   pointer-events: none;
 }
-@media (min-width: 981px) {
-  .hero-photo img {
-    height: 480px;
-    object-fit: cover;
-    object-position: 50% 8%;
-  }
-}
 .hero-content {
   position: relative;
   z-index: 2;
@@ -329,6 +323,40 @@ main { display: block; }
   text-align: center;
   gap: 16px;
   width: 100%;
+}
+@media (min-width: 981px) {
+  .hero { padding: 0; }
+  .hero-photo { position: absolute; inset: 0; }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 72% 20%;
+  }
+  .hero-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(10, 8, 5, 0.94) 0%, rgba(10, 8, 5, 0.78) 28%, rgba(10, 8, 5, 0.3) 54%, rgba(10, 8, 5, 0) 74%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-photo::after { height: 34%; }
+  .hero-content {
+    margin: 0 auto;
+    max-width: 1280px;
+    min-height: 620px;
+    padding: 64px 24px 56px 60px;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: center;
+    gap: 18px;
+  }
+  .hero-brand-block { text-align: left; }
+  .hero-brand-caps { text-indent: 0; }
+  .hero-headline { max-width: 640px; margin: 0; }
+  .hero-subheadline { max-width: 530px; }
+  .hero-badges, .hero-cta-row, .hero-proof-row { justify-content: flex-start; }
 }
 
 .hero-brand-block { text-align: center; margin-bottom: 6px; }
@@ -1496,7 +1524,10 @@ vturb-smartplayer iframe, vturb-smartplayer video {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-photo">
-    <img src="/img/ipp-hero.webp" alt="Rian Tavares" width="1365" height="900" fetchpriority="high">
+    <picture>
+      <source media="(min-width: 981px)" srcset="/img/ipp-hero-pc.webp" width="1920" height="770">
+      <img src="/img/ipp-hero.webp" alt="Rian Tavares" width="1365" height="900" fetchpriority="high">
+    </picture>
   </div>
   <div class="hero-content">
     <div class="hero-brand-block">
@@ -1516,11 +1547,11 @@ vturb-smartplayer iframe, vturb-smartplayer video {
     </div>
 
     <h1 class="hero-headline">
-      Pare de trabalhar pelo dinheiro. <em>Faça o dinheiro trabalhar por você</em>, com o método e o acompanhamento de quem já movimentou bilhões em renda fixa.
+      Aprenda a investir o seu dinheiro <em>de forma segura</em> com quem já movimentou <em>bilhões</em> no mercado financeiro.
     </h1>
 
     <p class="hero-subheadline">
-      Não é só um curso. É o ecossistema completo de investimentos do Rian Tavares: 35 aulas, AssessorIA, planilhas, 6 meses de aulas ao vivo no Clube do Investidor e suporte por 1 ano. <strong>Sem economês, sem promessa furada.</strong>
+      Tenha todos os meus cursos de forma vitalícia, 6 meses de acompanhamento, IA e suporte. <strong>Garanta hoje enquanto há vagas.</strong>
     </p>
 
     <div class="hero-cta-row">
