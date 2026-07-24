@@ -1394,6 +1394,63 @@ vturb-smartplayer iframe, vturb-smartplayer video {
   .virals-grid { grid-template-columns: 1fr; max-width: 320px; }
   .benefit-card { padding: 30px 26px; }
 }
+/* ================= DEADLINE BAR ================= */
+.deadline-bar {
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-deep));
+  color: var(--ink-deep);
+  padding: 10px 20px;
+  position: relative;
+  z-index: 10;
+}
+.deadline-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.deadline-text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.deadline-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.deadline-timer b {
+  background: rgba(10, 8, 5, 0.88);
+  color: var(--gold-bright);
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 4px 7px;
+  border-radius: 6px;
+  min-width: 30px;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.2;
+}
+.deadline-timer i {
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.75;
+  margin-right: 3px;
+}
+@media (max-width: 640px) {
+  .deadline-bar { padding: 9px 14px; }
+  .deadline-text { font-size: 10.5px; letter-spacing: 0.05em; }
+  .deadline-timer b { font-size: 12.5px; padding: 3px 6px; min-width: 27px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .terms-track { animation: none; }
@@ -1401,6 +1458,15 @@ vturb-smartplayer iframe, vturb-smartplayer video {
 </style>
 </head>
 <body>
+
+<div class="deadline-bar" id="deadline-bar" hidden>
+  <div class="deadline-bar-inner">
+    <span class="deadline-text">Entre agora e receba uma análise personalizada de onde você deve investir</span>
+    <span class="deadline-timer" aria-label="Tempo restante da condição">
+      <b id="dt-h">--</b><i>h</i><b id="dt-m">--</b><i>min</i><b id="dt-s">--</b><i>seg</i>
+    </span>
+  </div>
+</div>
 
 <main>
 
@@ -2109,6 +2175,31 @@ vturb-smartplayer iframe, vturb-smartplayer video {
     Este site não é afiliado ao Facebook, Instagram ou qualquer entidade do Meta Inc. Resultados em investimentos dependem de mercado, perfil de risco e disciplina do investidor. O conteúdo aqui é educacional, não constitui recomendação personalizada de investimento e não substitui um assessor certificado.
   </p>
 </footer>
+
+<script>
+(function () {
+  var end = new Date('2026-07-25T02:59:59Z').getTime(); // 24/07/2026 23:59:59 Brasilia
+  var bar = document.getElementById('deadline-bar');
+  var eh = document.getElementById('dt-h');
+  var em = document.getElementById('dt-m');
+  var es = document.getElementById('dt-s');
+  if (!bar || !eh) return;
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function tick() {
+    var left = end - Date.now();
+    if (left <= 0) { bar.hidden = true; clearInterval(timer); return; }
+    var h = Math.floor(left / 3600000);
+    var m = Math.floor((left % 3600000) / 60000);
+    var s = Math.floor((left % 60000) / 1000);
+    eh.textContent = pad(h);
+    em.textContent = pad(m);
+    es.textContent = pad(s);
+    bar.hidden = false;
+  }
+  tick();
+  var timer = setInterval(tick, 1000);
+})();
+</script>
 
 <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 <script>
