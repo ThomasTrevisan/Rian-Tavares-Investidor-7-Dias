@@ -360,10 +360,11 @@ main { display: block; }
     justify-content: center;
     gap: 18px;
   }
-  .hero-brand-block { text-align: left; }
-  .hero-brand-caps { text-indent: 0; }
-  .hero-headline { max-width: 640px; margin: 0; }
-  .hero-subheadline { max-width: 530px; }
+  .hero-content .hero-brand-block { text-align: left; }
+  .hero-brand-block .hero-brand-caps { text-indent: 0; }
+  .hero-content .hero-headline { max-width: 640px; margin: 0; }
+  .hero-content .hero-vsl { max-width: 500px; }
+  .hero-content .hero-subheadline { max-width: 530px; }
   .hero-badges, .hero-cta-row, .hero-proof-row { justify-content: flex-start; }
 }
 
@@ -430,6 +431,8 @@ main { display: block; }
   max-width: 580px;
 }
 .hero-subheadline strong { color: var(--text-paper); font-weight: 600; }
+
+.hero-vsl { width: 100%; max-width: 640px; border-radius: 14px; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,0.45); background: #000; }
 
 .hero-cta-row { display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
 
@@ -1377,8 +1380,9 @@ vturb-smartplayer iframe, vturb-smartplayer video {
 
 /* ================= RESPONSIVO ================= */
 @media (max-width: 980px) {
-  .hero { padding: 0 0 48px; }
-  .hero-content { gap: 14px; margin-top: -128px; padding: 0 20px; }
+  .hero { padding: 0 0 40px; }
+  .hero-photo { display: none; }
+  .hero-content { gap: 10px; margin-top: 0; padding: 16px 20px 0; }
   .hero-brand-script { font-size: clamp(30px, 8vw, 38px); }
   .hero-brand-caps { font-size: 12px; letter-spacing: 0.44em; text-indent: 0.44em; margin-top: 9px; }
   .hero-proof-row { gap: 14px; font-size: 11.5px; }
@@ -1554,7 +1558,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
       </span>
       <span class="hero-badge">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0-6C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" opacity=".25"/><path d="M12 1a11 11 0 1 1 0 22 11 11 0 0 1 0-22zm0 2a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm.5 4v5.25l4.5 2.67-.75 1.23L11 13V7h1.5z"/></svg>
-        13 ANOS DE MERCADO
+        +14 ANOS DE MERCADO
       </span>
     </div>
 
@@ -1565,6 +1569,11 @@ vturb-smartplayer iframe, vturb-smartplayer video {
     <p class="hero-subheadline">
       Tenha todos os meus cursos de forma vitalícia, 6 meses de acompanhamento, IA e suporte. <strong>Garanta hoje enquanto há vagas.</strong>
     </p>
+
+    <div class="hero-vsl">
+      <vturb-smartplayer id="vid-6a658a3270d97a6b7dd4ee20" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+      <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/5ab6965b-6268-4b7f-885a-aac5dae85715/players/6a658a3270d97a6b7dd4ee20/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+    </div>
 
     <div class="hero-cta-row">
       <a href="#oferta" class="cta cta-bigger">
@@ -1783,7 +1792,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
       <div class="bio-content">
         <span class="section-eyebrow">Quem é o Rian</span>
         <h2>A carteira do Rian <em>quase triplicou em 8 anos</em>. O mesmo método está dentro do programa.</h2>
-        <p>Sou Rian Tavares. Economista, 13 anos no mercado financeiro, liderei operações de quase R$ 5 bilhões mensais em uma mesa de renda fixa de assessoria de investimentos. Hoje sou CEO da Hedge Consultoria e autor de 2 livros sobre investimentos: <em>"A Renda é Fixa, o Preço Não"</em> e <em>"Não Existe Almoço Grátis"</em>.</p>
+        <p>Sou Rian Tavares. Economista, mais de 14 anos no mercado financeiro, liderei operações de quase R$ 5 bilhões mensais em uma mesa de renda fixa de assessoria de investimentos. Hoje sou CEO da Hedge Consultoria e autor de 2 livros sobre investimentos: <em>"A Renda é Fixa, o Preço Não"</em> e <em>"Não Existe Almoço Grátis"</em>.</p>
 
         <aside class="stat-stack bio-stat-stack">
           <div class="stat-stack-item">
@@ -1795,7 +1804,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
             <div class="stat-stack-label">geridos em operações mensais de renda fixa</div>
           </div>
           <div class="stat-stack-item">
-            <div class="stat-stack-number">13 anos</div>
+            <div class="stat-stack-number">+14 anos</div>
             <div class="stat-stack-label">de mercado financeiro em assessoria</div>
           </div>
           <div class="stat-stack-item">
@@ -2067,7 +2076,7 @@ vturb-smartplayer iframe, vturb-smartplayer video {
       <div class="bio-content">
         <span class="section-eyebrow">Por trás do método</span>
         <h2>Mais de uma década no mercado. <em>+1.500 alunos formados</em>. Carteira que quase triplicou em 8 anos.</h2>
-        <p>13 anos no mercado financeiro. Liderei operações de quase R$ 5 bilhões mensais em uma mesa de renda fixa de assessoria de investimentos, aconselhei os maiores empresários do Brasil e cuidei das carteiras das famílias mais ricas do país.</p>
+        <p>Mais de 14 anos no mercado financeiro. Liderei operações de quase R$ 5 bilhões mensais em uma mesa de renda fixa de assessoria de investimentos, aconselhei os maiores empresários do Brasil e cuidei das carteiras das famílias mais ricas do país.</p>
         <p>Sou também atleta. Já fui 2 vezes Ultra Man, fiz Iron Man e outras 5 maratonas. E construir patrimônio é exatamente igual: não é uma corrida de domingo, é uma prova longa. Quem cruza a linha de chegada tem três coisas: o caminho certo, o equipamento certo e um treinador que já correu a prova antes.</p>
         <p>É exatamente isso que o Invista Para Prosperar entrega: o mapa, o equipamento e o treinador. Pra você não precisar fazer sozinho. Porque sozinho, no mercado, sai caro.</p>
 
