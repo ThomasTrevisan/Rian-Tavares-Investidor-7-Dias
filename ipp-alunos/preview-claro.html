@@ -28,12 +28,12 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Geist', -apple-system, sans-serif; color: var(--ink); background: var(--cream-soft); font-size: 14.5px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body { font-family: 'Geist', -apple-system, sans-serif; color: var(--ink); background: var(--cream-soft); font-size: 15.5px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; display: block; }
 .wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
 .wrap-narrow { max-width: 880px; margin: 0 auto; padding: 0 22px; }
 
-h2 { font-size: clamp(22px, 2.3vw, 28px); line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
 h3 { font-weight: 700; }
 .gold { color: var(--gold-text); }
 .center { text-align: center; }
@@ -73,29 +73,31 @@ h3 { font-weight: 700; }
 }
 
 /* ===== MARQUEE ===== */
-.marquee { background: linear-gradient(to right, #E8D58F 50%, #A5854C 100%); overflow: hidden; padding: 10px 0; }
+.marquee { background: linear-gradient(to right, #E8D58F 35%, #A5854C 100%); overflow: hidden; padding: 15px 0; }
 .marquee-track { display: flex; gap: 0; white-space: nowrap; animation: mq 22s linear infinite; width: max-content; }
-.marquee-track span { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #6b5323; padding-right: 8px; }
+.marquee-track span { font-size: 15.5px; font-weight: 800; letter-spacing: 0.16em; color: #FDF6E3; text-shadow: 0 1px 2px rgba(90,67,16,0.35); padding-right: 10px; }
 @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ===== SECOES ===== */
 .sec { padding: 54px 0; }
 .sec-cream { background: var(--cream); }
 .sec-soft { background: var(--cream-soft); }
-.sec-deep { background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%); }
+.sec-deep { position: relative; background: linear-gradient(180deg, #FBEDC9 0%, #F3CE7C 100%); overflow: hidden; }
+.sec-deep > .wrap, .sec-deep > .wrap-narrow { position: relative; z-index: 1; }
+.sec-deep::before { content: ''; position: absolute; top: -10%; left: -18%; width: 75%; height: 120%; background: url('/img/bonus-dolar.webp') no-repeat center / cover; opacity: 0.10; filter: blur(2px); pointer-events: none; }
 
 /* para quem e */
 .pq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
-.pq-media img { border-radius: 14px; box-shadow: 0 18px 44px rgba(122, 92, 30, 0.2); }
+.pq-media img { border-radius: 10px; box-shadow: 0 30px 60px rgba(90, 67, 16, 0.35); transform: perspective(1200px) rotateY(6deg); }
 .pq-list { list-style: none; margin-top: 20px; }
-.pq-list li { display: flex; gap: 10px; align-items: flex-start; background: var(--cream); border-left: 3px solid var(--gold); border-radius: 6px; padding: 10px 13px; margin-bottom: 8px; font-size: 13.5px; }
-.pq-check { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--gold-deep); color: var(--gold-deep); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.pq-list li { display: flex; gap: 14px; align-items: center; background: linear-gradient(90deg, #F9ECC4, rgba(249,236,196,0.25)); border-left: 4px solid var(--gold); border-radius: 4px; padding: 17px 20px; margin-bottom: 13px; font-size: 16px; }
+.pq-check { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #4a3d20; color: #4a3d20; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; background: transparent; }
 .pq-close { margin-top: 18px; font-weight: 600; color: var(--gold-text); }
 @media (max-width: 900px) { .pq-grid { grid-template-columns: 1fr; } }
 
 /* cards de icones */
 .icards { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 40px; }
-.icard { position: relative; flex: 0 1 255px; background: linear-gradient(180deg, #FBEFC9, #F6E5A6); border-radius: 10px; padding: 28px 16px 16px; text-align: center; font-size: 13px; color: var(--ink); }
+.icard { position: relative; flex: 0 1 290px; background: linear-gradient(180deg, #FBEFC9, #F6E5A6); border-radius: 10px; padding: 32px 20px 20px; text-align: center; font-size: 15px; color: var(--ink); }
 .icard-ico { position: absolute; top: -19px; left: 50%; transform: translateX(-50%); width: 38px; height: 38px; background: var(--cream-soft); border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-deep); font-size: 18px; }
 .tagline { margin-top: 36px; text-align: center; font-weight: 700; color: var(--gold-text); }
 .tagline .big { display: block; margin-top: 6px; color: var(--ink); font-size: 15px; }
@@ -104,14 +106,14 @@ h3 { font-weight: 700; }
 .prob-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 44px; align-items: center; }
 .prob-grid img { border-radius: 14px; box-shadow: 0 18px 44px rgba(60, 45, 15, 0.28); filter: grayscale(100%); }
 .sintomas { list-style: none; margin-top: 20px; }
-.sintomas li { background: var(--cream); border-left: 3px solid var(--gold); border-radius: 6px; padding: 10px 13px; margin-bottom: 8px; font-size: 13.5px; }
-.prob-lede { color: var(--gold-text); font-weight: 600; margin: 14px 0 10px; }
+.sintomas li { background: linear-gradient(90deg, #F9ECC4, rgba(249,236,196,0.25)); border-left: 4px solid var(--gold); border-radius: 4px; padding: 15px 18px; margin-bottom: 11px; font-size: 15.5px; }
+.prob-lede { color: var(--gold-text); font-weight: 700; font-size: 20px; margin: 16px 0 12px; }
 @media (max-width: 900px) { .prob-grid { grid-template-columns: 1fr; } }
 
 /* solucao */
 .sol-card { background: var(--cream-soft); border-radius: 16px; padding: 44px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; box-shadow: 0 14px 40px rgba(122, 92, 30, 0.12); }
 .passos { list-style: none; }
-.passos li { background: var(--cream); border-left: 3px solid var(--gold); border-radius: 6px; padding: 10px 13px; margin-bottom: 8px; font-weight: 600; font-size: 13.5px; }
+.passos li { background: linear-gradient(90deg, #F9ECC4, rgba(249,236,196,0.25)); border-left: 4px solid var(--gold); border-radius: 4px; padding: 15px 18px; margin-bottom: 11px; font-weight: 600; font-size: 15.5px; }
 .sol-note { margin-top: 16px; font-size: 15px; color: var(--ink-soft); }
 @media (max-width: 900px) { .sol-card { grid-template-columns: 1fr; padding: 30px 22px; } }
 
@@ -541,7 +543,7 @@ footer p { font-size: 11.5px; margin-top: 12px; opacity: 0.85; }
   <div class="fb-script">Invista para</div>
   <div class="fb-caps">PROSPERAR</div>
   <p>POLÍTICA DE PRIVACIDADE | TERMOS DE USO<br>TODOS OS DIREITOS RESERVADOS – 2026 – RIAN TAVARES</p>
-  <p style="opacity:0.5; font-size:10px;">v3 compacta</p>
+  <p style="opacity:0.5; font-size:10px;">v4 design referencia</p>
 </footer>
 
 <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
