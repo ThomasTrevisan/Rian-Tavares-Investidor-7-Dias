@@ -1,0 +1,14 @@
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/08ce1c4bdb1a8f83fa24187c60c2924d.js?ver=2924d -> js/57743989c0.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/206a85db36f2cc10825e192ab56daa8b.js?ver=daa8b -> js/cbbc210b07.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/2e9941ffb6989878007f0072a9adabc5.js?ver=dabc5 -> js/e3578714ce.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/4358223c886abe5a2f700402620462d9.js?ver=462d9 -> js/15d603117e.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/50b7ee8cc75fe0bd3777c0d18ea3df10.js?ver=3df10 -> js/8b032af6ec.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/7ec20be4899b6c29f465ca14b8795785.js?ver=95785 -> js/dddf2c10d4.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/86538d74da271fd77b75c2c961c6d4c1.js?ver=6d4c1 -> js/22bbaf4278.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/95c5d610d866b1b15c81dee5020a842a.js?ver=a842a -> js/4e4a5db60a.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/9e5e7139ddd92c5fde35fb3aaae1caea.js?ver=1caea -> js/f90443d8f8.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/9f0a4545661ac772c94553ae11fe2add.js?ver=e2add -> js/238546c15e.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/aec2494b05c0a7bcec529582e700be3c.js?ver=0be3c -> js/0f181dfa43.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/cbe5f143c989ada7d5e739969e8cd069.js?ver=cd069 -> js/1d71784f51.js
+https://bastasentirtreinamento.com.br/wp-content/litespeed/js/db97e26a20dd9c647738b14674c772f9.js?ver=772f9 -> js/f65667f748.js
+https://bastasentirtreinamento.com.br/wp-includes/js/jquery/jquery.min.js -> js/9a04931767.js
