@@ -10,6 +10,19 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, "") || "/";
 
+  // Dominio white: investidor.* serve so o passo a passo pos-compra (/obrigado/).
+  // O funil inteiro vive em lp.riantavares.com.br; qualquer rota antiga cai no /obrigado/.
+  if (url.hostname === "investidor.riantavares.com.br") {
+    const allowed = path === "/obrigado" || path.startsWith("/obrigado/") ||
+      path.startsWith("/img/") || path.startsWith("/fonts/") || path.startsWith("/api/");
+    if (!allowed) {
+      return new Response(null, {
+        status: 302,
+        headers: { Location: "https://investidor.riantavares.com.br/obrigado/", "Cache-Control": "no-store" },
+      });
+    }
+  }
+
   // Only the main LP entry path is split. Tudo o resto passa direto (custo ~zero).
   if (path !== "/o-ano-da-virada") return next();
 
