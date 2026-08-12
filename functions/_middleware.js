@@ -23,6 +23,11 @@ export async function onRequest(context) {
     }
   }
 
+  // Rota oficial /i7d serve a LP do Investidor em 7 Dias (a pagina raiz).
+  if (path === "/i7d") {
+    return env.ASSETS.fetch(new Request(new URL("/", url.origin).toString(), request));
+  }
+
   // Only the main LP entry path is split. Tudo o resto passa direto (custo ~zero).
   if (path !== "/o-ano-da-virada") return next();
 
