@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://investidor.riantavares.com.br/sitemap.xml
+Sitemap: https://lp.riantavares.com.br/sitemap.xml
