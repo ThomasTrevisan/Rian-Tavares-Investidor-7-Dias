@@ -23,9 +23,9 @@ export async function onRequest(context) {
     }
   }
 
-  // Rota oficial /i7d serve a LP do Investidor em 7 Dias (a pagina raiz).
-  if (path === "/i7d") {
-    return env.ASSETS.fetch(new Request(new URL("/", url.origin).toString(), request));
+  // A pagina do I7D mora em /i7d/; a raiz redireciona pra la.
+  if (path === "/") {
+    return new Response(null, { status: 301, headers: { Location: "/i7d/" } });
   }
 
   // Only the main LP entry path is split. Tudo o resto passa direto (custo ~zero).
