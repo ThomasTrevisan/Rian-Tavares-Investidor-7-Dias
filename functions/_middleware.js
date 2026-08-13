@@ -23,23 +23,6 @@ export async function onRequest(context) {
     }
   }
 
-  // Dominio oficial do Rian: raiz serve a pagina institucional (/home/);
-  // www redireciona pro apex; o funil continua morando no lp.
-  const APEX = "riantavares.com.br";
-  if (url.hostname === "www." + APEX) {
-    return new Response(null, { status: 301, headers: { Location: "https://" + APEX + url.pathname + url.search } });
-  }
-  if (url.hostname === APEX) {
-    if (path === "/") {
-      return env.ASSETS.fetch(new Request(new URL("/home/", url.origin).toString(), request));
-    }
-    const estatico = path.startsWith("/img/") || path.startsWith("/fonts/") ||
-      path.startsWith("/ipp-alunos/ref/") || path.startsWith("/home");
-    if (!estatico) {
-      return new Response(null, { status: 301, headers: { Location: "https://lp." + APEX + url.pathname + url.search } });
-    }
-  }
-
   // A pagina do I7D mora em /i7d/; a raiz do lp. redireciona pra la.
   if (path === "/") {
     return new Response(null, { status: 301, headers: { Location: "/i7d/" } });
