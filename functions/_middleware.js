@@ -23,9 +23,9 @@ export async function onRequest(context) {
     }
   }
 
-  // A pagina do I7D mora em /i7d/; a raiz do lp. redireciona pra la.
+  // A raiz do lp. e a pagina oficial de links (bio do Rian), servida de /links/.
   if (path === "/") {
-    return new Response(null, { status: 301, headers: { Location: "/i7d/" } });
+    return env.ASSETS.fetch(new Request(new URL("/links/", url.origin).toString(), request));
   }
 
   // Only the main LP entry path is split. Tudo o resto passa direto (custo ~zero).
