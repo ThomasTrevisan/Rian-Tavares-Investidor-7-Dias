@@ -14,7 +14,7 @@
  --bg:#f7f3ea;--card:#fff;--l:#e5dac4;--l2:#d3c4a2;
  --ink:#1b1712;--ink2:#655c4e;--ink3:#8d8371;
  --gold:#c9a96e;--gold-d:#8b7340;
- --pre:#a9b5a2;--bur:#e0cda3;--spo:#c9a96e;--cap:#8b7340;--cpl:#7a1f33;--car:#3c3527;
+ --pre:#a9b5a2;--bur:#d6bb7e;--spo:#b8924a;--cap:#8b7340;--cpl:#7a1f33;--car:#3c3527;
  --conv:#2f5d7c;--aqu:#5b8aa6;--ret:#1f4157;--bla:#7a1f33;
  --disp:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
  --sans:'DM Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
@@ -93,6 +93,20 @@ h2{font-size:20px;margin-bottom:3px}
 #cal:not([data-mostra="a"]) .dia[data-fg="cpl"]{background:#7a1f33}
 #cal:not([data-mostra="a"]) .dia[data-fg="cpl"] b,#cal:not([data-mostra="a"]) .dia[data-fg="cpl"] .ac{color:#fff}
 #cal:not([data-mostra="a"]) .dia[data-fg="cpl"] .ac::before{background:#fff}
+/* fundo do dia por fase (publico nas visoes geral, organico e todos; alunos na visao alunos) */
+#cal:not([data-mostra="a"]) .dia[data-fg="pre"]{background:#e9efe6;border-color:#c9d5c2}
+#cal:not([data-mostra="a"]) .dia[data-fg="bur"]{background:#faf1d9;border-color:#e3cf9c}
+#cal:not([data-mostra="a"]) .dia[data-fg="spo"]{background:#f4e5c6;border-color:#d6bb80}
+#cal:not([data-mostra="a"]) .dia[data-fg="cap"]{background:#ecdfc0;border-color:#cdb47f}
+#cal:not([data-mostra="a"]) .dia[data-fg="car"]{background:#e6e2d6;border-color:#c6bda8}
+#cal[data-mostra="a"] .dia[data-fa="conv"]{background:#e2ecf3;border-color:#adc5d6}
+#cal[data-mostra="a"] .dia[data-fa="aqu"]{background:#ecf2f6;border-color:#bfd2df}
+#cal[data-mostra="a"] .dia[data-fa="ret"]{background:#d7e2ea;border-color:#9db7c8}
+#cal[data-mostra="a"] .dia[data-fa="bla"]{background:#7a1f33;border-color:#7a1f33}
+#cal[data-mostra="a"] .dia[data-fa="bla"] b,#cal[data-mostra="a"] .dia[data-fa="bla"] .ac{color:#fff}
+#cal[data-mostra="a"] .dia[data-fa="bla"] .ac::before{background:#fff}
+#cal[data-mostra="a"] .dia[data-fa="car"]{background:#e6e2d6;border-color:#c6bda8}
+.dia--fds b{color:var(--ink3)}
 /* filtro das acoes */
 #cal[data-mostra="g"] .ac[data-tr="a"],#cal[data-mostra="g"] .ac[data-tr="o"]{display:none}
 #cal[data-mostra="a"] .ac[data-tr="g"],#cal[data-mostra="a"] .ac[data-tr="o"]{display:none}
@@ -225,8 +239,8 @@ h2{font-size:20px;margin-bottom:3px}
   <div id="cal" data-mostra="t">
     <div class="legenda leg-g">
       <span><i style="background:#a9b5a2"></i>Pré-captação</span>
-      <span><i style="background:#e0cda3"></i>Burburinho</span>
-      <span><i style="background:#c9a96e"></i>Spoiler</span>
+      <span><i style="background:#d6bb7e"></i>Burburinho</span>
+      <span><i style="background:#b8924a"></i>Spoiler</span>
       <span><i style="background:#8b7340"></i>Captação</span>
       <span><i style="background:#7a1f33"></i>Abertura</span>
       <span><i style="background:#3c3527"></i>Carrinho</span>
