@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Plano da Black Rian 2026</title>
+<style>@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/dm-sans-300n-latin.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/dm-sans-300n-latin.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/dm-sans-300n-latin.woff2) format('woff2')}
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --bg:#f7f3ea;--card:#fff;--l:#e5dac4;--l2:#d3c4a2;
+ --ink:#1b1712;--ink2:#655c4e;--ink3:#8d8371;
+ --gold:#c9a96e;--gold-d:#8b7340;
+ --pre:#a9b5a2;--bur:#e0cda3;--spo:#c9a96e;--cap:#8b7340;--cpl:#7a1f33;--car:#3c3527;
+ --conv:#2f5d7c;--aqu:#5b8aa6;--ret:#1f4157;--bla:#7a1f33;
+ --disp:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+ --sans:'DM Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1320px;margin:0 auto;padding:40px 20px 80px}
+h1,h2,h3,h4,.kpi b,.et-num,.dia b,.tr b,.onda-h b{font-family:var(--disp);font-weight:700;letter-spacing:-.015em}
+
+.topo{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;
+ border-bottom:2px solid var(--l2);padding-bottom:20px;margin-bottom:26px}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);font-weight:600}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.1;margin-top:9px}
+.sub{color:var(--ink2);margin-top:8px;max-width:58ch;font-size:15.5px}
+.kpis{display:flex;gap:9px;flex-wrap:wrap}
+.kpi{background:var(--card);border:1px solid var(--l);border-radius:10px;padding:12px 16px;min-width:108px}
+.kpi b{display:block;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
+.kpi span{display:block;font-size:11.5px;color:var(--ink2);margin-top:5px}
+.kpi--hot{background:#7a1f33;border-color:#7a1f33}
+.kpi--hot b,.kpi--hot span{color:#fff}
+
+h2{font-size:20px;margin-bottom:3px}
+.secao{margin:40px 0 0}
+.secao-sub{color:var(--ink3);font-size:13.5px;margin-bottom:16px}
+.cab{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+
+/* botoes de visao e abas */
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink2);background:var(--card);
+ border:1px solid var(--l);border-radius:999px;padding:7px 15px;cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--l2)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.abas{display:flex;gap:4px;border-bottom:2px solid var(--l);margin-bottom:22px;flex-wrap:wrap}
+.aba{font-family:var(--disp);font-weight:700;font-size:15.5px;color:var(--ink3);background:none;border:0;
+ padding:12px 18px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.15s}
+.aba:hover{color:var(--ink2)}
+.aba.on{color:var(--ink);border-bottom-color:var(--gold)}
+
+/* calendario */
+.legenda{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin-bottom:14px}
+.legenda i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.meses{display:grid;gap:20px}
+.mes{background:var(--card);border:1px solid var(--l);border-radius:12px;padding:15px 15px 17px}
+.mes h3{font-size:15px;margin-bottom:9px;color:var(--gold-d);letter-spacing:.04em;text-transform:uppercase}
+.dows,.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dows span{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);padding:0 0 5px 3px}
+.dia{min-height:76px;border:1px solid var(--l);border-radius:7px;padding:8px 6px 5px;position:relative;background:#fdfbf6;overflow:hidden}
+.dia--fora{border:0;background:transparent;min-height:0}
+.dia--fds{background:#f4efe4}
+.dia b{font-size:14px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.dia--passou{opacity:.34}
+.dia--hoje{outline:2px solid var(--gold);outline-offset:1px}
+.hoje-tag{position:absolute;top:6px;right:5px;font-style:normal;font-size:9px;letter-spacing:.1em;
+ text-transform:uppercase;background:var(--gold);color:#fff;padding:1px 5px;border-radius:4px}
+.acs{display:flex;flex-direction:column;gap:2px;margin-top:4px}
+.ac{font-size:10.5px;line-height:1.28;color:var(--ink2);padding-left:8px;position:relative}
+.ac::before{content:"";position:absolute;left:0;top:.42em;width:4px;height:4px;border-radius:50%;background:var(--ink3)}
+.ac--marco{font-weight:600;color:var(--ink)}
+.ac--marco::before{background:var(--cpl)}
+.ac--live::before{background:#2f5d7c}
+.ac--trafego::before{background:#b4611f}
+.ac--alerta{color:#a33}.ac--alerta::before{background:#a33}
+
+/* barra de fase, conforme a visao escolhida */
+.dia::after{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:4px;border-radius:7px 7px 0 0;background:transparent}
+#cal:not([data-mostra="a"]) .dia[data-fg="pre"]::after{background:var(--pre)}
+#cal:not([data-mostra="a"]) .dia[data-fg="bur"]::after{background:var(--bur)}
+#cal:not([data-mostra="a"]) .dia[data-fg="spo"]::after{background:var(--spo)}
+#cal:not([data-mostra="a"]) .dia[data-fg="cap"]::after{background:var(--cap)}
+#cal:not([data-mostra="a"]) .dia[data-fg="cpl"]::after{background:var(--cpl)}
+#cal:not([data-mostra="a"]) .dia[data-fg="car"]::after{background:var(--car)}
+#cal[data-mostra="a"] .dia[data-fa="conv"]::after{background:var(--conv)}
+#cal[data-mostra="a"] .dia[data-fa="aqu"]::after{background:var(--aqu)}
+#cal[data-mostra="a"] .dia[data-fa="ret"]::after{background:var(--ret)}
+#cal[data-mostra="a"] .dia[data-fa="bla"]::after{background:var(--bla)}
+#cal[data-mostra="a"] .dia[data-fa="car"]::after{background:var(--car)}
+#cal:not([data-mostra="a"]) .dia[data-fg="cpl"]{background:#7a1f33}
+#cal:not([data-mostra="a"]) .dia[data-fg="cpl"] b,#cal:not([data-mostra="a"]) .dia[data-fg="cpl"] .ac{color:#fff}
+#cal:not([data-mostra="a"]) .dia[data-fg="cpl"] .ac::before{background:#fff}
+/* filtro das acoes */
+#cal[data-mostra="g"] .ac[data-tr="a"],#cal[data-mostra="g"] .ac[data-tr="o"]{display:none}
+#cal[data-mostra="a"] .ac[data-tr="g"],#cal[data-mostra="a"] .ac[data-tr="o"]{display:none}
+#cal[data-mostra="o"] .ac[data-tr="g"],#cal[data-mostra="o"] .ac[data-tr="a"]{display:none}
+.ac--insta::before,.ac--instarot::before{background:#b5477a}
+.ac--instarot{opacity:.62}
+#cal[data-mostra="t"] .ac[data-tr="o"]{color:#8e3a62}
+#cal[data-mostra="t"] .ac[data-tr="a"]{color:var(--conv)}
+#cal[data-mostra="t"] .ac[data-tr="a"]::before{background:var(--conv)}
+#cal[data-mostra="t"] .ac[data-tr="a"].ac--marco{color:#1f4157}
+.leg-g,.leg-a{display:none}
+.so-t{display:none}
+#cal[data-mostra="t"] .so-t{display:inline}
+#cal:not([data-mostra="a"]) .leg-g{display:flex}
+#cal[data-mostra="a"] .leg-a{display:flex}
+
+/* etapas */
+.etapas{display:grid;gap:11px}
+.etapa{background:var(--card);border:1px solid var(--l);border-radius:12px;padding:19px 21px;border-left:5px solid}
+.etapa--pre{border-left-color:var(--pre)}.etapa--bur{border-left-color:var(--bur)}
+.etapa--spo{border-left-color:var(--spo)}.etapa--cap{border-left-color:var(--cap)}
+.etapa--cpl{border-left-color:var(--cpl)}.etapa--car{border-left-color:var(--car)}
+.et-head{display:flex;align-items:baseline;gap:13px}
+.et-num{font-size:24px;color:var(--l2);line-height:1;font-variant-numeric:tabular-nums}
+.et-head h3{font-size:19px}
+.et-per{font-size:13px;color:var(--ink3);font-variant-numeric:tabular-nums;margin-top:2px}
+.et-dias{color:var(--ink3);margin-left:6px}
+.et-obj{color:var(--ink2);margin:10px 0 11px;font-size:14.5px;max-width:78ch}
+.et-lista{list-style:none;display:grid;gap:6px;grid-template-columns:1fr 1fr}
+.et-lista li{position:relative;padding-left:16px;font-size:14px}
+.et-lista li::before{content:"";position:absolute;left:1px;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+/* paineis e listas */
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.painel{background:var(--card);border:1px solid var(--l);border-radius:12px;padding:21px}
+.painel h3{font-size:18px;margin-bottom:3px}
+.p-sub{color:var(--ink3);font-size:13px;margin-bottom:13px}
+.p-obj{background:#f6f1e5;border-radius:8px;padding:12px 14px;font-size:14.5px;margin-bottom:13px}
+.p-obj b{font-family:var(--sans);font-weight:700}
+.rot{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-d);font-weight:600;margin:13px 0 8px}
+.linhas{list-style:none;display:grid;gap:6px}
+.linhas li{position:relative;padding-left:15px;font-size:14px;color:var(--ink2)}
+.linhas li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--l2)}
+.passos{list-style:none;display:grid;gap:8px;counter-reset:p}
+.passos li{position:relative;padding-left:27px;font-size:14.5px;counter-increment:p}
+.passos li b{font-family:var(--sans);font-weight:700}
+.passos li::before{content:counter(p);position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;
+ background:#efe7d5;color:var(--gold-d);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+
+/* ondas */
+.ondas{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+.onda{background:var(--card);border:1px solid var(--l);border-radius:12px;padding:18px 20px;border-top:4px solid var(--conv)}
+.onda-h{display:flex;align-items:baseline;gap:9px;margin-bottom:7px}
+.onda-h b{font-size:13px;color:var(--conv);letter-spacing:.06em;text-transform:uppercase}
+.onda-h span{font-size:12.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.onda h4{font-size:16.5px;margin-bottom:6px}
+.onda p{font-size:14px;color:var(--ink2);margin-bottom:10px}
+
+/* porques */
+.porques{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.pq{display:flex;gap:13px;background:var(--card);border:1px solid var(--l);border-radius:11px;padding:16px 18px}
+.pq-n{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--gold);line-height:1.35;font-variant-numeric:tabular-nums;flex-shrink:0}
+.pq h4{font-size:15px;margin-bottom:5px;line-height:1.3}
+.pq p{font-size:14px;color:var(--ink2);line-height:1.5}
+.preco{margin-top:13px;background:#f6f1e5;border-radius:9px;padding:14px 17px;font-size:14.5px;color:var(--ink2)}
+.preco a{color:var(--gold-d);font-weight:600}
+
+/* matriz canal por dia */
+.mz-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--l);border-radius:12px}
+.mz{width:100%;border-collapse:collapse;font-size:13.5px;min-width:820px}
+.mz th,.mz td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--l);line-height:1.45}
+.mz thead th{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--gold-d);font-weight:600;background:#f6f1e5;white-space:nowrap}
+.mz tbody th{font-family:var(--disp);font-weight:700;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums;width:130px}
+.mz tbody th i{display:block;font-style:normal;font-family:var(--sans);font-weight:500;font-size:10.5px;color:var(--gold-d);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.mz td{color:var(--ink2)}
+.mz td b{color:var(--ink);font-weight:700;font-family:var(--sans)}
+.mz tr:last-child th,.mz tr:last-child td{border-bottom:0}
+.mz--forte td,.mz--forte th{background:#fbf8f0}
+.mz--hot th,.mz--hot td{background:#f7eaed}
+.mz--hot td b{color:var(--cpl)}
+
+/* riscos */
+.riscos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.risco{background:#fff;border:1px solid #e8d5cc;border-left:4px solid #a33;border-radius:10px;padding:16px 18px}
+.risco h4{font-size:15px;margin-bottom:6px}
+.risco p{font-size:13.5px;color:var(--ink2)}
+.risco--ideia{border-left-color:var(--gold-d);border-color:#e6dcc4}
+.risco--ideia h4{color:var(--gold-d)}
+
+/* aviso */
+.aviso{background:#fff;border:1px solid var(--l);border-left:4px solid var(--gold);border-radius:10px;
+ padding:14px 17px;font-size:14.5px;color:var(--ink2);margin-top:13px}
+.aviso b{color:var(--ink);font-weight:700;font-family:var(--sans)}
+
+@media(max-width:900px){
+ .et-lista,.duas,.riscos,.porques,.ondas{grid-template-columns:1fr}
+ .mz{font-size:12.5px}
+ .dia{min-height:60px} .ac{font-size:9.5px}
+ .wrap{padding:26px 14px 60px}
+ .aba{padding:10px 12px;font-size:14px}
+}
+</style>
+</head>
+<body><div class="wrap">
+
+<div class="topo">
+  <div>
+    <div class="eyebrow">Black Friday Rian Tavares 2026 · plano de execução</div>
+    <h1>O plano da Black,<br>etapa por etapa</h1>
+    <p class="sub">Público, alunos e o orgânico do Rian rodam ao mesmo tempo. O calendário mostra cada frente separada ou todas juntas.</p>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><b id="faltam">55</b><span>dias até a abertura</span></div>
+    <div class="kpi"><b>09/11</b><span>Black dos alunos</span></div>
+    <div class="kpi kpi--hot"><b>16/11</b><span>Abertura pro público</span></div>
+    <div class="kpi"><b>27/11</b><span>Black Friday</span></div>
+  </div>
+</div>
+
+<div class="secao" style="margin-top:0">
+  <div class="cab">
+    <div><h2>Calendário</h2><p class="secao-sub" style="margin:0">A cor no topo do dia diz a fase. O texto diz o que sai naquele dia.</p></div>
+    <div class="chips">
+      <button class="chip" data-vis="g">Geral</button>
+      <button class="chip" data-vis="a">Alunos</button>
+      <button class="chip" data-vis="o">Orgânico</button>
+      <button class="chip on" data-vis="t">Todos</button>
+    </div>
+  </div>
+  <div id="cal" data-mostra="t">
+    <div class="legenda leg-g">
+      <span><i style="background:#a9b5a2"></i>Pré-captação</span>
+      <span><i style="background:#e0cda3"></i>Burburinho</span>
+      <span><i style="background:#c9a96e"></i>Spoiler</span>
+      <span><i style="background:#8b7340"></i>Captação</span>
+      <span><i style="background:#7a1f33"></i>Abertura</span>
+      <span><i style="background:#3c3527"></i>Carrinho</span>
+      <span class="so-t" style="margin-left:6px;padding-left:16px;border-left:1px solid var(--l2)"><i style="background:#2f5d7c"></i>Ação da trilha de alunos</span>
+      <span class="so-t"><i style="background:#b5477a"></i>Story, reel e bio</span>
+    </div>
+    <div class="legenda leg-a">
+      <span><i style="background:#2f5d7c"></i>Ondas de convite</span>
+      <span><i style="background:#5b8aa6"></i>Aquecimento</span>
+      <span><i style="background:#1f4157"></i>Reta final</span>
+      <span><i style="background:#7a1f33"></i>Black dos alunos</span>
+      <span><i style="background:#3c3527"></i>Carrinho</span>
+    </div>
+    <div class="meses"><div class="mes"><h3>Setembro</h3><div class="dows"><span>dom</span><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span></div><div class="grid"><div class="dia dia--fora"></div><div class="dia dia--fora"></div><div class="dia" data-d="2026-09-01" data-fg="" data-fa=""><b>1</b><div class="acs"></div></div><div class="dia" data-d="2026-09-02" data-fg="" data-fa=""><b>2</b><div class="acs"></div></div><div class="dia" data-d="2026-09-03" data-fg="" data-fa=""><b>3</b><div class="acs"></div></div><div class="dia" data-d="2026-09-04" data-fg="" data-fa=""><b>4</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-09-05" data-fg="" data-fa=""><b>5</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-09-06" data-fg="" data-fa=""><b>6</b><div class="acs"></div></div><div class="dia" data-d="2026-09-07" data-fg="" data-fa=""><b>7</b><div class="acs"></div></div><div class="dia" data-d="2026-09-08" data-fg="" data-fa=""><b>8</b><div class="acs"></div></div><div class="dia" data-d="2026-09-09" data-fg="" data-fa=""><b>9</b><div class="acs"></div></div><div class="dia" data-d="2026-09-10" data-fg="" data-fa=""><b>10</b><div class="acs"></div></div><div class="dia" data-d="2026-09-11" data-fg="" data-fa=""><b>11</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-09-12" data-fg="" data-fa=""><b>12</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-09-13" data-fg="" data-fa=""><b>13</b><div class="acs"></div></div><div class="dia" data-d="2026-09-14" data-fg="" data-fa=""><b>14</b><div class="acs"></div></div><div class="dia" data-d="2026-09-15" data-fg="" data-fa=""><b>15</b><div class="acs"></div></div><div class="dia" data-d="2026-09-16" data-fg="" data-fa=""><b>16</b><div class="acs"></div></div><div class="dia" data-d="2026-09-17" data-fg="" data-fa=""><b>17</b><div class="acs"></div></div><div class="dia" data-d="2026-09-18" data-fg="" data-fa=""><b>18</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-09-19" data-fg="" data-fa=""><b>19</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-09-20" data-fg="" data-fa=""><b>20</b><div class="acs"></div></div><div class="dia" data-d="2026-09-21" data-fg="" data-fa=""><b>21</b><div class="acs"></div></div><div class="dia" data-d="2026-09-22" data-fg="pre" data-fa=""><b>22</b><div class="acs"><span class="ac ac--insta" data-tr="o">Bio · segue a página de links</span></div></div><div class="dia" data-d="2026-09-23" data-fg="pre" data-fa=""><b>23</b><div class="acs"></div></div><div class="dia" data-d="2026-09-24" data-fg="pre" data-fa="conv"><b>24</b><div class="acs"><span class="ac ac--marco" data-tr="a">Grava o vídeo do convite. Grupo novo criado</span><span class="ac ac--insta" data-tr="o">Reel aprofundado com insight</span></div></div><div class="dia" data-d="2026-09-25" data-fg="pre" data-fa="conv"><b>25</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-09-26" data-fg="pre" data-fa="conv"><b>26</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão em 2 dias</span></div></div><div class="dia dia--fds" data-d="2026-09-27" data-fg="pre" data-fa="conv"><b>27</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão amanhã, 20h</span></div></div><div class="dia" data-d="2026-09-28" data-fg="pre" data-fa="conv"><b>28</b><div class="acs"><span class="ac ac--live" data-tr="g">Aulão</span><span class="ac ac--insta" data-tr="o">Story · aulão hoje 20h + falta 1 hora</span></div></div><div class="dia" data-d="2026-09-29" data-fg="pre" data-fa="conv"><b>29</b><div class="acs"><span class="ac ac--marco" data-tr="a">ONDA 1 por API · convite do aulão, com vídeo</span><span class="ac ac--conteudo" data-tr="a">Lista inteira + grupos de julho. Nada vai ser vendido</span></div></div><div class="dia" data-d="2026-09-30" data-fg="pre" data-fa="conv"><b>30</b><div class="acs"></div></div><div class="dia dia--fora"></div><div class="dia dia--fora"></div><div class="dia dia--fora"></div></div></div><div class="mes"><h3>Outubro</h3><div class="dows"><span>dom</span><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span></div><div class="grid"><div class="dia dia--fora"></div><div class="dia dia--fora"></div><div class="dia dia--fora"></div><div class="dia dia--fora"></div><div class="dia" data-d="2026-10-01" data-fg="pre" data-fa="conv"><b>1</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Lembrete do aulão no grupo</span><span class="ac ac--insta" data-tr="o">Reel aprofundado com insight</span></div></div><div class="dia" data-d="2026-10-02" data-fg="pre" data-fa="conv"><b>2</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-10-03" data-fg="pre" data-fa="conv"><b>3</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão em 2 dias</span></div></div><div class="dia dia--fds" data-d="2026-10-04" data-fg="pre" data-fa="conv"><b>4</b><div class="acs"><span class="ac ac--alerta" data-tr="g">1º turno, CPM mais caro</span><span class="ac ac--insta" data-tr="o">Story · aulão amanhã, 20h</span></div></div><div class="dia" data-d="2026-10-05" data-fg="pre" data-fa="conv"><b>5</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Lembrete do aulão no grupo</span><span class="ac ac--live" data-tr="g">Aulão</span><span class="ac ac--insta" data-tr="o">Story · aulão hoje 20h + falta 1 hora</span></div></div><div class="dia" data-d="2026-10-06" data-fg="pre" data-fa="conv"><b>6</b><div class="acs"><span class="ac ac--marco" data-tr="a">ONDA 2 por API · conteúdos secretos, só quem não entrou</span></div></div><div class="dia" data-d="2026-10-07" data-fg="pre" data-fa="conv"><b>7</b><div class="acs"></div></div><div class="dia" data-d="2026-10-08" data-fg="pre" data-fa="conv"><b>8</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Lembrete do aulão</span><span class="ac ac--insta" data-tr="o">Reel aprofundado com insight</span></div></div><div class="dia" data-d="2026-10-09" data-fg="pre" data-fa="conv"><b>9</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-10-10" data-fg="pre" data-fa="conv"><b>10</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão em 2 dias</span></div></div><div class="dia dia--fds" data-d="2026-10-11" data-fg="pre" data-fa="conv"><b>11</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão amanhã, 20h</span></div></div><div class="dia" data-d="2026-10-12" data-fg="bur" data-fa="conv"><b>12</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Lembrete do aulão</span><span class="ac ac--alerta" data-tr="g">Feriado</span><span class="ac ac--marco" data-tr="g">TIRO DE ALERTA</span><span class="ac ac--trafego" data-tr="g">Corredor polonês no pago</span><span class="ac ac--live" data-tr="g">Aulão confirma a Black</span><span class="ac ac--insta" data-tr="o">Story · aulão hoje 20h + falta 1 hora</span><span class="ac ac--insta" data-tr="o">Reel · TIRO DE ALERTA + story</span></div></div><div class="dia" data-d="2026-10-13" data-fg="bur" data-fa="conv"><b>13</b><div class="acs"><span class="ac ac--marco" data-tr="a">AULÃO 1 dos alunos, 20h (data proposta)</span><span class="ac ac--conteudo" data-tr="a">É hoje · falta 1 hora · estamos ao vivo</span></div></div><div class="dia" data-d="2026-10-14" data-fg="bur" data-fa="aqu"><b>14</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · card vem aí, sem explicar</span></div></div><div class="dia" data-d="2026-10-15" data-fg="bur" data-fa="aqu"><b>15</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Conteúdo 1 no grupo</span><span class="ac ac--insta" data-tr="o">Reel aprofundado + card vem aí no fim</span></div></div><div class="dia" data-d="2026-10-16" data-fg="bur" data-fa="aqu"><b>16</b><div class="acs"></div></div><div class="dia dia--fds" data-d="2026-10-17" data-fg="bur" data-fa="aqu"><b>17</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão em 2 dias</span><span class="ac ac--insta" data-tr="o">Story · card vem aí, sem explicar</span></div></div><div class="dia dia--fds" data-d="2026-10-18" data-fg="bur" data-fa="aqu"><b>18</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão amanhã, 20h</span></div></div><div class="dia" data-d="2026-10-19" data-fg="spo" data-fa="aqu"><b>19</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Conteúdo 2 + começa o seeding</span><span class="ac ac--marco" data-tr="g">Começa o spoiler</span><span class="ac ac--live" data-tr="g">Aulão vem aí</span><span class="ac ac--insta" data-tr="o">Story · aulão hoje 20h + falta 1 hora</span><span class="ac ac--insta" data-tr="o">Story · spoiler, camiseta da Black</span></div></div><div class="dia" data-d="2026-10-20" data-fg="spo" data-fa="aqu"><b>20</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · spoiler, caneca na mesa</span></div></div><div class="dia" data-d="2026-10-21" data-fg="spo" data-fa="aqu"><b>21</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · spoiler, adesivo no notebook</span></div></div><div class="dia" data-d="2026-10-22" data-fg="spo" data-fa="aqu"><b>22</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Conteúdo 3</span><span class="ac ac--insta" data-tr="o">Story · spoiler, caixa de produção chegando</span><span class="ac ac--insta" data-tr="o">Reel aprofundado, gravado com a camiseta</span></div></div><div class="dia" data-d="2026-10-23" data-fg="spo" data-fa="aqu"><b>23</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · spoiler, amanhã eu conto</span></div></div><div class="dia dia--fds" data-d="2026-10-24" data-fg="spo" data-fa="aqu"><b>24</b><div class="acs"><span class="ac ac--marco" data-tr="g">REVELA A DATA</span><span class="ac ac--insta" data-tr="o">Story · aulão em 2 dias</span><span class="ac ac--insta" data-tr="o">Story · REVELA A DATA, depois zera os stories</span></div></div><div class="dia dia--fds" data-d="2026-10-25" data-fg="spo" data-fa="aqu"><b>25</b><div class="acs"><span class="ac ac--alerta" data-tr="g">2º turno, sem post</span><span class="ac ac--insta" data-tr="o">Story · aulão amanhã, 20h</span></div></div><div class="dia" data-d="2026-10-26" data-fg="cap" data-fa="aqu"><b>26</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Conteúdo 4</span><span class="ac ac--marco" data-tr="g">MANIFESTO, abre inscrição</span><span class="ac ac--live" data-tr="g">Aulão abre a captação</span><span class="ac ac--marco" data-tr="g">Grupo público passa a 1 vídeo por dia</span><span class="ac ac--insta" data-tr="o">Story · aulão hoje 20h + falta 1 hora</span><span class="ac ac--insta" data-tr="o">Arrastão · 8 a 12 stories</span><span class="ac ac--insta" data-tr="o">Reel · MANIFESTO</span><span class="ac ac--insta" data-tr="o">Bio · troca pra inscrição (a confirmar)</span></div></div><div class="dia" data-d="2026-10-27" data-fg="cap" data-fa="aqu"><b>27</b><div class="acs"><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia" data-d="2026-10-28" data-fg="cap" data-fa="aqu"><b>28</b><div class="acs"><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia" data-d="2026-10-29" data-fg="cap" data-fa="aqu"><b>29</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Conteúdo 5</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span><span class="ac ac--insta" data-tr="o">Reel aprofundado + CTA inscrição</span></div></div><div class="dia" data-d="2026-10-30" data-fg="cap" data-fa="aqu"><b>30</b><div class="acs"><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia dia--fds" data-d="2026-10-31" data-fg="cap" data-fa="aqu"><b>31</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão em 2 dias</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div></div></div><div class="mes"><h3>Novembro</h3><div class="dows"><span>dom</span><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span></div><div class="grid"><div class="dia dia--fds" data-d="2026-11-01" data-fg="cap" data-fa="aqu"><b>1</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · aulão amanhã, 20h</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia" data-d="2026-11-02" data-fg="cap" data-fa="aqu"><b>2</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Conteúdo 6, já cita a Black + convite da aula 2</span><span class="ac ac--alerta" data-tr="g">Finados, story e WhatsApp</span><span class="ac ac--trafego" data-tr="g">Reforça o investimento</span><span class="ac ac--live" data-tr="g">Aulão com link</span><span class="ac ac--insta" data-tr="o">Story · aulão hoje 20h + falta 1 hora</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia" data-d="2026-11-03" data-fg="cap" data-fa="aqu"><b>3</b><div class="acs"><span class="ac ac--marco" data-tr="g">Vídeo de comparecimento 1</span><span class="ac ac--insta" data-tr="o">Story · vídeo de comparecimento 1</span></div></div><div class="dia" data-d="2026-11-04" data-fg="cap" data-fa="ret"><b>4</b><div class="acs"><span class="ac ac--marco" data-tr="a">AULA 2 dos alunos, fala da Black no fim (data proposta)</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia" data-d="2026-11-05" data-fg="cap" data-fa="ret"><b>5</b><div class="acs"><span class="ac ac--marco" data-tr="a">TRANSIÇÃO · vídeo, nova foto e nome. Vira grupo da Black</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span><span class="ac ac--insta" data-tr="o">Reel aprofundado + CTA inscrição</span></div></div><div class="dia" data-d="2026-11-06" data-fg="cap" data-fa="ret"><b>6</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Lembrete da Black dos alunos</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia dia--fds" data-d="2026-11-07" data-fg="cap" data-fa="ret"><b>7</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Lembrete da Black dos alunos</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia dia--fds" data-d="2026-11-08" data-fg="cap" data-fa="ret"><b>8</b><div class="acs"><span class="ac ac--conteudo" data-tr="a">Lembrete da Black dos alunos</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia" data-d="2026-11-09" data-fg="cap" data-fa="bla"><b>9</b><div class="acs"><span class="ac ac--marco" data-tr="a">BLACK DOS ALUNOS, canal fechado</span><span class="ac ac--insta" data-tr="o">Story · hoje é dia dos alunos, a do público é dia 16</span></div></div><div class="dia" data-d="2026-11-10" data-fg="cap" data-fa=""><b>10</b><div class="acs"><span class="ac ac--marco" data-tr="g">Último vídeo da série pública</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia" data-d="2026-11-11" data-fg="cap" data-fa=""><b>11</b><div class="acs"><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia" data-d="2026-11-12" data-fg="cap" data-fa=""><b>12</b><div class="acs"><span class="ac ac--marco" data-tr="g">Vídeo de comparecimento 2</span><span class="ac ac--insta" data-tr="o">Story · vídeo de comparecimento 2</span><span class="ac ac--insta" data-tr="o">Reel aprofundado + CTA inscrição</span></div></div><div class="dia" data-d="2026-11-13" data-fg="cap" data-fa=""><b>13</b><div class="acs"><span class="ac ac--marco" data-tr="g">Vídeo de transição no grupo</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia dia--fds" data-d="2026-11-14" data-fg="cap" data-fa=""><b>14</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · abertura em 2 dias</span><span class="ac ac--instarot" data-tr="o">Story · captação, com link</span></div></div><div class="dia dia--fds" data-d="2026-11-15" data-fg="cap" data-fa=""><b>15</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · abertura amanhã, 20h</span><span class="ac ac--insta" data-tr="o">Arrastão 2 · última chamada</span></div></div><div class="dia" data-d="2026-11-16" data-fg="cpl" data-fa=""><b>16</b><div class="acs"><span class="ac ac--marco" data-tr="g">ABERTURA PRO PÚBLICO, 20h</span><span class="ac ac--insta" data-tr="o">Story · abertura hoje 20h + falta 1 hora</span><span class="ac ac--insta" data-tr="o">Bio · link do checkout</span></div></div><div class="dia" data-d="2026-11-17" data-fg="car" data-fa="car"><b>17</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · abriu, primeiras provas</span></div></div><div class="dia" data-d="2026-11-18" data-fg="car" data-fa="car"><b>18</b><div class="acs"><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span></div></div><div class="dia" data-d="2026-11-19" data-fg="car" data-fa="car"><b>19</b><div class="acs"><span class="ac ac--insta" data-tr="o">Reel aprofundado + CTA checkout</span></div></div><div class="dia" data-d="2026-11-20" data-fg="car" data-fa="car"><b>20</b><div class="acs"><span class="ac ac--alerta" data-tr="g">Feriado</span><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span></div></div><div class="dia dia--fds" data-d="2026-11-21" data-fg="car" data-fa="car"><b>21</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · live em 2 dias</span><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span></div></div><div class="dia dia--fds" data-d="2026-11-22" data-fg="car" data-fa="car"><b>22</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · live amanhã, 20h</span><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span></div></div><div class="dia" data-d="2026-11-23" data-fg="car" data-fa="car"><b>23</b><div class="acs"><span class="ac ac--live" data-tr="g">Live de carrinho</span><span class="ac ac--insta" data-tr="o">Story · live hoje 20h + falta 1 hora</span></div></div><div class="dia" data-d="2026-11-24" data-fg="car" data-fa="car"><b>24</b><div class="acs"><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span></div></div><div class="dia" data-d="2026-11-25" data-fg="car" data-fa="car"><b>25</b><div class="acs"><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span></div></div><div class="dia" data-d="2026-11-26" data-fg="car" data-fa="car"><b>26</b><div class="acs"><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span><span class="ac ac--insta" data-tr="o">Reel aprofundado + CTA checkout</span></div></div><div class="dia" data-d="2026-11-27" data-fg="car" data-fa="car"><b>27</b><div class="acs"><span class="ac ac--marco" data-tr="g">BLACK FRIDAY</span><span class="ac ac--insta" data-tr="o">Stories · Black Friday, bônus do dia</span></div></div><div class="dia dia--fds" data-d="2026-11-28" data-fg="car" data-fa="car"><b>28</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · live em 2 dias</span><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span></div></div><div class="dia dia--fds" data-d="2026-11-29" data-fg="car" data-fa="car"><b>29</b><div class="acs"><span class="ac ac--insta" data-tr="o">Story · live amanhã, 20h</span><span class="ac ac--instarot" data-tr="o">Story · carrinho, prova ou marco</span></div></div><div class="dia" data-d="2026-11-30" data-fg="car" data-fa="car"><b>30</b><div class="acs"><span class="ac ac--marco" data-tr="g">Cyber Monday</span><span class="ac ac--live" data-tr="g">Live de carrinho</span><span class="ac ac--insta" data-tr="o">Story · live hoje 20h + falta 1 hora</span><span class="ac ac--insta" data-tr="o">Stories · Cyber Monday</span></div></div><div class="dia dia--fora"></div><div class="dia dia--fora"></div><div class="dia dia--fora"></div><div class="dia dia--fora"></div><div class="dia dia--fora"></div></div></div></div>
+  </div>
+</div>
+
+<div class="secao">
+  <div class="abas">
+    <button class="aba on" data-tab="geral">Geral</button>
+    <button class="aba" data-tab="alunos">Alunos</button>
+    <button class="aba" data-tab="organico">Orgânico</button>
+    <button class="aba" data-tab="datas">Datas e motivos</button>
+  </div>
+
+  <!-- ============ GERAL ============ -->
+  <div class="pane" id="pane-geral">
+    <h2>As seis etapas do público aberto</h2>
+    <p class="secao-sub">O que cada fase precisa entregar, e o que sai dela.</p>
+    <div class="etapas"><section class="etapa etapa--pre">
+  <div class="et-head"><span class="et-num">01</span>
+    <div><h3>Pré-captação</h3><p class="et-per">22/09 a 11/10 <span class="et-dias">20 dias</span></p></div></div>
+  <p class="et-obj">Aquecer sem anunciar. A audiência precisa chegar em outubro já assistindo o Rian toda semana.</p>
+  <ul class="et-lista"><li>Aulões de Investimentos seguem como conteúdo puro, com a palavra GRUPO no tira-dúvidas</li><li>Puxar gente nova pro grupo de conteúdos, que é a lista da Black</li><li>Falar de Black só de raspão, sem data e sem oferta</li><li>Gravar o lote de vídeos do grupo, que é o gargalo do lançamento</li></ul>
+</section><section class="etapa etapa--bur">
+  <div class="et-head"><span class="et-num">02</span>
+    <div><h3>Burburinho</h3><p class="et-per">12/10 a 18/10 <span class="et-dias">7 dias</span></p></div></div>
+  <p class="et-obj">Tiro de alerta. O público sente que vem coisa grande e ninguém confirma nada.</p>
+  <ul class="et-lista"><li>Vídeo no estilo trailer de Hollywood, com produção acima do normal, sem revelar do que se trata</li><li>Corredor polonês no pago pra base quente (leads de julho e alunos), com card de vem aí no fim de cada peça</li><li>Caixinha no Aulão de segunda 12/10 confirmando que vai ter Black, sem data</li><li>Nenhuma explicação em comentário. Quem perguntar, ele desconversa</li></ul>
+</section><section class="etapa etapa--spo">
+  <div class="et-head"><span class="et-num">03</span>
+    <div><h3>Spoiler</h3><p class="et-per">19/10 a 25/10 <span class="et-dias">7 dias</span></p></div></div>
+  <p class="et-obj">Ele passa a aparecer com a Black no corpo, no cenário e no escritório, e segue sem falar do assunto.</p>
+  <ul class="et-lista"><li>Camiseta da Black, caneca na mesa, adesivo no notebook, caixa de produção chegando</li><li>Aulão de segunda 19/10 com um vem aí, se prepara e nada além disso</li><li>Revelação da data no sábado 24/10, um dia antes do 2º turno, que é o gancho pro manifesto</li><li>Domingo 25/10 é dia de urna. Só o story de amanhã 20h, mais nada</li></ul>
+</section><section class="etapa etapa--cap">
+  <div class="et-head"><span class="et-num">04</span>
+    <div><h3>Captação</h3><p class="et-per">26/10 a 15/11 <span class="et-dias">21 dias</span></p></div></div>
+  <p class="et-obj">21 dias pra encher a lista e garantir presença no dia 16. Aqui mora o volume, e a eleição já passou.</p>
+  <ul class="et-lista"><li>Manifesto na segunda 26/10, dia seguinte ao 2º turno, abre a inscrição no orgânico e por API</li><li>Arrastão de stories em 26/10 e de novo em 15/11</li><li>Tráfego pago roda a captação inteira fora da eleição, sem CPM de urna</li><li>Grupo de conteúdos passa a mandar 1 vídeo por dia pra quem entra</li><li>Dois vídeos de comparecimento, em 03/11 e 12/11</li><li>Aulões de 26/10 e 02/11 com o link na tela</li></ul>
+</section><section class="etapa etapa--cpl">
+  <div class="et-head"><span class="et-num">05</span>
+    <div><h3>Abertura pro público</h3><p class="et-per">16/11 (seg) </p></div></div>
+  <p class="et-obj">Um dia só. É o evento que abre o carrinho e faz a maior parte das vendas. Em julho, 59,9% das vendas saíram no dia do evento.</p>
+  <ul class="et-lista"><li>Ao vivo às 20h, na segunda, que passa a ser o dia em que ele aparece toda semana</li><li>Tsunami de bônus pros primeiros e bônus que morre à meia-noite</li><li>Time inteiro no WhatsApp e nos comentários durante e depois</li></ul>
+</section><section class="etapa etapa--car">
+  <div class="et-head"><span class="et-num">06</span>
+    <div><h3>Carrinho</h3><p class="et-per">a partir de 17/11 </p></div></div>
+  <p class="et-obj">Lançamento dentro do lançamento. Cada semana precisa de um motivo novo pra comprar hoje.</p>
+  <ul class="et-lista"><li>Lives de carrinho em 23/11 e 30/11, que é a Cyber Monday</li><li>Black Friday em 27/11 é o segundo pico, com bônus próprio</li><li>A urgência vem de marco que entra e sai, não de data de fechamento</li></ul>
+</section></div>
+
+    <div class="secao">
+      <h2>Aquecimento do público</h2>
+      <p class="secao-sub">As duas frentes que rodam a semana inteira, fora das fases.</p>
+      <div class="duas">
+        <div class="painel">
+          <h3>Grupo de conteúdos</h3>
+          <p class="p-sub">A lista da Black, no WhatsApp</p>
+          <ul class="linhas"><li>Já existe e recebe quem manda GRUPO nos Aulões. A partir de 26/10 recebe quem se inscreve e passa a mandar 1 vídeo por dia.</li><li>16 vídeos na escada do método, Blindar, Multiplicar e Expandir, mais boas-vindas e transição. Hoje existem 4 prontos.</li><li>Cada vídeo funciona sozinho, porque entra gente no meio todo dia.</li><li>Vídeo de transição em 13/11 faz a ponte pro dia 16.</li></ul>
+        </div>
+        <div class="painel">
+          <h3>Aulões de Investimentos, segunda 20h</h3>
+          <p class="p-sub">Instagram, ao vivo · dia proposto, a confirmar com o Rian</p>
+          <ul class="linhas"><li>Conteúdo puro até 19/10, com a palavra GRUPO no meio e no tira-dúvidas.</li><li>12/10 confirma que vem Black. 19/10 solta o se prepara.</li><li>26/10 e 02/11 já entram com o link da Black na tela.</li><li>09/11 e 16/11 caem na segunda, que vira o dia em que a audiência espera por ele. 12/10 e 02/11 são feriados, live mantida ou movida pra terça, decidir.</li><li>23 e 30/11 viram lives de carrinho, cada uma com um motivo novo pra comprar hoje.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ALUNOS ============ -->
+  <div class="pane" id="pane-alunos" hidden>
+    <h2>A operação dos alunos</h2>
+    <p class="secao-sub">A base do Investidor em 7 Dias, os alunos do Invista Para Prosperar e os grupos do lançamento de julho viram fonte, não canal. O que a gente quer é tirar de lá quem ainda responde e juntar num grupo novo.</p>
+
+    <div class="painel" style="margin-bottom:13px">
+      <div class="p-obj"><b>Objetivo.</b> Levar cerca de 10% dos mais de 7 mil alunos do Investidor em 7 Dias, algo em torno de 700 pessoas, mais os alunos do Invista Para Prosperar, pra um grupo novo. Os grupos de julho estão parados e cheios de quem nunca mais abriu. Quem entra no grupo novo levantou a mão, e é com essa lista que a gente trabalha até a Black. A oferta pra essa base é a ascensão pro IPP, que em julho respondeu por 19,8% do faturamento.</div>
+      <div class="rot">Por que grupo novo em vez de reanimar os antigos</div>
+      <ol class="passos">
+        <li>A lista fica limpa. Só entra quem respondeu a um convite, então a taxa de leitura do grupo novo não tem nada a ver com a dos antigos.</li>
+        <li>Resolve o risco de administração. Em vez de depender dos números que administraram os grupos de julho, a operação nasce em grupos que a gente cria e controla.</li>
+        <li>Dá uma razão pra pessoa entrar, e razão é o que faz ela abrir a mensagem depois.</li>
+      </ol>
+    </div>
+
+    <div class="secao" style="margin-top:26px">
+      <h2>As ondas de convite</h2>
+      <p class="secao-sub">Duas ondas por API e nada além disso. Cada uma com uma narrativa, porque quem ignorou a primeira não vai responder ao mesmo argumento. Depois da segunda, o trabalho é todo dentro do grupo.</p>
+      <div class="ondas"><div class="onda">
+  <div class="onda-h"><b>Onda 1</b><span>ter 29/09</span></div>
+  <h4>O aulão do 13º</h4><p>Convite pro grupo novo com a promessa de um aulão fechado sobre o que fazer com o dinheiro do fim de ano, dia 13/10. Vai com vídeo do Rian, pra lista inteira e pros grupos de julho, e termina dizendo que nada vai ser vendido.</p><ul class="linhas"><li>Disparo por API pra base inteira de alunos</li><li>Mesma mensagem e vídeo dentro dos grupos de julho</li><li>E-mail em escada, das turmas mais recentes pras antigas</li></ul>
+</div><div class="onda">
+  <div class="onda-h"><b>Onda 2</b><span>ter 06/10</span></div>
+  <h4>Os conteúdos secretos</h4><p>Só pra quem ignorou a primeira. Muda o argumento: no grupo novo vão sair conteúdos que não saem em lugar nenhum, feitos pra deixar a carteira pronta pra 2027. Quem já entrou não recebe.</p><ul class="linhas"><li>Segundo disparo por API, argumento diferente do primeiro</li><li>Prova social de quem já entrou</li><li>É a última onda por API. Daqui em diante o trabalho é dentro do grupo</li></ul>
+</div></div>
+      <div class="aviso"><b>Regra das ondas.</b> Quem já entrou no grupo novo sai da lista da onda seguinte. Receber o mesmo convite duas vezes é o jeito mais rápido de a pessoa sair do grupo e marcar como spam.</div>
+    </div>
+
+    <div class="secao" style="margin-top:26px">
+      <h2>Canal por dia</h2>
+      <p class="secao-sub">O que sai em cada canal, do convite até a Black dos alunos. As datas dos dois aulões são proposta e dependem da agenda do Rian.</p>
+      <div class="mz-wrap"><table class="mz">
+        <thead><tr><th>Data</th><th>API</th><th>Grupo novo dos alunos</th><th>E-mail</th><th>Tráfego</th></tr></thead>
+        <tbody>
+          <tr><th>qui 24/09</th><td>Vídeo do convite gravado. Se a API for a oficial, template aprovado</td><td>Grupo criado, link rotativo, 2 admins de números diferentes</td><td></td><td></td></tr>
+          <tr class="mz--forte"><th>ter 29/09</th><td><b>Onda 1</b> · convite do aulão, com vídeo, pra lista inteira e grupos de julho. Nada vai ser vendido</td><td>Recebe quem entra. Boas-vindas curta com a data</td><td>Convite do aulão, degrau 1, compradores mais recentes</td><td></td></tr>
+          <tr><th>qui 01/10</th><td></td><td>Lembrete do aulão</td><td>Degrau 2</td><td></td></tr>
+          <tr><th>seg 05/10</th><td></td><td>Lembrete do aulão</td><td>Degrau 3</td><td></td></tr>
+          <tr class="mz--forte"><th>ter 06/10</th><td><b>Onda 2</b> · conteúdos secretos, só pra quem não entrou. Última onda por API</td><td>Lembrete do aulão</td><td>Convite pro grupo, só quem não clicou</td><td></td></tr>
+          <tr><th>07 a 12/10</th><td></td><td>Lembretes do aulão, dois por semana</td><td>Lembrete do aulão</td><td>Corredor polonês público começa em 12/10</td></tr>
+          <tr class="mz--forte"><th>ter 13/10 <i>proposta</i></th><td></td><td>É hoje · Falta 1 hora · Estamos ao vivo · <b>Aulão 1</b>, antecipa a Black sem data</td><td>É hoje</td><td></td></tr>
+          <tr><th>14/10 a 01/11</th><td></td><td>Conteúdo segunda e quinta, 5 vídeos. Seeding a partir de 19/10</td><td>Semanal</td><td>Captação pública abre em 26/10, reforço em 02/11</td></tr>
+          <tr><th>seg 02/11</th><td></td><td>Conteúdo 6, já cita a Black, com o convite da aula 2</td><td>Convite da aula 2</td><td>Captação</td></tr>
+          <tr class="mz--forte"><th>qua 04/11 <i>proposta</i></th><td></td><td><b>Aula 2</b> dos alunos. No fim fala da Black pra quem está ao vivo</td><td>É hoje</td><td>Captação</td></tr>
+          <tr class="mz--forte"><th>qui 05/11</th><td></td><td><b>Transição</b> · vídeo de transição, nova foto e nome. Vira grupo da Black</td><td>O grupo agora é da Black</td><td>Captação</td></tr>
+          <tr><th>06 a 08/11</th><td></td><td>Lembrete da Black dos alunos, um por dia</td><td>Lembrete</td><td>Captação</td></tr>
+          <tr class="mz--hot"><th>seg 09/11</th><td></td><td><b>Black dos alunos</b>, canal fechado</td><td>É hoje</td><td>Captação</td></tr>
+        </tbody>
+      </table></div>
+      <div class="aviso"><b>Regra das ondas.</b> Quem já entrou no grupo novo sai da lista da onda 2. Receber o mesmo convite duas vezes é o jeito mais rápido de a pessoa sair do grupo e marcar como spam. E o e-mail depende de a base de compradores da Hubla estar exportada e limpa.</div>
+    </div>
+
+    <div class="secao" style="margin-top:26px">
+      <h2>Os dois aulões</h2>
+      <div class="duas">
+        <div class="painel">
+          <h3>Aulão 1 · o dinheiro do fim de ano</h3>
+          <p class="p-sub">ter 13/10, 20h · proposta</p>
+          <ul class="linhas"><li>Entrega o que a onda 1 prometeu, o que fazer com o 13º e com o dinheiro que sobra no fim do ano.</li><li>A mensagem de chamada avisa que nada vai ser vendido. É isso que enche a sala.</li><li>No fim ele antecipa que vem Black, sem data e sem oferta.</li><li>Cai um dia depois do tiro de alerta público, então a Black já está no ar como rumor.</li></ul>
+        </div>
+        <div class="painel">
+          <h3>Aula 2 · ponte pra Black</h3>
+          <p class="p-sub">qua 04/11, 20h · proposta</p>
+          <ul class="linhas"><li>Conteúdo denso, a carteira pronta pra 2027, e no fim fala da Black pra quem está ao vivo, com a data de 09/11.</li><li>Na manhã seguinte sai o vídeo de transição, e o grupo troca de nome e de foto.</li><li>De sexta a domingo, um lembrete por dia. O fim de semana cai aqui, então o vídeo de transição carrega o peso.</li><li>Segunda 09/11 é a Black dos alunos, em canal fechado.</li></ul>
+        </div>
+      </div>
+      <div class="aviso"><b>Pendente.</b> As duas datas dependem da agenda do Rian. A do aulão 1 precisa fechar até 24/09, porque ela entra no vídeo do convite que sai dia 29.</div>
+    </div>
+  </div>
+
+  <!-- ============ ORGÂNICO ============ -->
+  <div class="pane" id="pane-organico" hidden>
+    <h2>O orgânico do Rian, dia a dia</h2>
+    <p class="secao-sub">Story, reel e bio. O que é regra fixa e o que muda por fase. As fofoquinhas do dia a dia não entram aqui, só o reel aprofundado de quinta.</p>
+
+    <div class="painel" style="margin-bottom:13px">
+      <div class="rot" style="margin-top:0">Quatro regras que valem o lançamento inteiro</div>
+      <ol class="passos">
+        <li><b>Todo Aulão tem três dias de story.</b> Dois dias antes ("segunda tem Aulão"), um dia antes ("amanhã, 20h") e no dia, com dois stories: de manhã ("hoje, 20h") e uma hora antes ("falta 1 hora"). Vale pra abertura de 16/11 também.</li>
+        <li><b>Um reel aprofundado por semana, às quintas, com insight de professor.</b> Notícia, a leitura do Rian e uma ação. As fofoquinhas continuam no ritmo dele. O fecho do reel de quinta muda por fase: puro até 08/10, card "vem aí" em 15/10, camiseta em 22/10, CTA de inscrição na captação, CTA de checkout no carrinho. Pode nascer do tema do Aulão de segunda, que já está gravado.</li>
+        <li><b>A bio fica com a página de links por enquanto</b>, porque ela vende o I7D e o IPP no perpétuo. A troca pro link de inscrição em 26/10 é uma decisão a tomar, porque pausa o perpétuo por três semanas. De 16/11 em diante, checkout da Black.</li>
+        <li><b>Black não existe no orgânico antes de 12/10.</b> Até lá, nem palavra, nem card, nem caixinha.</li>
+      </ol>
+    </div>
+
+    <div class="mz-wrap"><table class="mz">
+      <thead><tr><th>Fase</th><th>Stories</th><th>Reels</th><th>Bio</th></tr></thead>
+      <tbody>
+        <tr><th>Pré-captação<i>22/09 a 11/10</i></th><td>Só os da regra dos Aulões (28/09 e 05/10). Mais CTA pro grupo de conteúdos quando couber</td><td>Aprofundado com insight nas quintas 24/09, 01/10 e 08/10, puro</td><td>Página de links</td></tr>
+        <tr class="mz--forte"><th>Burburinho<i>12 a 18/10</i></th><td>Aulão de 12/10 com a caixinha confirmando. Card "vem aí" em 14 e 17/10, sem explicar nada</td><td><b>Tiro de alerta</b> em 12/10, o trailer de Hollywood. Aprofundado de 15/10 termina com o card "vem aí"</td><td>Página de links</td></tr>
+        <tr class="mz--forte"><th>Spoiler<i>19 a 25/10</i></th><td>Um por dia: camiseta (19), caneca (20), adesivo no notebook (21), caixa de produção (22), "amanhã eu conto" (23). Em 24/10 <b>revela a data</b> e zera os stories pro arrastão. 25/10 é o 2º turno, só o story de amanhã 20h</td><td>Aprofundado de 22/10 gravado com a camiseta da Black</td><td>Página de links</td></tr>
+        <tr class="mz--forte"><th>Captação<i>26/10 a 15/11</i></th><td><b>Arrastão</b> de 8 a 12 stories em 26/10. Depois, story com link todo dia. Comparecimento em 03/11 e 12/11. Em 09/11, "hoje é dia dos alunos, a do público é dia 16". <b>Arrastão 2</b> em 15/11</td><td><b>Manifesto</b> em 26/10. Aprofundado com CTA de inscrição em 29/10, 05/11 e 12/11</td><td>Inscrição (a confirmar, pausa o perpétuo)</td></tr>
+        <tr class="mz--hot"><th>Abertura<i>16/11</i></th><td>Story em 14 e 15/11, e no dia os dois da regra</td><td></td><td>Troca pro checkout</td></tr>
+        <tr><th>Carrinho<i>a partir de 17/11</i></th><td>Em 17/11, "abriu" com as primeiras provas. Depois um story por dia de prova ou marco. Lives de 23 e 30/11 com a regra. 27/11 Black Friday e 30/11 Cyber Monday com stories próprios</td><td>Aprofundado com CTA de checkout em 19 e 26/11</td><td>Checkout</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="aviso"><b>Hoje, 22/09.</b> Bio segue na página de links. O primeiro Aulão do plano é segunda 28/09, então a regra completa começa com stories em 26, 27 e 28. O reel aprofundado de quinta começa em 24/09.</div>
+  </div>
+
+  <!-- ============ DATAS E MOTIVOS ============ -->
+  <div class="pane" id="pane-datas" hidden>
+    <h2>Por que 16 de novembro</h2>
+    <p class="secao-sub">A data veio fechada. O que ela ganha e o que ela custa:</p>
+    <div class="porques">
+      <div class="pq"><span class="pq-n">01</span><div><h4>A captação inteira acontece depois da eleição</h4><p>O manifesto sai na segunda 26/10, um dia depois do 2º turno. Pro público do Rian isso pesa mais que pra qualquer outro: "vou esperar a eleição passar" é a desculpa número 1 pra deixar o dinheiro parado, e em 26/10 ela deixa de existir.</p></div></div>
+      <div class="pq"><span class="pq-n">02</span><div><h4>Menos risco de derrubar a API do WhatsApp</h4><p>Em período eleitoral a Meta aperta o cerco a disparo em massa. As duas ondas de convite saem antes do 2º turno, mas a captação, que é onde o volume mora, roda com a eleição encerrada. O canal fez 45% das vendas do lançamento de julho.</p></div></div>
+      <div class="pq"><span class="pq-n">03</span><div><h4>Tempo pra gravar os vídeos e rodar os Aulões</h4><p>Dos 16 vídeos do grupo, existem 4. Até 26/10 são 12 vídeos, mais o trailer, o manifesto, os dois de comparecimento e o de transição. A data dá 5 semanas de gravação e 5 Aulões de aquecimento antes do manifesto.</p></div></div>
+      <div class="pq"><span class="pq-n">04</span><div><h4>Nenhuma fase que precisa de atenção nasce embaixo de urna</h4><p>O burburinho começa em 12/10, oito dias depois do 1º turno. A única fase que atravessa a semana do 2º turno é o spoiler, que é muda de propósito: camiseta, caneca, adesivo. Não pede atenção de ninguém.</p></div></div>
+      <div class="pq"><span class="pq-n">05</span><div><h4>Black dos alunos em 09/11, com aquecimento suficiente</h4><p>Dá tempo de rodar as duas ondas de convite, encher o grupo novo, fazer o aulão do 13º e a aula 2 antes de ofertar pra base. Com data mais cedo, os alunos receberiam a oferta com o grupo ainda vazio.</p></div></div>
+      <div class="pq"><span class="pq-n">06</span><div><h4>Uma semana depois da Black da Thaize, numa segunda</h4><p>A mesma equipe roda as duas. A abertura da Thaize em 10/11 fica com a semana dela, e o que ela ensinar sobre oferta, objeção e ritmo de carrinho entra na do Rian em 16/11. E cair numa segunda permite fixar o Aulão na segunda às 20h, pra que o evento herde o comparecimento em vez de brigar contra ele.</p></div></div>
+    </div>
+    <p class="preco">O que essa escolha custa: são 11 dias entre a abertura e a Black Friday, então a oferta precisa nascer pronta. Não sobra semana pra descobrir preço e bônus depois que o carrinho abre. E a semana de 09 a 16/11 concentra a Black dos alunos do Rian, a abertura da Thaize e a abertura do Rian, com um time só.</p>
+  </div>
+</div>
+
+<div class="secao">
+  <h2>O que não pode passar</h2>
+  <p class="secao-sub">Quatro pontos que travam o lançamento se ninguém pegar pra si.</p>
+  <div class="riscos">
+    <div class="risco"><h4>Gravação dos 16 vídeos</h4><p>Todos precisam estar prontos em 26/10, quando o grupo público passa a mandar um por dia. Hoje existem 4, e os 12 restantes ainda passam pela revisão de roteiro. São 3 por semana daqui até lá, ou duas diárias de gravação concentradas.</p></div>
+    <div class="risco"><h4>Números de WhatsApp</h4><p>Vão rodar ao mesmo tempo o grupo novo dos alunos, o grupo de conteúdos e os de captação. Cada frente precisa dos seus próprios números, porque se o número que administra tudo cair, cai a operação inteira no meio da captação. O canal fez 45% das vendas de julho.</p></div>
+    <div class="risco"><h4>A semana de 09 a 16/11</h4><p>Black dos alunos do Rian na segunda 09, abertura da Thaize na terça 10, abertura do Rian na segunda 16. É a mesma equipe, a mesma produção e o mesmo suporte. Oferta, página, checkout e roteiro de abertura do Rian precisam estar fechados antes do dia 09, porque a semana não tem folga pra ajuste.</p></div>
+    <div class="risco risco--ideia"><h4>A oferta precisa ser maior que o IPP de hoje</h4><p>O Invista Para Prosperar vende no perpétuo a R$ 1.997 desde agosto, então quem comprou agora não pode se sentir passado pra trás e quem esperou precisa de motivo pra correr. A ascensão dos alunos do I7D já provou valor em julho. Ideia em estudo, um acompanhamento ao vivo cobrindo o fim de ano e a montagem da carteira de 2027.</p></div>
+  </div>
+</div>
+
+</div>
+<script>
+(function(){
+  /* --- abas --- */
+  document.querySelectorAll("[data-tab]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var alvo = btn.getAttribute("data-tab");
+      document.querySelectorAll("[data-tab]").forEach(function(b){ b.classList.toggle("on", b===btn); });
+      document.querySelectorAll(".pane").forEach(function(p){ p.hidden = (p.id !== "pane-"+alvo); });
+    });
+  });
+  /* --- visoes do calendario --- */
+  var cal = document.getElementById("cal");
+  document.querySelectorAll("[data-vis]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var v = btn.getAttribute("data-vis");
+      document.querySelectorAll("[data-vis]").forEach(function(b){ b.classList.toggle("on", b===btn); });
+      cal.setAttribute("data-mostra", v);
+    });
+  });
+  /* --- hoje e contagem, sempre certos --- */
+  function hojeBR(){
+    var d = new Date(Date.now() - 3*3600000);
+    return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  }
+  var hoje = hojeBR(), abertura = new Date(Date.UTC(2026,10,16));
+  var el = document.getElementById("faltam");
+  if (el) {
+    var dias = Math.round((abertura - hoje)/86400000);
+    el.textContent = dias > 0 ? dias : 0;
+    if (dias <= 0 && el.nextElementSibling)
+      el.nextElementSibling.textContent = (dias === 0) ? "e hoje" : "ja aconteceu";
+  }
+  document.querySelectorAll(".dia[data-d]").forEach(function(c){
+    var p = c.getAttribute("data-d").split("-");
+    var d = new Date(Date.UTC(+p[0], p[1]-1, +p[2]));
+    if (d.getTime() === hoje.getTime()) {
+      c.classList.add("dia--hoje");
+      var i = document.createElement("i");
+      i.className = "hoje-tag"; i.textContent = "hoje";
+      c.insertBefore(i, c.querySelector(".acs"));
+    } else if (d < hoje) { c.classList.add("dia--passou"); }
+  });
+})();
+</script>
+</body></html>

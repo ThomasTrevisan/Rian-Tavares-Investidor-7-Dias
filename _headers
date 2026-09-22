@@ -100,3 +100,9 @@
 
 /sitemap.xml
   Cache-Control: public, max-age=86400
+
+/plano
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/plano.html
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
