@@ -28,6 +28,28 @@ export async function onRequest(context) {
     return env.ASSETS.fetch(new Request(new URL("/links/", url.origin).toString(), request));
   }
 
+  // Black 2026 do Rian: teste de LP 50/50 em /black, sem redirect e sticky por cookie (igual a /black da Thaize).
+  // B = /black-b/ (clone da /black-v2 da Thaize) x C = /black-c/ (clone da /black-c, modelo Speak Journey).
+  // ?v=b|c forca a versao. Cada pagina marca o lead (lp-black-rian-2026-b / -c) e a visita (/black#b / #c).
+  if (path === "/black") {
+    const uaB = request.headers.get("user-agent") || "";
+    const botB = /bot|crawl|spider|slurp|bing|google|facebookexternalhit|facebot|whatsapp|telegram|discord|preview|embed|lighthouse|pagespeed/i.test(uaB);
+    const ck = request.headers.get("cookie") || "";
+    const forced = (url.searchParams.get("v") || "").toLowerCase();
+    const PAGINAS = { b: "/black-b/", c: "/black-c/" };
+    let bv = (ck.match(/(?:^|;\s*)bk_rian=([bc])/) || [])[1];
+    let setCk = false;
+    if (PAGINAS[forced]) { bv = forced; setCk = true; }
+    else if (botB) { bv = "b"; }
+    else if (bv !== "b" && bv !== "c") { bv = Math.random() < 0.5 ? "b" : "c"; setCk = true; }
+    const asset = await env.ASSETS.fetch(new URL(PAGINAS[bv], url.origin));
+    const h = new Headers();
+    h.set("Content-Type", asset.headers.get("Content-Type") || "text/html; charset=utf-8");
+    h.set("Cache-Control", "no-store");
+    if (setCk) h.append("Set-Cookie", `bk_rian=${bv}; Path=/; Max-Age=2592000; SameSite=Lax`);
+    return new Response(await asset.text(), { status: 200, headers: h });
+  }
+
   // Only the main LP entry path is split. Tudo o resto passa direto (custo ~zero).
   if (path !== "/o-ano-da-virada") return next();
 

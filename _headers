@@ -106,3 +106,12 @@
 
 /plano.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/black-b/
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/black-c/
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/obrigado-black/
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#000000">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M2WP6WNT');</script>
+<!-- End Google Tag Manager -->
+<title>Black dos Investimentos · Live 16/11 às 20h</title>
+<meta name="description" content="Acesso vitalício a todos os cursos de investimentos do Rian Tavares, com um super desconto e presentes especiais. Revelado na live de 16/11 às 20h.">
+<link rel="canonical" href="https://lp.riantavares.com.br/black/">
+<meta property="og:title" content="Black dos Investimentos · Live 16/11 às 20h">
+<meta property="og:image" content="https://lp.riantavares.com.br/img/black/hero-b-rian.webp">
+<link rel="preload" as="image" href="/img/black/hero-b-rian.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&family=DM+Sans:opsz,wght@9..40,900&family=Archivo:wdth,wght@62..125,800&display=swap" rel="stylesheet">
+<style>
+/* RIAN · VERSAO C do teste A/B (servida em /black pelo _middleware). Clone da /black-c da Thaize.
+   Modelada na LP da Black Friday do Spencer (lp.speakjourney.com/blackfriday), medidas em 1440 e 390, 21/10/2026. */
+:root{ --y1:#ffa100; --y2:#ffd900; --yt:#ffb800; --cinza:#f2f2f2; --campo:#485270; --verde:#52ee7f; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#000;color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+b,strong{font-weight:700}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--y2);outline-offset:3px}
+
+/* barra do topo */
+.barra{height:75px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--y1) 0%,var(--y2) 100%);color:#000;font-weight:700;font-size:21px;line-height:1.2;text-align:center;padding:0 16px}
+
+/* topo */
+.hero{position:relative;height:831px;overflow:hidden;background:#000}
+.hero-arte{position:absolute;z-index:1;top:0;right:0;width:62%;height:100%}
+.capas{position:absolute;top:-6px;right:5%;width:78%;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;opacity:.85;filter:grayscale(1) brightness(.55) contrast(1.05)}
+.capas img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px}
+.capas img:nth-child(n+7){opacity:.55}
+.foto{position:absolute;left:12%;bottom:0;height:97%;width:auto;max-width:none}
+.capas{z-index:1}
+.hero-arte::before{content:"";position:absolute;z-index:2;left:0;top:0;width:86%;height:100%;background:radial-gradient(40% 44% at 57% 38%,rgba(255,176,0,.6) 0%,rgba(255,150,0,.22) 45%,rgba(0,0,0,.55) 75%,rgba(0,0,0,0) 100%)}
+.foto{z-index:3}
+.hero-arte::after{z-index:4;content:"";position:absolute;inset:0;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,0) 22%),linear-gradient(0deg,#000 0%,rgba(0,0,0,0) 30%)}
+.hero-in{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:34px 0 0 180px}
+.logo{width:231px;height:auto;transform:scale(.8);transform-origin:left bottom}
+.selo{display:inline-block;margin-top:20px;background:linear-gradient(90deg,var(--y1),var(--y2));color:#0e0e0e;font-weight:800;font-size:20.5px;line-height:1.2;padding:5px 18px;border-radius:6px}
+.h1{margin-top:26px;width:449px;font-weight:700;font-size:40px;line-height:1.02}
+.h1 em{font-style:normal;color:var(--yt)}
+.sub{margin-top:24px;width:430px;font-weight:300;font-size:18px;line-height:1.2}
+.form{margin-top:25px;width:505px;display:grid;gap:10px}
+.campo{height:47px;background:var(--cinza);border-radius:600px;display:flex;align-items:center;padding:0 26px;color:var(--campo)}
+.campo input{border:0;background:transparent;font:inherit;font-size:16px;color:#14120e;width:100%;height:100%;outline:none}
+.campo input::placeholder{color:var(--campo)}
+.campo.tel{padding-left:12px;gap:8px}
+.ddi{position:relative;display:flex;align-items:center;gap:6px;font-size:15px;color:#14120e;padding:0 10px;height:33px;border-radius:600px;background:#e2e2e2;cursor:pointer;flex-shrink:0}
+.ddi select{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:16px}
+.campo.erro{box-shadow:0 0 0 2px #ff6b5a}
+.btn{height:43px;border:0;border-radius:45px;cursor:pointer;background:var(--verde);color:#000;font-family:'DM Sans',sans-serif;font-weight:900;font-size:19px;letter-spacing:-.77px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:9px}
+.btn svg{width:20px;height:20px}
+.btn:hover{filter:brightness(1.05)}
+
+/* faixas cruzadas */
+.faixas{position:relative;height:200px;margin-top:-40px;z-index:3;overflow:hidden}
+.faixa{position:absolute;left:-5%;width:110%;height:53px;background:#181818;display:flex;align-items:center;overflow:hidden}
+.faixa.f1{top:40px;transform:rotate(2.8deg)}
+.faixa.f2{top:95px;height:69px;transform:rotate(-6.2deg);filter:blur(.4px)}
+.trilho{display:flex;gap:52px;width:max-content;animation:anda 30s linear infinite;padding-left:20px}
+.faixa.f2 .trilho{animation-direction:reverse;animation-duration:36s}
+.trilho span{font-family:'Archivo',sans-serif;font-stretch:62%;font-weight:800;font-size:34px;letter-spacing:-.5px;white-space:nowrap;color:#fff}
+.trilho span i{font-style:normal;color:var(--yt);font-weight:800}
+.faixa.f2 .trilho span{opacity:.75}
+@keyframes anda{to{transform:translateX(-50%)}}
+
+/* secao 2 */
+.s2{position:relative;padding:20px 24px 110px;background:radial-gradient(at 100% 100%,rgba(255,170,0,.55) 0%,#000 42%)}
+.h2{max-width:702px;margin:0 auto;text-align:center;font-weight:700;font-size:39.6px;line-height:1.2}
+.h2 em{font-style:normal;color:var(--yt)}
+.tudo{display:block;width:911px;max-width:100%;height:auto;margin:40px auto 0}
+.p2{max-width:753px;margin:40px auto 0;text-align:center;font-weight:300;font-size:25.5px;line-height:1.38}
+footer{background:#0d0d0d;min-height:147px;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 20px;font-size:13px;color:#fff}
+
+/* celular (medidas da referencia em 390) */
+@media(max-width:900px){
+  .barra{height:36px;font-size:12.5px}
+  .hero{height:auto;padding-bottom:30px}
+  .hero-arte{position:relative;z-index:1;width:100%;height:330px;overflow:hidden}
+  .capas{width:96%;right:2%;gap:8px}
+  .capas img{border-radius:8px}
+  .foto{left:50%;transform:translateX(-58%);height:100%}
+  .hero-arte::before{left:0;width:100%;background:radial-gradient(40% 50% at 50% 38%,rgba(255,176,0,.6) 0%,rgba(255,150,0,.22) 45%,rgba(0,0,0,.55) 75%,rgba(0,0,0,0) 100%)}
+  .hero-arte::after{z-index:4;background:linear-gradient(0deg,#000 0%,#000 14%,rgba(0,0,0,.7) 34%,rgba(0,0,0,0) 60%)}
+  .hero-in{padding:0 20px;margin-top:-150px;text-align:center}
+  .logo{width:230px;margin:0 auto;transform-origin:center bottom}
+  .selo{font-size:15px;margin-top:14px;padding:6px 16px;border-radius:8px}
+  .h1{width:auto;max-width:320px;margin:20px auto 0;font-size:25px;line-height:1.02;letter-spacing:-.5px}
+  .sub{width:auto;max-width:330px;margin:16px auto 0;font-size:14.5px;line-height:1.25}
+  .form{width:100%;margin-top:22px}
+  .campo{padding:0 22px}
+  .campo input{font-size:15px}
+  .btn{height:40px;font-size:17px}
+  .faixas{height:120px;margin-top:0}
+  .faixa.f1{top:22px;height:39px}
+  .faixa.f2{top:56px;height:51px}
+  .trilho span{font-size:24px}
+  .s2{padding:20px 20px 80px}
+  .h2{font-size:26px}
+  .tudo{margin-top:30px}
+  .p2{font-size:17px;line-height:1.38;margin-top:30px}
+}
+@media(prefers-reduced-motion:reduce){.trilho{animation:none}}
+</style>
+<script>
+// Contador de visitas do painel da Black (1 por sessao), marcado como versao C
+(function(){try{
+  if(sessionStorage.getItem('black_hit'))return;
+  sessionStorage.setItem('black_hit','1');
+  var p=new URLSearchParams(location.search);
+  fetch('/api/hit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    page:location.pathname.replace(/-c\/?$/,'')+'#c',
+    utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',
+    utm_campaign:p.get('utm_campaign')||'',utm_content:p.get('utm_content')||'',
+    utm_term:p.get('utm_term')||'',ref:document.referrer||''
+  }),keepalive:true}).catch(function(){});
+}catch(e){}})();
+</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2WP6WNT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="barra">BLACK FRIDAY COM ACESSO VITALÍCIO!</div>
+
+<section class="hero" id="topo">
+  <div class="hero-arte" aria-hidden="true">
+    <div class="capas">
+      <img src="/img/black/curso-i7d.webp" alt="">
+      <img src="/img/black/curso-m1-fundamentos.webp" alt="">
+      <img src="/img/black/curso-m2-renda-fixa.webp" alt="">
+      <img src="/img/black/curso-m3-renda-variavel.webp" alt="">
+      <img src="/img/black/curso-m4-fiis.webp" alt="">
+      <img src="/img/black/curso-m5-carteira.webp" alt="">
+      <img src="/img/black/curso-plano-liberdade.webp" alt="">
+      <img src="/img/black/curso-guia-exterior.webp" alt="">
+      <img src="/img/black/curso-livros.webp" alt="">
+    </div>
+    <img class="foto" src="/img/black/rian-recorte.webp" width="677" height="1225" alt="" fetchpriority="high">
+  </div>
+  <div class="hero-in">
+    <img class="logo" src="/img/black/logo-black-rian.webp" width="1602" height="197" alt="Black dos Investimentos" style="width:268px">
+    <div class="selo">DIA 16/11 ÀS 20H</div>
+    <h1 class="h1"><em>Tenha acesso vitalício a todos os meus cursos de investimentos</em> com um super desconto e presentes especiais!</h1>
+    <p class="sub">Se inscreva para entrar no grupo e receber a nova oferta especial que vai ser revelada no <b>dia 16 de novembro, às 20h</b></p>
+    <form class="form" id="form" onsubmit="return enviar(this)" novalidate>
+      <label class="campo"><input type="email" name="email" placeholder="Email:" autocomplete="email" inputmode="email" required></label>
+      <label class="campo tel fl"><span class="ddi"><span id="ddi-v">🇧🇷 +55</span><select id="pais" aria-label="País do WhatsApp"><option value="br:55" selected>🇧🇷 Brasil +55</option><option value="pt:351">🇵🇹 Portugal +351</option><option value="us:1">🇺🇸 Estados Unidos +1</option><option value="ca:1">🇨🇦 Canadá +1</option><option value="es:34">🇪🇸 Espanha +34</option><option value="it:39">🇮🇹 Itália +39</option><option value="fr:33">🇫🇷 França +33</option><option value="de:49">🇩🇪 Alemanha +49</option><option value="gb:44">🇬🇧 Reino Unido +44</option><option value="ie:353">🇮🇪 Irlanda +353</option><option value="ch:41">🇨🇭 Suíça +41</option><option value="nl:31">🇳🇱 Países Baixos +31</option><option value="be:32">🇧🇪 Bélgica +32</option><option value="jp:81">🇯🇵 Japão +81</option><option value="au:61">🇦🇺 Austrália +61</option><option value="ar:54">🇦🇷 Argentina +54</option><option value="mx:52">🇲🇽 México +52</option><option value="co:57">🇨🇴 Colômbia +57</option><option value="cl:56">🇨🇱 Chile +56</option><option value="pe:51">🇵🇪 Peru +51</option><option value="uy:598">🇺🇾 Uruguai +598</option><option value="py:595">🇵🇾 Paraguai +595</option><option value="ao:244">🇦🇴 Angola +244</option><option value="mz:258">🇲🇿 Moçambique +258</option></select></span><input type="tel" name="telefone" placeholder="Whatsapp:" autocomplete="tel-national" inputmode="numeric" required></label>
+      <button class="btn" type="submit"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg><span>Entrar no grupo</span></button>
+    </form>
+  </div>
+</section>
+
+<div class="faixas" aria-hidden="true">
+  <div class="faixa f2"><div class="trilho" id="t2"><span>BLACK <i>DOS INVESTIMENTOS</i></span><span>BLACK <i>DOS INVESTIMENTOS</i></span><span>BLACK <i>DOS INVESTIMENTOS</i></span><span>BLACK <i>DOS INVESTIMENTOS</i></span><span>BLACK <i>DOS INVESTIMENTOS</i></span></div></div>
+  <div class="faixa f1"><div class="trilho" id="t1"><span>BLACK <i>DOS INVESTIMENTOS</i></span><span>BLACK <i>DOS INVESTIMENTOS</i></span><span>BLACK <i>DOS INVESTIMENTOS</i></span><span>BLACK <i>DOS INVESTIMENTOS</i></span><span>BLACK <i>DOS INVESTIMENTOS</i></span></div></div>
+</div>
+
+<section class="s2">
+  <h2 class="h2">Aprenda a investir de uma vez por todas e <em>nunca mais deixe o seu dinheiro parado sem saber o que fazer com ele.</em></h2>
+  <img class="tudo" src="/img/black/tudo-junto-rian-v2.webp" width="1600" height="980" alt="Invista Para Prosperar, os módulos, a AssessorIA e os livros do Rian" loading="lazy">
+  <p class="p2">Nessa Black Friday você vai <b>ter acesso PARA SEMPRE</b> a todos os meus cursos de investimentos, com as minhas IAs, acompanhamento ao vivo comigo e o método que já ensinou mais de 7 mil alunos a investir.</p>
+</section>
+
+<footer>Black dos Investimentos - Copyright © Todos os direitos reservados.</footer>
+
+<script>
+(function(){ ["t1","t2"].forEach(function(id){ var t=document.getElementById(id); t.innerHTML += t.innerHTML; }); })();
+
+// WhatsApp: Brasil no formato (xx) xxxxx-xxxx; outros paises so numero (6 a 15 digitos)
+(function(){
+  var t = document.querySelector('input[name=telefone]'), sel = document.getElementById('pais'), vis = document.getElementById('ddi-v');
+  function pais(){ var p = sel.value.split(":"); return {iso:p[0], cod:p[1]}; }
+  function bandeira(iso){ return iso.toUpperCase().replace(/./g, function(c){ return String.fromCodePoint(127397 + c.charCodeAt(0)); }); }
+  function br(){ return pais().iso === "br"; }
+  function fmt(v){
+    var all = v.replace(/\D/g,"");
+    if(!br()) return all.slice(0,15);
+    var d = all.replace(/^0+/,"");
+    if(d.length > 11 && d.slice(0,2) === "55") d = d.slice(2);
+    d = d.slice(0,11);
+    if(!d) return "";
+    if(d.length <= 2) return "(" + d;
+    if(d.length <= 7) return "(" + d.slice(0,2) + ") " + d.slice(2);
+    return "(" + d.slice(0,2) + ") " + d.slice(2,7) + "-" + d.slice(7);
+  }
+  function ok(v){ return br() ? /^\([1-9][1-9]\) 9\d{4}-\d{4}$/.test(v) : /^\d{6,15}$/.test(v); }
+  function marca(e){ t.closest(".campo").classList.toggle("erro", e); }
+  sel.addEventListener("change", function(){ var p = pais(); vis.textContent = bandeira(p.iso) + " +" + p.cod; t.placeholder = br() ? "Whatsapp:" : "Número com código de área"; t.value = fmt(t.value); marca(false); t.focus(); });
+  t.addEventListener("input", function(){ t.value = fmt(t.value); if(ok(t.value)) marca(false); });
+  t.addEventListener("blur", function(){ if(t.value) marca(!ok(t.value)); });
+  window.telefoneOk = function(){ var b = ok(t.value); marca(!b); if(!b) t.focus(); return b; };
+  window.telefoneCompleto = function(){ return "+" + pais().cod + " " + t.value.replace(/\D/g,""); };
+})();
+
+var SUCCESS_REDIRECT = "/obrigado-black/";
+function enviar(f){
+  var em = f.email.value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ f.email.closest(".campo").classList.add("erro"); f.email.focus(); return false; }
+  f.email.closest(".campo").classList.remove("erro");
+  if(!window.telefoneOk()) return false;
+  var btn = f.querySelector("button");
+  var q = new URLSearchParams(window.location.search);
+  try{ sessionStorage.setItem("black_email", em); }catch(e){}
+  var data = { name:"", email:em, phone:window.telefoneCompleto(), source:"lp-black-rian-2026-c", url:window.location.href, utm:window.location.search,
+    utm_source:q.get("utm_source")||"", utm_medium:q.get("utm_medium")||"", utm_campaign:q.get("utm_campaign")||"", utm_content:q.get("utm_content")||"", utm_term:q.get("utm_term")||"" };
+  if(btn){ btn.disabled = true; btn.lastChild.textContent = "Enviando..."; }
+  var foi = false;
+  function ir(){ if(!foi){ foi = true; var s = window.location.search; window.location.href = SUCCESS_REDIRECT + (s ? "?" + s.substring(1) : ""); } }
+  fetch("/api/lead",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).then(ir,ir);
+  setTimeout(ir, 3000);
+  return false;
+}
+</script>
+</body>
+</html>

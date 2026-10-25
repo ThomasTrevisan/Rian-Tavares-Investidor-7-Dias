@@ -47,9 +47,12 @@ export async function onRequestPost({ request, env }) {
     }
   }
 
-  // 2) Repassa pra Reportana (best-effort)
+  // 2) Repassa pra Reportana (best-effort).
+  // A Black (lp-black-*) NAO vai pra Reportana: o webhook ainda e o fluxo de julho (O Ano da Virada).
+  // O lead da Black fica no D1 (fonte de verdade) e a Black usa o grupo do Sendflow.
   let reportanaOk = false;
-  if (env.REPORTANA_WEBHOOK_URL) {
+  const ehBlack = /^lp-black/i.test(lead.source);
+  if (env.REPORTANA_WEBHOOK_URL && !ehBlack) {
     try {
       const resp = await fetch(env.REPORTANA_WEBHOOK_URL, {
         method: "POST",
