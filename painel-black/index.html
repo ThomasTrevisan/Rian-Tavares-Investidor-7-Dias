@@ -481,7 +481,7 @@ function render(d){
     const cel = (taxa, venc, o, c, v) => '<td class="'+(venc === o.versao ? 'taxa' : 'ab-neutro')+'">'+pct(taxa)+(venc === o.versao ? ' ▲' : '')+sub(c, v)+'</td>';
     for (const o of va) html += '<tr><td>'+o.versao+'</td><td>'+fmt(o.visitas)+'</td><td>'+fmt(o.cadastros)+'</td>'
       + cel(o.taxaPago, vPago, o, o.cadPago, o.visPago) + cel(o.taxaOrg, vOrg, o, o.cadOrg, o.visOrg) + '</tr>';
-    html += '</table></div><div class="muted" style="font-size:12px;padding:8px 2px 0">Metade de quem abre /black cai em cada versão (a pessoa sempre volta na mesma). Testes anteriores: A x B (B venceu no orgânico, 43,1% x 33,7%) e B x C (empate: orgânico 42,4% x 41,4%, pago 9,7% x 9,0%; ficou a B). Em verde com ▲ fica quem converte mais naquela coluna (só aparece com 100+ visitas em cada versão e diferença de pelo menos 1 ponto).</div></section>';
+    html += '</table></div><div class="muted" style="font-size:12px;padding:8px 2px 0">Metade de quem abre /black cai em cada versão (a pessoa sempre volta na mesma). Em verde fica quem converte mais naquela coluna (só aparece com 100+ visitas em cada versão).</div></section>';
   }
 
   // grupo de WhatsApp (Sendflow): quem se inscreveu entrou mesmo no grupo?
@@ -516,7 +516,7 @@ function render(d){
     html += '<tr><td>'+diaBonito(o.dia)+(hoje?' <span class="muted">(hoje, parcial)</span>':'')+'</td><td>'+fmt(o.organico)+'</td><td>'+fmt(o.pago)+'</td><td><b>'+fmt(o.total)+'</b></td></tr>';
   }
   if(dt.length) html += '<tr class="tr-total"><td>Total</td><td>'+fmt(sO)+'</td><td>'+fmt(sP)+'</td><td>'+fmt(sO+sP)+'</td></tr>';
-  html += '</table></div><div class="muted" style="font-size:12px;padding:8px 2px 0">Meta por dia: 359 orgânicos e 250 pagos.</div></section>';
+  html += '</table></div></section>';
 
   // por origem
   const maxV = Math.max(1, ...d.porOrigem.map(o=>o.visitas||o.cadastros||0));
@@ -590,11 +590,11 @@ function card(lbl, big, cap){
 function graficoDias(d){
   const dias = (d.porDiaTipo || []).slice().sort((a,b)=> a.dia < b.dia ? -1 : 1);
   if(!dias.length) return '';
-  const META_DIA = 609;
+  const META_DIA = 0; // sem meta diaria definida pro Rian
   const max = Math.max(META_DIA * 1.08, ...dias.map(o=>o.total));
   const muitos = dias.length > 10;
   let h = '<section><h2>Cadastros por dia</h2><div class="dias-wrap"><div class="dias'+(muitos?' muitos':'')+'" id="dias">';
-  h += '<div class="meta-linha" style="bottom:'+(META_DIA/max*188)+'px"><span>meta '+fmt(META_DIA)+'/dia</span></div>';
+  if (META_DIA) h += '<div class="meta-linha" style="bottom:'+(META_DIA/max*188)+'px"><span>meta '+fmt(META_DIA)+'/dia</span></div>';
   for(const o of dias){
     const hoje = o.dia === d.hoje;
     const ho = Math.round(o.organico/max*188), hp = Math.round(o.pago/max*188);
@@ -612,7 +612,7 @@ function ligaGraficoDias(){
   const mostra = el => {
     box.querySelectorAll('.dia').forEach(x=>x.classList.toggle('sel', x===el));
     const o=+el.dataset.o, p=+el.dataset.p, t=+el.dataset.t;
-    tip.innerHTML = '<b>'+el.dataset.d+'</b><br>Total: '+fmt(t)+'<br>Orgânico: '+fmt(o)+'<br>Pago: '+fmt(p)+'<br>vs meta 609: '+(t>=609?'+':'')+fmt(t-609);
+    tip.innerHTML = '<b>'+el.dataset.d+'</b><br>Total: '+fmt(t)+'<br>Orgânico: '+fmt(o)+'<br>Pago: '+fmt(p);
     tip.style.display='block';
     const r = el.getBoundingClientRect(), w = box.parentElement.getBoundingClientRect();
     let x = r.left - w.left + r.width/2 - tip.offsetWidth/2; x = Math.max(0, Math.min(x, w.width - tip.offsetWidth));
