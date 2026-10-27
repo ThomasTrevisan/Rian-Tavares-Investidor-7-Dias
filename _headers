@@ -115,3 +115,6 @@
 
 /obrigado-black/
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/cronograma-adv/*
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
