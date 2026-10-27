@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel · Black dos Investimentos</title>
+<meta name="theme-color" content="#0b0a09">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0a09; --card:#141210; --card2:#1b1814; --ink:#f6f3ec; --ink2:#cfcabd; --mut:#8f897d;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
+    --gold:#f0c75e; --gold2:#d4ad5a; --gold-soft:rgba(240,199,94,.12); --gold-line:rgba(240,199,94,.35);
+    --green:#4fd38a; --green-soft:rgba(79,211,138,.14);
+    --amber:#f2b84b; --amber-soft:rgba(242,184,75,.14);
+    --red:#ff6b5a; --red-soft:rgba(255,107,90,.14);
+    --disp:'Archivo',system-ui,-apple-system,sans-serif; --sans:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;min-height:100vh;
+    background-image:radial-gradient(closest-side,rgba(240,199,94,.10),transparent);background-repeat:no-repeat;
+    background-size:900px 700px;background-position:right -300px top -320px}
+  .wrap{max-width:1000px;margin:0 auto;padding:34px 18px 64px}
+  header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+  h1{font-family:var(--disp);font-weight:200;font-size:30px;margin:0;letter-spacing:-.03em;line-height:1}
+  h1 b{font-weight:800;color:var(--gold)}
+  h1 span{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--mut);letter-spacing:0;margin-left:6px}
+  .sub{color:var(--mut);font-size:12.5px;margin-top:8px}
+  .refresh{border:1px solid var(--line2);background:transparent;color:var(--ink);font-family:var(--sans);
+    border-radius:999px;padding:10px 18px;font-size:13px;cursor:pointer;font-weight:600;transition:border-color .2s,background .2s}
+  .refresh:hover{border-color:var(--gold);background:var(--gold-soft)}
+  button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .filters{display:flex;gap:8px;margin:4px 0 18px;flex-wrap:wrap}
+  .filters button{border:1px solid var(--line2);background:var(--card);color:var(--ink2);font-family:var(--sans);
+    border-radius:999px;padding:8px 16px;font-size:13px;cursor:pointer;font-weight:600;transition:border-color .2s}
+  .filters button.active{background:var(--gold);border-color:var(--gold);color:#14120e}
+  .filters button:hover:not(.active){border-color:var(--gold-line);color:var(--ink)}
+  .filters input[type=date]{border:1px solid var(--line2);background:var(--card);color:var(--ink2);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;color-scheme:dark}
+  .filters input[type=date].active{border-color:var(--gold);color:var(--gold)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px}
+  .card .lbl{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  .card .big{font-family:var(--disp);font-size:38px;font-weight:700;margin:8px 0 4px;letter-spacing:-.03em;line-height:1}
+  .card:nth-child(2) .big{color:var(--gold)}
+  .card .cap{font-size:12px;color:var(--mut)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 18px 12px;margin-bottom:16px}
+  section h2{font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);margin:16px 2px 6px;font-weight:600}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:right;padding:11px 8px;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  th{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);font-weight:600}
+  td{color:var(--ink2)}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover td,table tr:hover td{background:rgba(255,255,255,.02)}
+  .ori{position:relative}
+  .bar{position:absolute;left:0;top:6px;bottom:6px;background:var(--gold-soft);border-radius:6px;z-index:0}
+  .ori span{font-weight:600;color:var(--ink)}
+  .tr-total td{background:var(--card2);font-weight:700;color:var(--ink)}
+  .taxa{color:var(--green);font-weight:700}
+  .muted{color:var(--mut)}
+  .note{background:var(--gold-soft);border:1px solid var(--gold-line);color:var(--ink2);border-radius:14px;padding:13px 16px;font-size:13px;margin:0 0 16px;line-height:1.55}
+  .note b{color:var(--gold)}
+  .ritmo{font-size:13px;color:var(--mut);margin:0 2px 16px}
+  .ritmo b{color:var(--ink)}
+  .ritmo .up{color:var(--green);font-weight:700}
+  .ritmo .down{color:var(--red);font-weight:700}
+  /* cadastros por dia (barras empilhadas organico + pago) */
+  .dias-wrap{position:relative;padding:8px 2px 0}
+  .dias{position:relative;display:flex;align-items:flex-end;gap:8px;height:210px;padding-top:22px}
+  .dia{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;cursor:pointer;position:relative}
+  .dia .tot{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .dia .stack{width:100%;max-width:46px;display:flex;flex-direction:column-reverse;border-radius:5px 5px 0 0;overflow:hidden}
+  .dia .org{background:var(--gold)}
+  .dia .pag{background:rgba(240,199,94,.35)}
+  .dia.hoje .stack{opacity:.55;outline:1px dashed rgba(240,199,94,.7);outline-offset:-1px}
+  .dia:hover .stack,.dia.sel .stack{filter:brightness(1.18)}
+  .dlabels{display:flex;gap:8px;padding:6px 2px 0}
+  .dlabels span{flex:1;min-width:0;text-align:center;font-size:10.5px;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden}
+  .meta-linha{position:absolute;left:0;right:0;border-top:1.5px dashed rgba(255,255,255,.35);pointer-events:none}
+  .meta-linha span{position:absolute;right:0;top:-17px;font-size:10.5px;color:var(--mut);background:var(--bg,#0b0a08);padding:0 4px}
+  .dleg{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:10px}
+  .dleg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+  .dtip{position:absolute;z-index:5;pointer-events:none;background:#15130e;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:12px;line-height:1.45;color:var(--ink);white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.5);display:none}
+  .dtip b{color:var(--gold)}
+  @media(max-width:700px){.dias.muitos{gap:3px}.dias.muitos .tot{display:none}.dlabels.muitos{gap:3px}.dlabels.muitos .pula{visibility:hidden}.dlabels.muitos span{font-size:9.5px;overflow:visible}}
+  .hours{display:flex;align-items:flex-end;gap:3px;height:120px;padding:12px 2px 0}
+  .hbar{flex:1;background:rgba(240,199,94,.22);border-radius:4px 4px 0 0;min-height:2px}
+  .hbar.peak{background:var(--gold);box-shadow:0 0 18px rgba(240,199,94,.45)}
+  .hlabels{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);padding:6px 2px 0}
+  .msg{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:40px 22px;text-align:center;color:var(--mut)}
+  .msg b{color:var(--ink)}
+  code{background:var(--card2);color:var(--gold);padding:2px 6px;border-radius:5px;font-size:13px}
+  .foot{color:var(--mut);font-size:12px;text-align:center;margin-top:26px}
+  /* bloco de captacao */
+  .meta-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+  .meta-col{min-width:0}
+  .meta-col .meta-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .meta-col{background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:14px;padding:18px}
+  @media(max-width:760px){.meta-grid{grid-template-columns:minmax(0,1fr)}.meta-col{padding:14px}}
+  section.meta{padding:22px;background:linear-gradient(160deg,#1d1912 0%,var(--card) 55%);border-color:var(--gold-line);margin-bottom:22px}
+  .meta-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .meta-head h2{margin:0;color:var(--ink2);font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+  .pill{font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap;letter-spacing:.04em}
+  .pill-ok{background:var(--green-soft);color:var(--green)}
+  .pill-warn{background:var(--amber-soft);color:var(--amber)}
+  .pill-bad{background:var(--red-soft);color:var(--red)}
+  .meta-big{font-family:var(--disp);font-size:52px;font-weight:800;letter-spacing:-.04em;line-height:.95;color:var(--gold)}
+  .meta-big span{font-family:var(--sans);font-size:16px;font-weight:500;color:var(--mut);letter-spacing:0;margin-left:4px}
+  .meta-pctnum{color:var(--ink2);font-weight:600;font-size:13.5px;margin:8px 0 16px}
+  .prog{position:relative;height:10px;background:rgba(255,255,255,.07);border-radius:999px;margin-bottom:8px}
+  .prog-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:999px;min-width:10px;box-shadow:0 0 16px rgba(240,199,94,.4)}
+  .prog-mark{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--ink);opacity:.7}
+  .prog-cap{display:flex;justify-content:space-between;font-size:11.5px;color:var(--mut)}
+  .meta-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 4px}
+  .mtile{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:12px;padding:13px}
+  .mtile .l{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+  .mtile .v{font-family:var(--disp);font-size:26px;font-weight:700;letter-spacing:-.02em;margin:6px 0 2px;color:var(--ink)}
+  .mtile .c{font-size:11.5px;color:var(--mut)}
+  .meta-sub{font-size:12px;color:var(--mut);margin-bottom:6px;line-height:1.5}
+  .cards-4{grid-template-columns:repeat(4,1fr)}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  td.cp{max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  td.cp b{color:var(--ink)}
+  @media(max-width:760px){.cards-4,.meta-tiles{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .meta-big{font-size:52px}
+    .card .big{font-size:30px}
+    h1{font-size:26px}
+  }
+
+  /* painel da Thaize */
+  section.th{margin-bottom:16px}
+  .th-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+  .th-tiles .mtile .v{font-size:30px}
+  .mtile.th-dest{border-color:var(--gold-line);background:rgba(241,197,107,.08)}
+  .mtile.th-dest .v{color:var(--gold)}
+  section.th-total .meta-big{font-size:44px}
+  section.th-pago{background:var(--card);border-color:var(--line)}
+  section.th-pago .meta-big{font-size:40px;color:var(--ink2)}
+  .th-graf{padding:14px 16px 16px}
+  .th-chart{width:100%}
+  .th-svg{display:block;max-width:100%;overflow:visible}
+  .th-svg .gl{stroke:rgba(255,255,255,.07);stroke-width:1}
+  .th-svg .gm{stroke:rgba(255,255,255,.35);stroke-width:1.2;stroke-dasharray:6 6}
+  .th-svg .gt{fill:none;stroke:#f1c56b;stroke-width:3;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+  .th-svg .go{fill:none;stroke:#4fd38a;stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:.9}
+  .th-svg .gd{fill:#14120e;stroke:#f1c56b;stroke-width:2}
+  .th-svg .gp{fill:#f1c56b;stroke:#fff;stroke-width:2}
+  .th-svg .ga{fill:var(--mut);font-size:12px;font-family:var(--sans)}
+  .th-svg .gpt{fill:var(--gold);font-size:13px;font-weight:700;font-family:var(--sans)}
+  .th-leg{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:8px}
+  .th-leg i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+  .lg-t{background:#f1c56b}.lg-o{background:#4fd38a}.lg-m{background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 4px,transparent 4px 8px)}
+  @media(max-width:640px){.th-tiles .mtile .v{font-size:24px}.th-tiles{gap:8px}.th-tiles .mtile{padding:10px}}
+
+  .th-chart{position:relative}
+  .th-svg .ghit{fill:transparent;cursor:pointer}
+  .th-svg .gguia{stroke:rgba(241,197,107,.5);stroke-width:1;stroke-dasharray:3 4;pointer-events:none}
+  .th-svg .gsel{r:7;fill:#f1c56b;stroke:#fff}
+  .gtip{position:absolute;pointer-events:none;z-index:3;background:#0b0a09;border:1px solid var(--gold-line);border-radius:10px;padding:9px 12px;font-size:12.5px;line-height:1.5;box-shadow:0 10px 30px rgba(0,0,0,.6);white-space:nowrap}
+  .gtip b{display:block;color:var(--gold);margin-bottom:3px}
+  .gtip .r{display:flex;align-items:center;gap:6px;color:var(--ink2)}
+  .gtip .r strong{margin-left:auto;padding-left:14px;color:var(--ink)}
+  .gtip i{display:inline-block;width:10px;height:3px;border-radius:2px}
+  .lg-p{background:#7aa7ff}
+  .th-precisa{margin:2px 0 14px;padding:10px 14px;border-radius:12px;background:rgba(241,197,107,.08);border:1px solid var(--gold-line);font-size:14px;color:var(--ink2);line-height:1.45}
+  .th-precisa b{color:var(--gold)}
+  .ab-neutro{color:var(--ink2);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1><b>Black</b> dos Investimentos <span>· painel</span></h1>
+      <div class="sub" id="sub">Carregando...</div>
+    </div>
+    <button class="refresh" id="refresh">Atualizar</button>
+  </header>
+
+  <div id="meta"></div>
+
+  <div class="filters" id="filters">
+    <button data-range="hoje" class="active">Hoje</button>
+    <button data-range="ontem">Ontem</button>
+    <button data-range="total">Total</button>
+    <button data-range="3d">3 dias</button>
+    <button data-range="7d">7 dias</button>
+    <input type="date" id="diaPicker" min="2026-10-26" title="Ver um dia especifico">
+  </div>
+
+  <div id="app"></div>
+  <div class="foot">Datas em horario de Brasilia. Visita conta 1 por sessao.</div>
+</div>
+
+<script>
+const KEY = new URLSearchParams(location.search).get("key") || "";
+const API = "/api/stats-black";
+const app = document.getElementById("app");
+const sub = document.getElementById("sub");
+let range = "hoje", customDate = "";
+
+const LABELS = { hoje:"hoje", ontem:"ontem", "3d":"ultimos 3 dias", "7d":"ultimos 7 dias", total:"no total" };
+const fmt = n => (n==null?"—":Number(n).toLocaleString("pt-BR"));
+const pct = n => (n==null||n>100?"—":n.toLocaleString("pt-BR")+"%");
+const diaBonito = d => { if(!d) return d; const p=d.split("-"); return p[2]+"/"+p[1]; };
+const pct1 = n => (Math.round(n*10)/10).toLocaleString("pt-BR") + "%";
+const brl = n => "R$ " + Math.round(n).toLocaleString("pt-BR");
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// Captacao da Black: abre 20/10 (manifesto), fecha na Super Live 10/11 as 20h.
+// leads: meta de cadastros. Enquanto for null, o painel mostra so o ritmo e a projecao.
+// Metas da captacao da Black (Thomas, 21/10). Captacao de 20/10 a 09/11 (21 dias), Super Live 10/11 20h.
+const META = null; // metas da captacao do Rian ainda nao definidas: o bloco de meta fica escondido
+
+async function loadMeta(){
+  if(!META) return;
+  try{
+    const r = await fetch(API+"?key="+encodeURIComponent(KEY)+"&range=total", {cache:"no-store"});
+    if(!r.ok) return;
+    const d = await r.json();
+    if(d && d.ok) renderMeta(d);
+  }catch(e){}
+}
+
+const ehPago = origem => { const m=(origem.split(" / ")[1]||"").toLowerCase(); return m==="pago"||m==="paid"||m==="cpc"; };
+
+function blocoMeta(nome, real, m, decorrido, total, extra){
+  const DAY = 86400000;
+  const esperado = Math.min(m.leads, Math.round(m.leads * decorrido / total));
+  const delta = real - esperado;
+  const ritmo = decorrido > 0 ? real / (decorrido / DAY) : 0;
+  const proj = Math.round(ritmo * (total / DAY));
+  const faltam = Math.max(0, m.leads - real);
+  const diasRest = Math.max(0, (total - decorrido) / DAY);
+  const precisa = diasRest > 0.05 ? Math.ceil(faltam / diasRest) : 0;
+  const pctMeta = real / m.leads * 100, espPct = esperado / m.leads * 100;
+  const vendasProj = Math.round(proj * m.conv / 100);
+  const fatProj = vendasProj * META.ticket;
+  let cls, txt;
+  if (delta >= 0) { cls = "ok"; txt = "NO RITMO"; }
+  else if (delta >= -0.1 * Math.max(esperado, 1)) { cls = "warn"; txt = "LEVEMENTE ATRÁS"; }
+  else { cls = "bad"; txt = "ATRASADO"; }
+  const dtxt = delta >= 0 ? ("+" + fmt(delta) + " vs o esperado até agora") : (fmt(Math.abs(delta)) + " atrás do esperado até agora");
+  const tile = (l,v,c) => '<div class="mtile"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="c">'+c+'</div></div>';
+  let h = '<div class="meta-col">';
+  h += '<div class="meta-head"><h2>Meta '+nome+'</h2><span class="pill pill-'+cls+'">'+txt+'</span></div>';
+  h += '<div class="meta-big">'+fmt(real)+' <span>/ '+fmt(m.leads)+' leads</span></div>';
+  h += '<div class="meta-pctnum">'+pct1(pctMeta)+' da meta · '+dtxt+'</div>';
+  h += '<div class="prog"><div class="prog-fill" style="width:'+Math.min(100,pctMeta)+'%"></div><div class="prog-mark" style="left:'+Math.min(100,espPct)+'%" title="onde deveríamos estar agora"></div></div>';
+  h += '<div class="prog-cap"><span>esperado agora: '+fmt(esperado)+'</span><span>'+fmt(m.leads)+' até 09/11</span></div>';
+  h += '<div class="meta-tiles">'
+    + tile("Ritmo real", fmt(Math.round(ritmo))+"/dia", "meta "+fmt(m.dia)+"/dia")
+    + tile("Precisa agora", precisa ? fmt(precisa)+"/dia" : "meta batida", "pra bater "+fmt(m.leads))
+    + tile("Projeção 09/11", fmt(proj), pct1(proj / m.leads * 100)+" da meta")
+    + tile("Vendas projetadas", fmt(vendasProj), "meta "+fmt(m.vendas)+" ("+m.conv+"% da lista)")
+    + '</div>';
+  h += '<div class="meta-sub" style="margin-top:10px">Faturamento líquido no ritmo atual: <b style="color:var(--ink)">'+brl(fatProj)+'</b> · meta '+brl(m.fat)+(extra||"")+'</div>';
+  h += '</div>';
+  return h;
+}
+
+function renderMeta(d){
+  if (d.restricted) return;
+  const box = document.getElementById("meta");
+  const ori = d.porOrigem || [];
+  const pago = ori.filter(o => ehPago(o.origem)).reduce((a,b)=>a+(b.cadastros||0),0);
+  const total = (d.totais && d.totais.cadastros) || 0;
+  const organico = Math.max(0, total - pago);
+  const ini = new Date(META.start).getTime(), fim = new Date(META.end).getTime();
+  const decorrido = Math.max(0, Math.min(Date.now(), fim) - ini), span = fim - ini;
+  const dia = Math.min(META.dias, Math.floor(decorrido / 86400000) + 1);
+  let h = '<section class="meta">';
+  h += '<div class="meta-head" style="margin-bottom:6px"><h2>Captação da Black · dia '+dia+' de '+META.dias+'</h2><span class="pill pill-warn">Super Live '+META.live+'</span></div>';
+  h += '<div class="meta-sub" style="margin-bottom:16px">Total: <b style="color:var(--ink)">'+fmt(total)+'</b> de '+fmt(META.organico.leads+META.pago.leads)+' leads · meta de '+fmt(META.organico.vendas+META.pago.vendas)+' vendas e '+brl(META.organico.fat+META.pago.fat)+' líquidos</div>';
+  h += '<div class="meta-grid">';
+  h += blocoMeta("orgânico", organico, META.organico, decorrido, span, "");
+  h += blocoMeta("pago", pago, META.pago, decorrido, span,
+        '<br>Investimento previsto '+brl(META.pago.invest)+' · CPL máximo R$ 9,51 · ROAS 10. CPL real: gasto do gerenciador ÷ '+fmt(pago)+' leads pagos.');
+  h += '</div>';
+  h += '<div class="meta-sub" style="margin-top:12px">Pago = utm_medium pago/paid/cpc; o resto conta como orgânico. Ritmo e projeção usam o tempo corrido desde 20/10 às 09h03. Ticket líquido médio das metas: '+brl(META.ticket)+'.</div>';
+  h += '</section>';
+  box.innerHTML = h;
+}
+
+async function load(){
+  sub.textContent = "Carregando...";
+  let data;
+  try{
+    let q = API+"?key="+encodeURIComponent(KEY)+"&range="+range;
+    if(range==="dia" && customDate) q += "&date="+customDate;
+    const r = await fetch(q, {cache:"no-store"});
+    if(r.status===401){ return msg("Chave invalida.", "Abra o painel com <code>?key=SUA-CHAVE</code> no final da URL."); }
+    data = await r.json();
+  }catch(e){ return msg("Erro ao carregar", "Tenta de novo em instantes."); }
+  if(data && data.error === "limite_d1"){ return msg("Painel fora do ar temporariamente", "O banco do painel bateu o limite diário de leituras do plano gratuito da Cloudflare. Os cadastros continuam sendo salvos e o e-mail de boas-vindas continua saindo; só a leitura dos números está bloqueada."); }
+  if(data && data.error){ return msg("Erro ao ler os dados", "O banco do painel recusou a leitura. Tenta de novo em instantes."); }
+  if(!data || !data.ok){ return msg("Sem dados ainda", "Assim que chegarem visitas e cadastros, aparecem aqui."); }
+  if (data.restricted) { document.getElementById("filters").style.display = "none"; document.getElementById("meta").innerHTML = ""; renderThaize(data); }
+  else render(data);
+  const now = new Date();
+  sub.textContent = "Atualizado as " + now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+}
+
+function msg(t, s){ app.innerHTML = '<div class="msg"><b>'+t+'</b><br>'+s+'</div>'; sub.textContent=""; }
+
+// ===================== PAINEL DA THAIZE (visao simples) =====================
+// Orgânico em destaque, total no ritmo, gráfico de leads por dia e o pago separado embaixo.
+function renderThaize(d){
+  const DAY = 86400000;
+  const ini = new Date(META.start).getTime(), fim = new Date(META.end).getTime();
+  const agora = Math.min(Date.now(), fim);
+  const decorridoDias = Math.max(0.01, (agora - ini) / DAY);
+  // dias da captacao ate hoje (preenche dia sem lead com zero)
+  const porDia = {}; for (const o of (d.porDiaTipo || [])) porDia[o.dia] = o;
+  const dias = [];
+  for (let t = new Date("2026-10-20T12:00:00-03:00").getTime(); t <= agora + DAY/2; t += DAY) {
+    const dia = new Date(t - 3*3600000).toISOString().slice(0,10);
+    const o = porDia[dia] || { organico: 0, pago: 0 };
+    dias.push({ dia, organico: o.organico || 0, pago: o.pago || 0, total: (o.organico||0) + (o.pago||0) });
+  }
+  const soma = k => dias.reduce((a,b)=>a+b[k],0);
+  const org = soma("organico"), pag = soma("pago"), tot = org + pag;
+  const hoje = dias[dias.length-1] || {organico:0,pago:0,total:0};
+  const ontem = dias.length > 1 ? dias[dias.length-2] : {organico:0,pago:0,total:0};
+  const metaOrg = META.organico.leads, metaPag = META.pago.leads, metaTot = metaOrg + metaPag;
+  const diaOrg = META.organico.dia, diaPag = META.pago.dia, diaTot = diaOrg + diaPag;
+  const mediaOrg = org / decorridoDias, mediaPag = pag / decorridoDias, mediaTot = tot / decorridoDias;
+  const esperado = (meta) => Math.round(meta * Math.min(1, (agora - ini) / (fim - ini)));
+  const pill = (real, meta) => {
+    const e = esperado(meta), dlt = real - e;
+    if (dlt >= 0) return '<span class="pill pill-ok">NO RITMO</span>';
+    if (dlt >= -0.1 * Math.max(e,1)) return '<span class="pill pill-warn">QUASE NO RITMO</span>';
+    return '<span class="pill pill-bad">ABAIXO DO RITMO</span>';
+  };
+  const t3 = (a,b,c) => '<div class="th-tiles">'+a+b+c+'</div>';
+  const tl = (l,v,c,dest) => '<div class="mtile'+(dest?' th-dest':'')+'"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="c">'+c+'</div></div>';
+  const dia = Math.min(META.dias, Math.floor((agora - ini)/DAY) + 1);
+  const restDias = Math.max(0, Math.ceil((fim - agora)/DAY));
+
+  let h = '';
+  // ---- ORGANICO ----
+  h += '<section class="meta th">';
+  h += '<div class="meta-head"><h2>Leads orgânicos · dia '+dia+' de '+META.dias+'</h2>'+pill(org, metaOrg)+'</div>';
+  h += '<div class="meta-big">'+fmt(org)+' <span>de '+fmt(metaOrg)+'</span></div>';
+  h += '<div class="meta-pctnum">Faltam <b style="color:var(--ink)">'+fmt(Math.max(0, metaOrg - org))+'</b> leads orgânicos pra meta · '+restDias+' dias até 09/11</div>';
+  const diasFaltam = Math.max(0.01, (fim - agora) / DAY);
+  const precisaOrg = Math.ceil(Math.max(0, metaOrg - org) / diasFaltam);
+  h += '<div class="th-precisa">' + (org >= metaOrg
+    ? 'Meta orgânica batida!'
+    : 'Seguindo assim, precisa de <b>'+fmt(precisaOrg)+' leads orgânicos por dia</b> pra bater a meta' + (mediaOrg >= precisaOrg ? ' (a média atual já está acima disso)' : ' (hoje a média é '+fmt(Math.round(mediaOrg))+' por dia)')) + '</div>';
+  h += '<div class="prog"><div class="prog-fill" style="width:'+Math.min(100, org/metaOrg*100)+'%"></div><div class="prog-mark" style="left:'+Math.min(100, esperado(metaOrg)/metaOrg*100)+'%"></div></div>';
+  h += '<div class="prog-cap"><span>onde deveríamos estar agora: '+fmt(esperado(metaOrg))+'</span><span>'+pct1(org/metaOrg*100)+'</span></div>';
+  h += t3(tl("Hoje", fmt(hoje.organico), "até agora", true), tl("Ontem", fmt(ontem.organico), "dia inteiro"), tl("Média por dia", fmt(Math.round(mediaOrg)), "meta "+fmt(diaOrg)+"/dia"));
+  h += '</section>';
+
+  // ---- TOTAL ----
+  h += '<section class="meta th th-total">';
+  h += '<div class="meta-head"><h2>Total de leads (orgânico + pago)</h2>'+pill(tot, metaTot)+'</div>';
+  h += '<div class="meta-big">'+fmt(tot)+' <span>de '+fmt(metaTot)+'</span></div>';
+  h += t3(tl("Hoje", fmt(hoje.total), "até agora", true), tl("Ontem", fmt(ontem.total), "dia inteiro"), tl("Média por dia", fmt(Math.round(mediaTot)), "meta "+fmt(diaTot)+"/dia"));
+  h += '</section>';
+
+  // ---- GRAFICO ----
+  h += '<section class="th-graf"><h2>Leads por dia</h2>' + grafico(dias, diaTot) + '<div class="th-leg"><span><i class="lg-t"></i>Total</span><span><i class="lg-o"></i>Orgânico</span><span><i class="lg-m"></i>Meta do dia ('+fmt(diaTot)+')</span></div></section>';
+
+  // ---- PAGO (embaixo) ----
+  h += '<section class="meta th th-pago">';
+  // pago: so os numeros, sem meta nem status (acompanhar o trafego nao e papel dela)
+  h += '<div class="meta-head"><h2>Leads pagos (anúncios)</h2></div>';
+  h += '<div class="meta-big">'+fmt(pag)+' <span>leads</span></div>';
+  h += t3(tl("Hoje", fmt(hoje.pago), "até agora"), tl("Ontem", fmt(ontem.pago), "dia inteiro"), tl("Média por dia", fmt(Math.round(mediaPag)), "desde 27/10"));
+  h += '</section>';
+
+  app.innerHTML = h;
+  document.querySelector(".foot").textContent = "Horário de Brasília. Hoje conta até agora; o dia fecha à meia-noite.";
+  ligaTooltip();
+}
+
+function ligaTooltip(){
+  const box = document.querySelector(".th-chart"); if (!box || !window.__graf) return;
+  const tip = box.querySelector(".gtip"), guia = box.querySelector(".gguia"), dias = window.__graf.dias, W = window.__graf.W;
+  const mostra = el => {
+    const i = +el.dataset.i, o = dias[i], xx = +el.dataset.x, yy = +el.dataset.y;
+    const ehHoje = i === dias.length - 1;
+    tip.innerHTML = '<b>'+diaBonito(o.dia)+(ehHoje?' · hoje (até agora)':'')+'</b>'
+      + '<span class="r"><i class="lg-t"></i>Total <strong>'+fmt(o.total)+'</strong></span>'
+      + '<span class="r"><i class="lg-o"></i>Orgânico <strong>'+fmt(o.organico)+'</strong></span>'
+      + '<span class="r"><i class="lg-p"></i>Pago <strong>'+fmt(o.pago)+'</strong></span>';
+    tip.style.display = "block";
+    const tw = tip.offsetWidth, left = Math.min(Math.max(4, xx - tw/2), W - tw - 4);
+    tip.style.left = left + "px"; tip.style.top = Math.max(0, yy - tip.offsetHeight - 14) + "px";
+    guia.setAttribute("x1", xx); guia.setAttribute("x2", xx); guia.style.display = "";
+    box.querySelectorAll(".gd,.gp").forEach((c,k) => c.classList.toggle("gsel", k === i));
+  };
+  const esconde = () => { tip.style.display = "none"; guia.style.display = "none"; box.querySelectorAll(".gsel").forEach(c => c.classList.remove("gsel")); };
+  box.querySelectorAll(".ghit").forEach(r => {
+    r.addEventListener("mouseenter", () => mostra(r));
+    r.addEventListener("click", () => mostra(r));
+    r.addEventListener("touchstart", () => mostra(r), {passive:true});
+  });
+  box.addEventListener("mouseleave", esconde);
+}
+
+// gráfico de área, estilo painel de vendas: um ponto por dia, com o pico marcado
+function grafico(dias, metaDia){
+  const W = Math.max(300, Math.round((document.getElementById("app").clientWidth || 960) - 34)), H = W < 500 ? 220 : 280, pl = 40, pr = 14, pt = 28, pb = 30;
+  const max = Math.max(metaDia, ...dias.map(o => o.total)) * 1.12;
+  const n = Math.max(1, dias.length - 1);
+  const x = i => pl + (W - pl - pr) * (dias.length === 1 ? 0.5 : i / n);
+  const y = v => pt + (H - pt - pb) * (1 - v / max);
+  const linha = k => dias.map((o,i) => (i?'L':'M') + x(i).toFixed(1) + ' ' + y(o[k]).toFixed(1)).join(' ');
+  const area = linha("total") + ' L' + x(dias.length-1).toFixed(1) + ' ' + y(0) + ' L' + x(0).toFixed(1) + ' ' + y(0) + ' Z';
+  let g = '<svg class="th-svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Leads por dia">';
+  g += '<defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1c56b" stop-opacity=".45"/><stop offset="1" stop-color="#f1c56b" stop-opacity="0"/></linearGradient></defs>';
+  for (let k = 0; k <= 4; k++) { const v = max * k / 4, yy = y(v); g += '<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+yy+'" y2="'+yy+'" class="gl"/><text x="'+(pl-8)+'" y="'+(yy+4)+'" class="ga" text-anchor="end">'+Math.round(v)+'</text>'; }
+  g += '<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(metaDia)+'" y2="'+y(metaDia)+'" class="gm"/>';
+  g += '<path d="'+area+'" fill="url(#gA)"/>';
+  g += '<path d="'+linha("organico")+'" class="go"/>';
+  g += '<path d="'+linha("total")+'" class="gt"/>';
+  const pico = dias.reduce((a,b,i) => b.total > dias[a].total ? i : a, 0);
+  const passo = Math.max(1, Math.ceil(dias.length / (W < 500 ? 5 : 9)));
+  dias.forEach((o,i) => {
+    g += '<circle cx="'+x(i)+'" cy="'+y(o.total)+'" r="'+(i===pico?6:3.5)+'" class="'+(i===pico?'gp':'gd')+'"></circle>';
+    if (i % passo === 0 || i === dias.length-1) g += '<text x="'+x(i)+'" y="'+(H-10)+'" class="ga" text-anchor="middle">'+diaBonito(o.dia)+'</text>';
+  });
+  if (dias[pico] && dias[pico].total > 0) g += '<text x="'+x(pico)+'" y="'+(y(dias[pico].total)-12)+'" class="gpt" text-anchor="middle">pico: '+dias[pico].total+'</text>';
+  // passar o mouse (ou tocar) mostra o numero exato do dia
+  g += '<line class="gguia" x1="0" x2="0" y1="'+pt+'" y2="'+(H-pb)+'" style="display:none"/>';
+  const larg = (W - pl - pr) / Math.max(1, dias.length - (dias.length > 1 ? 1 : 0));
+  dias.forEach((o,i) => {
+    const x0 = dias.length === 1 ? pl : Math.max(pl, x(i) - larg/2), x1 = dias.length === 1 ? W - pr : Math.min(W - pr, x(i) + larg/2);
+    g += '<rect class="ghit" x="'+x0+'" y="'+pt+'" width="'+(x1-x0)+'" height="'+(H-pt-pb)+'" data-i="'+i+'" data-x="'+x(i)+'" data-y="'+y(o.total)+'"/>';
+  });
+  g += '</svg>';
+  window.__graf = { dias: dias, W: W };
+  return '<div class="th-chart">' + g + '<div class="gtip" style="display:none"></div></div>';
+}
+
+function render(d){
+  const t = d.totais, lbl = (range==="dia" ? diaBonito(customDate) : (LABELS[d.range] || ""));
+  const pos = d.pos || {};
+  let html = '<div class="cards'+(d.restricted?'':' cards-4')+'">';
+  if(!d.restricted) html += card("Visitas na LP", fmt(t.visitas), lbl);
+  html += card("Cadastros", fmt(t.cadastros), lbl);
+  if(!d.restricted){
+    html += card("Conversao da LP", pct(t.taxa), t.convVis ? ("rastreado: "+fmt(t.convCad)+" cad / "+fmt(t.convVis)+" vis") : "aguardando dados");
+    html += card("Clicou no grupo", pct(pos.taxaGrupo), fmt(pos.grupoConv)+" cliques de "+fmt(pos.cadConv)+" cadastros");
+  }
+  html += '</div>';
+
+  const p = d.pacing || {hoje:0,ontem:0,media:0};
+  const arrow = p.ontem>=p.media ? '<span class="up">▲</span>' : '<span class="down">▼</span>';
+  html += '<div class="ritmo">Ritmo de cadastros: hoje <b>'+fmt(p.hoje)+'</b> (parcial) · ontem <b>'+fmt(p.ontem)+'</b> '+arrow+' · media <b>'+fmt(p.media)+'</b>/dia</div>';
+  html += graficoDias(d);
+
+  if(!d.restricted){
+    html += '<div class="note"><b>Visitas, cadastros, conversão e clique no grupo</b> contam desde 26/10 (a LP entrou no ar nesse dia; a captação abriu em 27/10).</div>';
+    html += '<div class="note"><b>Clicou no grupo</b> conta quem chegou na pagina de obrigado e apertou o botao do grupo de abertura. Se ficar bem abaixo de 100%, tem gente se cadastrando e nao entrando no grupo, e esse publico precisa ser puxado por e-mail e pelo WhatsApp de suporte. O pixel da Meta dispara o <b>Lead</b> nessa mesma pagina.</div>';
+  }
+
+  // teste A/B
+  const va = d.porVariante || [];
+  if (va.length && !d.restricted) {
+    const tA = va[0], tB = va[1];
+    let lider = "";
+    if (!d.restricted && tA.visitas >= 100 && tB.visitas >= 100 && tA.taxa != null && tB.taxa != null && tA.taxa !== tB.taxa) lider = tA.taxa > tB.taxa ? tA.versao : tB.versao;
+    const fd = t => new Date(/Z$/.test(t) ? t : t + 'Z').toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).replace(',',' às');
+    const td = d.testeDesde || {};
+    html += '<section><h2>Teste da LP · B x C</h2><div class="muted" style="font-size:12px;padding:0 2px 8px">'+(td.B ? 'As duas contam desde '+fd(td.B)+'. B = página longa, C = 1 dobra (modelo Speak Journey). Sorteio 50/50 em /black.' : '')+'</div><div class="tw">' + tableHead(["Versao","Visitas","Cadastros","Conv. pago","Conv. orgânico"]);
+    const sub = (c,v) => '<span class="muted" style="display:block;font-size:11px;font-weight:400">'+fmt(c)+' de '+fmt(v)+'</span>';
+    // verde so em quem ganha em cada coluna (e so com diferenca de verdade: 100+ visitas e mais de 1 ponto)
+    const vence = (k, kv) => { const a = tA[k], b = tB[k]; if (a == null || b == null || tA[kv] < 100 || tB[kv] < 100 || Math.abs(a - b) < 1) return null; return a > b ? tA.versao : tB.versao; };
+    const vPago = vence("taxaPago","visPago"), vOrg = vence("taxaOrg","visOrg");
+    const cel = (taxa, venc, o, c, v) => '<td class="'+(venc === o.versao ? 'taxa' : 'ab-neutro')+'">'+pct(taxa)+(venc === o.versao ? ' ▲' : '')+sub(c, v)+'</td>';
+    for (const o of va) html += '<tr><td>'+o.versao+'</td><td>'+fmt(o.visitas)+'</td><td>'+fmt(o.cadastros)+'</td>'
+      + cel(o.taxaPago, vPago, o, o.cadPago, o.visPago) + cel(o.taxaOrg, vOrg, o, o.cadOrg, o.visOrg) + '</tr>';
+    html += '</table></div><div class="muted" style="font-size:12px;padding:8px 2px 0">Metade de quem abre /black cai em cada versão (a pessoa sempre volta na mesma). Testes anteriores: A x B (B venceu no orgânico, 43,1% x 33,7%) e B x C (empate: orgânico 42,4% x 41,4%, pago 9,7% x 9,0%; ficou a B). Em verde com ▲ fica quem converte mais naquela coluna (só aparece com 100+ visitas em cada versão e diferença de pelo menos 1 ponto).</div></section>';
+  }
+
+  // grupo de WhatsApp (Sendflow): quem se inscreveu entrou mesmo no grupo?
+  if (!d.restricted && d.grupo) {
+    const g = d.grupo;
+    html += '<section><h2>Grupo de WhatsApp · entrada dos inscritos</h2>';
+    if (g.alertas && g.alertas.length) {
+      html += '<div class="note" style="margin-bottom:12px;border-color:#7a2e2e;background:rgba(193,18,24,.12)"><b>⚠ Alertas do Sendflow (últimas 72h)</b><br>'
+        + g.alertas.map(a => new Date(a.created_at).toLocaleString("pt-BR",{timeZone:"America/Sao_Paulo",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+' · '+a.evento+(a.grupo?' · '+a.grupo:'')+(a.campanha?' · '+a.campanha:'')).join('<br>') + '</div>';
+    }
+    if (g.metricas) { const m = g.metricas; html += '<div class="note" style="margin-bottom:12px"><b>Sendflow agora:</b> '+fmt(m.participantes)+' pessoas nos grupos · '+fmt(m.cliques)+' cliques no link · '+fmt(m.entradas)+' entradas e '+fmt(m.saidas)+' saídas · '+fmt(m.grupos)+' grupos ('+fmt(m.gruposCheios)+' cheios). Atualizado em '+new Date(m.em).toLocaleString("pt-BR",{timeZone:"America/Sao_Paulo",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+'.</div>'; }
+    if (!g.ativo || !g.eventos) {
+      html += '<div class="note">Aguardando os primeiros eventos do Sendflow (Sendhook). Assim que alguém entrar ou sair do grupo, os números aparecem aqui.</div>';
+    } else {
+      html += '<div class="tw">' + tableHead(["Inscritos com WhatsApp","Desses, entraram no grupo","Taxa de entrada","Entradas no grupo (total)","Saíram","Ficaram"])
+        + '<tr><td>'+fmt(g.inscritosComTelefone)+'</td><td>'+fmt(g.inscritosNoGrupo)+'</td><td class="taxa">'+pct(g.taxaEntrada)+'</td><td>'+fmt(g.entraram)+'</td><td>'+fmt(g.sairam)+' <span class="muted">('+pct(g.taxaSaida)+')</span></td><td>'+fmt(g.ficaram)+'</td></tr></table></div>';
+      html += '<div class="tw" style="margin-top:12px">' + tableHead(["Dia","Inscrições","Desses, entraram no grupo","Taxa","Entradas no grupo","Saídas"]);
+      for (const o of g.porDia) html += '<tr><td>'+diaBonito(o.dia)+(o.dia===d.hoje?' <span class="muted">(hoje)</span>':'')+'</td><td>'+fmt(o.inscritos)+'</td><td>'+fmt(o.inscritosNoGrupo)+'</td><td>'+pct(o.taxa)+'</td><td>'+fmt(o.entradas)+'</td><td>'+fmt(o.saidas)+'</td></tr>';
+      html += '</table></div>';
+      html += '<div class="muted" style="font-size:12px;padding:8px 2px 0">Cruza o WhatsApp de quem se inscreveu com o de quem entrou no grupo. Conta as inscrições a partir do primeiro evento recebido do Sendflow ('+(g.desde?new Date(g.desde).toLocaleString("pt-BR",{timeZone:"America/Sao_Paulo",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"—")+'), porque antes disso não temos as entradas. "Entradas no grupo (total)" inclui quem entrou pelo link do grupo sem passar pela página. Último evento: '+(g.ultimoEvento?new Date(g.ultimoEvento).toLocaleString("pt-BR",{timeZone:"America/Sao_Paulo"}):"—")+'.</div>';
+    }
+    html += '</section>';
+  }
+
+  // leads por dia: organico x pago (todo o periodo da captacao)
+  const dt = d.porDiaTipo || [];
+  html += '<section><h2>Leads por dia · orgânico e pago</h2><div class="tw">' + tableHead(["Dia","Orgânico","Pago","Total"]);
+  if(!dt.length) html += emptyRow(4);
+  let sO=0,sP=0;
+  for(const o of dt){
+    const hoje = o.dia===d.hoje; sO+=o.organico; sP+=o.pago;
+    html += '<tr><td>'+diaBonito(o.dia)+(hoje?' <span class="muted">(hoje, parcial)</span>':'')+'</td><td>'+fmt(o.organico)+'</td><td>'+fmt(o.pago)+'</td><td><b>'+fmt(o.total)+'</b></td></tr>';
+  }
+  if(dt.length) html += '<tr class="tr-total"><td>Total</td><td>'+fmt(sO)+'</td><td>'+fmt(sP)+'</td><td>'+fmt(sO+sP)+'</td></tr>';
+  html += '</table></div><div class="muted" style="font-size:12px;padding:8px 2px 0">Meta por dia: 359 orgânicos e 250 pagos.</div></section>';
+
+  // por origem
+  const maxV = Math.max(1, ...d.porOrigem.map(o=>o.visitas||o.cadastros||0));
+  const R = d.restricted;
+  html += '<section><h2>Por origem ('+lbl+')</h2><div class="tw">' + tableHead(R ? ["Origem","Cadastros"] : ["Origem","Visitas","Cadastros","Taxa"]);
+  if(!d.porOrigem.length) html += emptyRow(R ? 2 : 4);
+  const isPago = o => { const m=(o.origem.split(" / ")[1]||"").toLowerCase(); return m==="pago"||m==="paid"||m==="cpc"; };
+  if(R){
+    const soma = a => a.reduce((x,y)=>x+y.cadastros,0);
+    const maxC = Math.max(1, ...d.porOrigem.map(o=>o.cadastros||0));
+    html += '<tr class="tr-total"><td>Orgânico (ManyChat + bio + direto)</td><td>'+fmt(soma(d.porOrigem.filter(o=>!isPago(o))))+'</td></tr>';
+    html += '<tr class="tr-total"><td>Pago (Meta Ads)</td><td>'+fmt(soma(d.porOrigem.filter(isPago)))+'</td></tr>';
+    for(const o of d.porOrigem){
+      const w = Math.round((o.cadastros||0)/maxC*100);
+      html += '<tr><td class="ori" style="background:linear-gradient(90deg,rgba(240,199,94,.14) '+w+'%,transparent '+w+'%)"><span>'+esc(o.origem)+'</span></td><td>'+fmt(o.cadastros)+'</td></tr>';
+    }
+  } else {
+  html += totalRow("Organico (ManyChat + bio + direto)", d.porOrigem.filter(o=>!isPago(o)));
+  html += totalRow("Pago (Meta Ads)", d.porOrigem.filter(isPago));
+  for(const o of d.porOrigem){
+    const w = Math.round((o.visitas||o.cadastros||0)/maxV*100);
+    html += '<tr><td class="ori" style="background:linear-gradient(90deg,rgba(240,199,94,.14) '+w+'%,transparent '+w+'%)"><span>'+esc(o.origem)+'</span></td>'
+      + '<td>'+fmt(o.visitas)+'</td><td>'+fmt(o.cadastros)+'</td>'
+      + '<td class="taxa">'+pct(o.taxa)+'</td></tr>';
+  }
+  }
+  html += '</table></div></section>';
+
+  // por anuncio (so trafego pago)
+  const an = d.porAnuncio || [];
+  html += '<section><h2>Cadastros por anuncio ('+lbl+')</h2><div class="tw">' + tableHead(["Anuncio (utm_content)","Campanha","Cadastros"]);
+  if(!an.length) html += emptyRow(3);
+  for(const o of an){
+    html += '<tr><td class="cp" title="'+esc(o.anuncio)+'"><b>'+esc(o.anuncio)+'</b></td><td class="cp muted" title="'+esc(o.campanha)+'">'+esc(o.campanha)+'</td><td>'+fmt(o.cadastros)+'</td></tr>';
+  }
+  html += '</table></div></section>';
+
+  // por dia (visitas e taxa): so no painel interno
+  if(!R){
+  html += '<section><h2>Por dia</h2><div class="tw">' + tableHead(["Dia","Visitas","Cadastros","Taxa"]);
+  const dias = d.porDia.slice(0,30);
+  if(!dias.length) html += emptyRow(4);
+  for(const o of dias){
+    const hoje = o.dia===d.hoje;
+    html += '<tr><td>'+diaBonito(o.dia)+(hoje?' <span class="muted">(hoje)</span>':'')+'</td>'
+      + '<td>'+fmt(o.visitas)+'</td><td>'+fmt(o.cadastros)+'</td>'
+      + '<td class="taxa">'+pct(o.taxa)+'</td></tr>';
+  }
+  html += '</table></div></section>';
+  }
+
+  // por horario
+  const hh = d.porHora || [];
+  const maxH = Math.max(1, ...hh.map(o=>o.c));
+  const peak = hh.reduce((a,b)=>b.c>a.c?b:a, {c:-1,hora:""});
+  html += '<section><h2>Cadastros por horario ('+lbl+')</h2><div class="hours">';
+  for(const o of hh){ const ht=Math.max(2, Math.round(o.c/maxH*100)); html += '<div class="hbar'+(o.hora===peak.hora&&o.c>0?' peak':'')+'" style="height:'+ht+'%" title="'+o.hora+'h: '+fmt(o.c)+'"></div>'; }
+  html += '</div><div class="hlabels"><span>0h</span><span>6h</span><span>12h</span><span>18h</span><span>23h</span></div>';
+  if(peak.c>0) html += '<div class="muted" style="font-size:12px;padding:8px 2px 0">Pico de cadastros: <b style="color:var(--ink)">'+peak.hora+'h</b></div>';
+  html += '</section>';
+
+  app.innerHTML = html;
+  ligaGraficoDias();
+}
+
+function card(lbl, big, cap){
+  return '<div class="card"><div class="lbl">'+lbl+'</div><div class="big">'+big+'</div><div class="cap">'+(cap||"")+'</div></div>';
+}
+
+// cadastros por dia: barras empilhadas (orgânico embaixo, pago em cima), total no topo, linha da meta diária
+function graficoDias(d){
+  const dias = (d.porDiaTipo || []).slice().sort((a,b)=> a.dia < b.dia ? -1 : 1);
+  if(!dias.length) return '';
+  const META_DIA = 609;
+  const max = Math.max(META_DIA * 1.08, ...dias.map(o=>o.total));
+  const muitos = dias.length > 10;
+  let h = '<section><h2>Cadastros por dia</h2><div class="dias-wrap"><div class="dias'+(muitos?' muitos':'')+'" id="dias">';
+  h += '<div class="meta-linha" style="bottom:'+(META_DIA/max*188)+'px"><span>meta '+fmt(META_DIA)+'/dia</span></div>';
+  for(const o of dias){
+    const hoje = o.dia === d.hoje;
+    const ho = Math.round(o.organico/max*188), hp = Math.round(o.pago/max*188);
+    h += '<div class="dia'+(hoje?' hoje':'')+'" data-d="'+diaBonito(o.dia)+(hoje?' (hoje, parcial)':'')+'" data-o="'+o.organico+'" data-p="'+o.pago+'" data-t="'+o.total+'">'
+      + '<div class="tot">'+fmt(o.total)+'</div><div class="stack"><div class="org" style="height:'+ho+'px"></div><div class="pag" style="height:'+hp+'px"></div></div></div>';
+  }
+  h += '</div><div class="dlabels'+(muitos?' muitos':'')+'">' + dias.map((o,i)=>'<span'+(muitos && i%3!==0 && i!==dias.length-1?' class="pula"':'')+'>'+diaBonito(o.dia)+'</span>').join('') + '</div><div class="dtip" id="dtip"></div></div>';
+  const tot = dias.reduce((a,o)=>a+o.total,0), org = dias.reduce((a,o)=>a+o.organico,0);
+  h += '<div class="dleg"><span><i style="background:var(--gold)"></i>Orgânico</span><span><i style="background:rgba(240,199,94,.35)"></i>Pago</span><span>Total no período: <b style="color:var(--ink)">'+fmt(tot)+'</b> ('+fmt(org)+' orgânicos, '+fmt(tot-org)+' pagos)</span></div></section>';
+  return h;
+}
+function ligaGraficoDias(){
+  const box = document.getElementById('dias'), tip = document.getElementById('dtip');
+  if(!box || !tip) return;
+  const mostra = el => {
+    box.querySelectorAll('.dia').forEach(x=>x.classList.toggle('sel', x===el));
+    const o=+el.dataset.o, p=+el.dataset.p, t=+el.dataset.t;
+    tip.innerHTML = '<b>'+el.dataset.d+'</b><br>Total: '+fmt(t)+'<br>Orgânico: '+fmt(o)+'<br>Pago: '+fmt(p)+'<br>vs meta 609: '+(t>=609?'+':'')+fmt(t-609);
+    tip.style.display='block';
+    const r = el.getBoundingClientRect(), w = box.parentElement.getBoundingClientRect();
+    let x = r.left - w.left + r.width/2 - tip.offsetWidth/2; x = Math.max(0, Math.min(x, w.width - tip.offsetWidth));
+    tip.style.left = x+'px'; tip.style.top = '0px';
+  };
+  box.querySelectorAll('.dia').forEach(el=>{ el.addEventListener('mouseenter',()=>mostra(el)); el.addEventListener('click',()=>mostra(el)); });
+  box.addEventListener('mouseleave',()=>{ tip.style.display='none'; box.querySelectorAll('.dia').forEach(x=>x.classList.remove('sel')); });
+}
+function tableHead(cols){ return '<table><tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr>'; }
+function emptyRow(n){ return '<tr><td colspan="'+n+'" class="muted" style="text-align:center;padding:22px">Ainda sem registros nesse periodo.</td></tr>'; }
+function totalRow(label, arr){
+  if(!arr.length) return "";
+  const v=arr.reduce((a,b)=>a+(b.visitas||0),0), c=arr.reduce((a,b)=>a+b.cadastros,0);
+  const cc=arr.reduce((a,b)=>a+(b.cadConv!=null?b.cadConv:b.cadastros),0);
+  const anyV = arr.some(b=>b.visitas!=null);
+  const tx=anyV&&v?Math.round(cc/v*1000)/10:null;
+  return '<tr class="tr-total"><td>'+label+'</td><td>'+(anyV?fmt(v):"—")+'</td><td>'+fmt(c)+'</td><td class="taxa">'+pct(tx)+'</td></tr>';
+}
+
+document.getElementById("filters").addEventListener("click", function(e){
+  const b = e.target.closest("button"); if(!b) return;
+  range = b.getAttribute("data-range"); customDate = "";
+  const dp = document.getElementById("diaPicker"); dp.value = ""; dp.classList.remove("active");
+  for(const btn of this.querySelectorAll("button")) btn.classList.toggle("active", btn===b);
+  load();
+});
+document.getElementById("diaPicker").addEventListener("change", function(){
+  if(!this.value) return;
+  range = "dia"; customDate = this.value;
+  for(const btn of document.querySelectorAll("#filters button")) btn.classList.remove("active");
+  this.classList.add("active");
+  load();
+});
+document.getElementById("refresh").addEventListener("click", function(){ loadMeta(); load(); });
+loadMeta();
+load();
+</script>
+</body>
+</html>
