@@ -134,7 +134,7 @@
     h1{font-size:26px}
   }
 
-  /* painel da Thaize */
+  /* painel simples (visao do expert) */
   section.th{margin-bottom:16px}
   .th-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
   .th-tiles .mtile .v{font-size:30px}
@@ -214,9 +214,7 @@ const pct1 = n => (Math.round(n*10)/10).toLocaleString("pt-BR") + "%";
 const brl = n => "R$ " + Math.round(n).toLocaleString("pt-BR");
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-// Captacao da Black: abre 20/10 (manifesto), fecha na Super Live 10/11 as 20h.
-// leads: meta de cadastros. Enquanto for null, o painel mostra so o ritmo e a projecao.
-// Metas da captacao da Black (Thomas, 21/10). Captacao de 20/10 a 09/11 (21 dias), Super Live 10/11 20h.
+// Captacao da Black do Rian: abre 27/10, fecha na live de abertura 16/11 as 20h.
 const META = null; // metas da captacao do Rian ainda nao definidas: o bloco de meta fica escondido
 
 async function loadMeta(){
@@ -310,17 +308,20 @@ async function load(){
 
 function msg(t, s){ app.innerHTML = '<div class="msg"><b>'+t+'</b><br>'+s+'</div>'; sub.textContent=""; }
 
-// ===================== PAINEL DA THAIZE (visao simples) =====================
-// Orgânico em destaque, total no ritmo, gráfico de leads por dia e o pago separado embaixo.
+// ===================== PAINEL DO RIAN (visao simples) =====================
+// Orgânico em destaque, total, gráfico de leads por dia e o pago separado embaixo.
+// Sem meta definida (META null): mostra só os números, sem ritmo nem "faltam".
+// Captacao: abre 27/10, live de abertura 16/11 as 20h.
+const CAP = { start: "2026-10-27T00:00:00-03:00", end: "2026-11-16T20:00:00-03:00", dias: 21 };
 function renderThaize(d){
   const DAY = 86400000;
-  const ini = new Date(META.start).getTime(), fim = new Date(META.end).getTime();
+  const ini = new Date(CAP.start).getTime(), fim = new Date(CAP.end).getTime();
   const agora = Math.min(Date.now(), fim);
-  const decorridoDias = Math.max(0.01, (agora - ini) / DAY);
+  const decorridoDias = Math.max(1, Math.ceil((agora - ini) / DAY));
   // dias da captacao ate hoje (preenche dia sem lead com zero)
   const porDia = {}; for (const o of (d.porDiaTipo || [])) porDia[o.dia] = o;
   const dias = [];
-  for (let t = new Date("2026-10-20T12:00:00-03:00").getTime(); t <= agora + DAY/2; t += DAY) {
+  for (let t = new Date("2026-10-27T12:00:00-03:00").getTime(); t <= agora + DAY/2; t += DAY) {
     const dia = new Date(t - 3*3600000).toISOString().slice(0,10);
     const o = porDia[dia] || { organico: 0, pago: 0 };
     dias.push({ dia, organico: o.organico || 0, pago: o.pago || 0, total: (o.organico||0) + (o.pago||0) });
@@ -329,11 +330,13 @@ function renderThaize(d){
   const org = soma("organico"), pag = soma("pago"), tot = org + pag;
   const hoje = dias[dias.length-1] || {organico:0,pago:0,total:0};
   const ontem = dias.length > 1 ? dias[dias.length-2] : {organico:0,pago:0,total:0};
-  const metaOrg = META.organico.leads, metaPag = META.pago.leads, metaTot = metaOrg + metaPag;
-  const diaOrg = META.organico.dia, diaPag = META.pago.dia, diaTot = diaOrg + diaPag;
+  const M = META || null;
+  const metaOrg = M ? M.organico.leads : 0, metaPag = M ? M.pago.leads : 0, metaTot = metaOrg + metaPag;
+  const diaOrg = M ? M.organico.dia : 0, diaPag = M ? M.pago.dia : 0, diaTot = diaOrg + diaPag;
   const mediaOrg = org / decorridoDias, mediaPag = pag / decorridoDias, mediaTot = tot / decorridoDias;
   const esperado = (meta) => Math.round(meta * Math.min(1, (agora - ini) / (fim - ini)));
   const pill = (real, meta) => {
+    if (!meta) return '';
     const e = esperado(meta), dlt = real - e;
     if (dlt >= 0) return '<span class="pill pill-ok">NO RITMO</span>';
     if (dlt >= -0.1 * Math.max(e,1)) return '<span class="pill pill-warn">QUASE NO RITMO</span>';
@@ -341,38 +344,44 @@ function renderThaize(d){
   };
   const t3 = (a,b,c) => '<div class="th-tiles">'+a+b+c+'</div>';
   const tl = (l,v,c,dest) => '<div class="mtile'+(dest?' th-dest':'')+'"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="c">'+c+'</div></div>';
-  const dia = Math.min(META.dias, Math.floor((agora - ini)/DAY) + 1);
+  const dia = Math.min(CAP.dias, Math.floor((agora - ini)/DAY) + 1);
   const restDias = Math.max(0, Math.ceil((fim - agora)/DAY));
+  const de = (meta) => meta ? ' <span>de '+fmt(meta)+'</span>' : ' <span>leads</span>';
+  const media = (v, metaDia) => tl("Média por dia", fmt(Math.round(v)), metaDia ? "meta "+fmt(metaDia)+"/dia" : "desde 27/10");
 
   let h = '';
   // ---- ORGANICO ----
   h += '<section class="meta th">';
-  h += '<div class="meta-head"><h2>Leads orgânicos · dia '+dia+' de '+META.dias+'</h2>'+pill(org, metaOrg)+'</div>';
-  h += '<div class="meta-big">'+fmt(org)+' <span>de '+fmt(metaOrg)+'</span></div>';
-  h += '<div class="meta-pctnum">Faltam <b style="color:var(--ink)">'+fmt(Math.max(0, metaOrg - org))+'</b> leads orgânicos pra meta · '+restDias+' dias até 09/11</div>';
-  const diasFaltam = Math.max(0.01, (fim - agora) / DAY);
-  const precisaOrg = Math.ceil(Math.max(0, metaOrg - org) / diasFaltam);
-  h += '<div class="th-precisa">' + (org >= metaOrg
-    ? 'Meta orgânica batida!'
-    : 'Seguindo assim, precisa de <b>'+fmt(precisaOrg)+' leads orgânicos por dia</b> pra bater a meta' + (mediaOrg >= precisaOrg ? ' (a média atual já está acima disso)' : ' (hoje a média é '+fmt(Math.round(mediaOrg))+' por dia)')) + '</div>';
-  h += '<div class="prog"><div class="prog-fill" style="width:'+Math.min(100, org/metaOrg*100)+'%"></div><div class="prog-mark" style="left:'+Math.min(100, esperado(metaOrg)/metaOrg*100)+'%"></div></div>';
-  h += '<div class="prog-cap"><span>onde deveríamos estar agora: '+fmt(esperado(metaOrg))+'</span><span>'+pct1(org/metaOrg*100)+'</span></div>';
-  h += t3(tl("Hoje", fmt(hoje.organico), "até agora", true), tl("Ontem", fmt(ontem.organico), "dia inteiro"), tl("Média por dia", fmt(Math.round(mediaOrg)), "meta "+fmt(diaOrg)+"/dia"));
+  h += '<div class="meta-head"><h2>Leads orgânicos · dia '+dia+' de '+CAP.dias+'</h2>'+pill(org, metaOrg)+'</div>';
+  h += '<div class="meta-big">'+fmt(org)+de(metaOrg)+'</div>';
+  if (metaOrg) {
+    h += '<div class="meta-pctnum">Faltam <b style="color:var(--ink)">'+fmt(Math.max(0, metaOrg - org))+'</b> leads orgânicos pra meta · '+restDias+' dias até a live de 16/11</div>';
+    const diasFaltam = Math.max(0.01, (fim - agora) / DAY);
+    const precisaOrg = Math.ceil(Math.max(0, metaOrg - org) / diasFaltam);
+    h += '<div class="th-precisa">' + (org >= metaOrg
+      ? 'Meta orgânica batida!'
+      : 'Seguindo assim, precisa de <b>'+fmt(precisaOrg)+' leads orgânicos por dia</b> pra bater a meta' + (mediaOrg >= precisaOrg ? ' (a média atual já está acima disso)' : ' (hoje a média é '+fmt(Math.round(mediaOrg))+' por dia)')) + '</div>';
+    h += '<div class="prog"><div class="prog-fill" style="width:'+Math.min(100, org/metaOrg*100)+'%"></div><div class="prog-mark" style="left:'+Math.min(100, esperado(metaOrg)/metaOrg*100)+'%"></div></div>';
+    h += '<div class="prog-cap"><span>onde deveríamos estar agora: '+fmt(esperado(metaOrg))+'</span><span>'+pct1(org/metaOrg*100)+'</span></div>';
+  } else {
+    h += '<div class="meta-pctnum">'+restDias+' dias até a live de 16/11 às 20h</div>';
+  }
+  h += t3(tl("Hoje", fmt(hoje.organico), "até agora", true), tl("Ontem", fmt(ontem.organico), "dia inteiro"), media(mediaOrg, diaOrg));
   h += '</section>';
 
   // ---- TOTAL ----
   h += '<section class="meta th th-total">';
   h += '<div class="meta-head"><h2>Total de leads (orgânico + pago)</h2>'+pill(tot, metaTot)+'</div>';
-  h += '<div class="meta-big">'+fmt(tot)+' <span>de '+fmt(metaTot)+'</span></div>';
-  h += t3(tl("Hoje", fmt(hoje.total), "até agora", true), tl("Ontem", fmt(ontem.total), "dia inteiro"), tl("Média por dia", fmt(Math.round(mediaTot)), "meta "+fmt(diaTot)+"/dia"));
+  h += '<div class="meta-big">'+fmt(tot)+de(metaTot)+'</div>';
+  h += t3(tl("Hoje", fmt(hoje.total), "até agora", true), tl("Ontem", fmt(ontem.total), "dia inteiro"), media(mediaTot, diaTot));
   h += '</section>';
 
   // ---- GRAFICO ----
-  h += '<section class="th-graf"><h2>Leads por dia</h2>' + grafico(dias, diaTot) + '<div class="th-leg"><span><i class="lg-t"></i>Total</span><span><i class="lg-o"></i>Orgânico</span><span><i class="lg-m"></i>Meta do dia ('+fmt(diaTot)+')</span></div></section>';
+  h += '<section class="th-graf"><h2>Leads por dia</h2>' + grafico(dias, diaTot) + '<div class="th-leg"><span><i class="lg-t"></i>Total</span><span><i class="lg-o"></i>Orgânico</span>'+(diaTot ? '<span><i class="lg-m"></i>Meta do dia ('+fmt(diaTot)+')</span>' : '')+'</div></section>';
 
   // ---- PAGO (embaixo) ----
   h += '<section class="meta th th-pago">';
-  // pago: so os numeros, sem meta nem status (acompanhar o trafego nao e papel dela)
+  // pago: so os numeros, sem meta nem status
   h += '<div class="meta-head"><h2>Leads pagos (anúncios)</h2></div>';
   h += '<div class="meta-big">'+fmt(pag)+' <span>leads</span></div>';
   h += t3(tl("Hoje", fmt(hoje.pago), "até agora"), tl("Ontem", fmt(ontem.pago), "dia inteiro"), tl("Média por dia", fmt(Math.round(mediaPag)), "desde 27/10"));
@@ -411,7 +420,7 @@ function ligaTooltip(){
 // gráfico de área, estilo painel de vendas: um ponto por dia, com o pico marcado
 function grafico(dias, metaDia){
   const W = Math.max(300, Math.round((document.getElementById("app").clientWidth || 960) - 34)), H = W < 500 ? 220 : 280, pl = 40, pr = 14, pt = 28, pb = 30;
-  const max = Math.max(metaDia, ...dias.map(o => o.total)) * 1.12;
+  const max = Math.max(4, metaDia, ...dias.map(o => o.total)) * 1.12;
   const n = Math.max(1, dias.length - 1);
   const x = i => pl + (W - pl - pr) * (dias.length === 1 ? 0.5 : i / n);
   const y = v => pt + (H - pt - pb) * (1 - v / max);
@@ -420,7 +429,7 @@ function grafico(dias, metaDia){
   let g = '<svg class="th-svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Leads por dia">';
   g += '<defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1c56b" stop-opacity=".45"/><stop offset="1" stop-color="#f1c56b" stop-opacity="0"/></linearGradient></defs>';
   for (let k = 0; k <= 4; k++) { const v = max * k / 4, yy = y(v); g += '<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+yy+'" y2="'+yy+'" class="gl"/><text x="'+(pl-8)+'" y="'+(yy+4)+'" class="ga" text-anchor="end">'+Math.round(v)+'</text>'; }
-  g += '<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(metaDia)+'" y2="'+y(metaDia)+'" class="gm"/>';
+  if (metaDia) g += '<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+y(metaDia)+'" y2="'+y(metaDia)+'" class="gm"/>';
   g += '<path d="'+area+'" fill="url(#gA)"/>';
   g += '<path d="'+linha("organico")+'" class="go"/>';
   g += '<path d="'+linha("total")+'" class="gt"/>';

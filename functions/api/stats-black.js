@@ -31,7 +31,7 @@ export async function onRequestGet({ request, env }) {
   const KEY_THAIZE = env.PANEL_KEY_BLACK_RIAN_VER || KEY_THAIZE_DEFAULT;
   let restricted;
   if (key === KEY_FULL) restricted = false;         // painel interno: ve tudo
-  else if (key === KEY_THAIZE) restricted = true;    // painel da Thaize: sem conversao
+  else if (key === KEY_THAIZE) restricted = true;    // painel do Rian: sem conversao
   else return json({ ok: false, error: "unauthorized" }, 401);
   if (!env.DB) return json({ ok: false, error: "no_db" }, 200);
 
@@ -150,7 +150,7 @@ export async function onRequestGet({ request, env }) {
   // Chave do telefone = DDD + últimos 8 dígitos (ignora o 55 e o 9 a mais, que às vezes vem e às vezes não).
   const grupoWa = restricted ? null : await grupoWhats(env, ZERO_UTC);
 
-  // painel da Thaize: remove tudo que e conversao (nem chega no navegador dela)
+  // painel do Rian: remove tudo que e conversao (nem chega no navegador)
   if (restricted) {
     totais.taxa = null; totais.visitas = null; delete totais.convCad; delete totais.convVis;
     porDia.forEach(o => { o.taxa = null; o.visitas = null; });
