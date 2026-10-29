@@ -216,6 +216,42 @@ h2{font-size:20px;margin-bottom:3px}
 #cal:not([data-mostra="a"]) .dia[data-fg="spo"]{background:#fde8dd;border-color:#f2b89c}
 #cal:not([data-mostra="a"]) .dia[data-fg="cap"]{background:#e6effa;border-color:#b3cceb}
 #cal:not([data-mostra="a"]) .dia[data-fg="car"]{background:#f0eaf7;border-color:#d0c0e6}
+
+/* editor do calendário e das abas (mesmo modelo do /plano da Thaize) */
+.ed-btn{margin-left:10px;border:1px solid var(--gold);background:#fff;color:var(--gold-d,var(--ink));font:600 12.5px var(--sans);padding:7px 13px;border-radius:999px;cursor:pointer}
+.ed-btn:hover{background:#faf5e8}
+.ed-btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ed-btn--dir{margin-left:auto;align-self:center}
+.ed-aviso{display:none;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:#fff7e0;border:1px solid #efd98a;font-size:13px;color:var(--ink2)}
+.editando-on .ed-aviso{display:block}
+#cal.editando .dia[data-d]{cursor:pointer}
+#cal.editando .dia[data-d]:hover{outline:2px solid var(--gold);outline-offset:1px}
+.ed-dlg{margin:auto;border:0;border-radius:16px;padding:0;width:min(640px,94vw);box-shadow:0 40px 100px -30px rgba(0,0,0,.45)}
+.ed-dlg::backdrop{background:rgba(20,18,14,.45)}
+.ed-in{padding:22px 22px 18px;font-family:var(--sans);color:var(--ink)}
+.ed-in h3{font-family:var(--disp);font-size:20px;margin-bottom:4px}
+.ed-in .sub{font-size:12.5px;color:var(--ink3);margin-bottom:16px}
+.ed-fases{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px}
+.ed-fases label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);display:grid;gap:5px}
+.ed-in select,.ed-in input[type=text]{font:400 13.5px var(--sans);padding:8px 9px;border:1px solid var(--l2);border-radius:8px;background:#fff;color:var(--ink);width:100%}
+.ed-lista{display:grid;gap:8px;max-height:46vh;overflow:auto;padding-right:2px}
+.ed-row{display:grid;grid-template-columns:1fr 128px 104px 30px;gap:6px;align-items:center}
+.ed-row button{border:0;background:#f3eee2;color:#8a2a2a;border-radius:8px;height:34px;cursor:pointer;font-size:15px}
+.ed-add{margin-top:10px;border:1px dashed var(--l2);background:#fff;color:var(--ink2);border-radius:8px;padding:9px;width:100%;cursor:pointer;font:500 13px var(--sans)}
+.ed-pe{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:10px}
+.ed-pe .msg{font-size:12.5px;color:var(--ink3)}
+.ed-pe .bt{display:flex;gap:8px}
+.ed-pe button{border:0;border-radius:999px;padding:10px 18px;font:600 13px var(--sans);cursor:pointer}
+.ed-pe .cancel{background:#f1ede4;color:var(--ink2)}
+.ed-pe .salvar{background:var(--ink);color:#fff}
+@media(max-width:600px){.ed-row{grid-template-columns:1fr 1fr 30px}.ed-row input{grid-column:1 / -1}}
+.abas-bar{position:sticky;top:8px;z-index:20;display:none;justify-content:space-between;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:13px}
+.abas-bar button{border:0;border-radius:999px;padding:8px 16px;font:600 13px var(--sans);cursor:pointer}
+.abas-bar .salvar{background:var(--gold);color:var(--ink)}
+.abas-bar .cancel{background:rgba(255,255,255,.15);color:#fff}
+body.abas-editando .abas-bar{display:flex}
+body.abas-editando .pane{outline:2px dashed var(--gold);outline-offset:6px;border-radius:8px}
+body.abas-editando .pane [class]{cursor:text}
 </style>
 </head>
 <body><div class="wrap">
@@ -420,6 +456,165 @@ h2{font-size:20px;margin-bottom:3px}
       c.insertBefore(i, c.querySelector(".acs"));
     } else if (d < hoje) { c.classList.add("dia--passou"); }
   });
+})();
+</script>
+<dialog class="ed-dlg" id="edDlg">
+  <form class="ed-in" method="dialog" onsubmit="return false">
+    <h3 id="edTit">Dia</h3>
+    <p class="sub">A mudança aparece pra todo mundo que abrir o plano.</p>
+    <div class="ed-fases">
+      <label>Fase<select id="edFg"><option value="">Nenhuma</option><option value="pre">Pré-captação</option><option value="bur">Burburinho</option><option value="spo">Spoiler</option><option value="cap">Captação</option><option value="cpl">Abertura</option><option value="car">Carrinho</option></select></label>
+      <input type="hidden" id="edFa" value="">
+    </div>
+    <div class="ed-lista" id="edLista"></div>
+    <button type="button" class="ed-add" id="edAdd">+ Adicionar ação</button>
+    <div class="ed-pe"><span class="msg" id="edMsg"></span><div class="bt"><button type="button" class="cancel" id="edCancel">Cancelar</button><button type="button" class="salvar" id="edSalvar">Salvar</button></div></div>
+  </form>
+</dialog>
+<script>
+/* --- senha do time, guardada só nesta aba do navegador --- */
+(function(){
+  window.planoSenhaOk = function(cb){
+    var s=null; try{ s=sessionStorage.getItem("plano_senha"); }catch(e){}
+    s=s||window.prompt("Senha pra editar:"); if(!s) return;
+    fetch("/api/plano",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha:s,op:"check"})}).then(function(r){return r.json();}).then(function(j){
+      if(j.ok){ try{ sessionStorage.setItem("plano_senha",s); }catch(e){} cb(s); } else if(j.error==="sem_senha"){ alert("A edição ainda não foi ligada no servidor (falta a senha no Cloudflare)."); } else { try{ sessionStorage.removeItem("plano_senha"); }catch(e){} alert("Senha errada."); }
+    }).catch(function(){ alert("Não consegui falar com o servidor. Tenta de novo."); });
+  };
+})();
+</script>
+<script>
+/* --- calendário editável: lê do banco e deixa o time editar com senha --- */
+(function(){
+  var cal = document.getElementById("cal"); if (!cal) return;
+  var API = "/api/plano", dados = {dias:{}, acoes:{}}, temBanco = false, senha = null, diaAtual = null;
+  var TIPOS = [["marco","Marco"],["live","Live"],["insta","Story / reel"],["instarot","Story (rotina)"],["trafego","Tráfego"],["alerta","Alerta"]];
+  var TRILHAS = [["g","Geral"],["o","Orgânico"]];
+  var MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+  var DOW = ["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
+  function esc(t){ var d=document.createElement("div"); d.textContent=t; return d.innerHTML; }
+
+  function render(){
+    cal.querySelectorAll(".dia[data-d]").forEach(function(c){
+      var d = c.getAttribute("data-d"), info = dados.dias[d], lista = dados.acoes[d] || [];
+      if (info){ c.setAttribute("data-fg", info.fg || ""); c.setAttribute("data-fa", info.fa || ""); }
+      var acs = c.querySelector(".acs"); if (!acs) return;
+      acs.innerHTML = lista.map(function(a){ return '<span class="ac ac--'+a.tipo+'" data-tr="'+a.trilha+'">'+esc(a.texto)+'</span>'; }).join("");
+    });
+  }
+  function carregar(){
+    return fetch(API, {cache:"no-store"}).then(function(r){ return r.json(); }).then(function(j){
+      if (!j.ok || !j.acoes || !j.acoes.length) return;
+      temBanco = true;
+      dados = {dias:{}, acoes:{}};
+      j.dias.forEach(function(d){ dados.dias[d.data] = d; });
+      j.acoes.forEach(function(a){ (dados.acoes[a.data] = dados.acoes[a.data] || []).push(a); });
+      render();
+    }).catch(function(){});
+  }
+  function post(body){ body.senha = senha; return fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ return r.json(); }); }
+  function doHtml(cell){
+    var lista = [];
+    cell.querySelectorAll(".acs .ac").forEach(function(s){ var t=(s.className.match(/ac--(\w+)/)||[])[1]; lista.push({texto:s.textContent.trim(), tipo:t, trilha:s.getAttribute("data-tr")||"g"}); });
+    return lista;
+  }
+  /* 1ª edição: o banco ainda está vazio, então sobe o calendário que está no HTML pra não sumir nenhum dia */
+  function semear(){
+    if (temBanco) return Promise.resolve();
+    var dias = [], acoes = [];
+    cal.querySelectorAll(".dia[data-d]").forEach(function(c){
+      var d = c.getAttribute("data-d");
+      dias.push({data:d, fg:c.getAttribute("data-fg")||"", fa:c.getAttribute("data-fa")||""});
+      doHtml(c).forEach(function(a, i){ a.data = d; a.ordem = i; acoes.push(a); });
+    });
+    return post({op:"seed", dias:dias, acoes:acoes}).then(carregar);
+  }
+
+  /* botão Editar */
+  var chips = document.querySelector(".cab .chips");
+  var btn = document.createElement("button"); btn.className = "ed-btn"; btn.type = "button"; btn.textContent = "✎ Editar calendário";
+  if (chips) chips.appendChild(btn);
+  var aviso = document.createElement("p"); aviso.className = "ed-aviso"; aviso.textContent = "Modo edição: clique em um dia pra mudar as ações ou a fase.";
+  cal.parentNode.insertBefore(aviso, cal);
+  function ligar(on){ cal.classList.toggle("editando", on); document.body.classList.toggle("editando-on", on); btn.classList.toggle("on", on); btn.textContent = on ? "Sair da edição" : "✎ Editar calendário"; }
+  btn.addEventListener("click", function(){
+    if (cal.classList.contains("editando")) { ligar(false); return; }
+    window.planoSenhaOk(function(s){ senha = s; semear().then(function(){ ligar(true); }).catch(function(){ alert("Não consegui falar com o servidor. Tenta de novo."); }); });
+  });
+
+  /* diálogo do dia */
+  var dlg = document.getElementById("edDlg"), lista = document.getElementById("edLista"), msg = document.getElementById("edMsg");
+  function opts(arr, sel){ return arr.map(function(o){ return '<option value="'+o[0]+'"'+(o[0]===sel?' selected':'')+'>'+o[1]+'</option>'; }).join(""); }
+  function linha(a){
+    var r = document.createElement("div"); r.className = "ed-row";
+    r.innerHTML = '<input type="text" placeholder="O que acontece" value="'+esc(a.texto||"").replace(/"/g,"&quot;")+'"><select>'+opts(TIPOS,a.tipo||"insta")+'</select><select>'+opts(TRILHAS,a.trilha||"g")+'</select><button type="button" title="Apagar">✕</button>';
+    r.querySelector("button").addEventListener("click", function(){ r.remove(); });
+    lista.appendChild(r); return r;
+  }
+  function abrir(d, cell){
+    diaAtual = d;
+    var p = d.split("-"), dt = new Date(Date.UTC(+p[0], p[1]-1, +p[2]));
+    document.getElementById("edTit").textContent = DOW[dt.getUTCDay()] + ", " + (+p[2]) + " de " + MESES[+p[1]-1];
+    document.getElementById("edFg").value = cell.getAttribute("data-fg") || "";
+    document.getElementById("edFa").value = cell.getAttribute("data-fa") || "";
+    lista.innerHTML = ""; msg.textContent = "";
+    var atuais = dados.acoes[d] || doHtml(cell);
+    atuais.forEach(linha);
+    if (!atuais.length) linha({});
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open","");
+  }
+  cal.addEventListener("click", function(e){
+    if (!cal.classList.contains("editando")) return;
+    var c = e.target.closest(".dia[data-d]"); if (c) abrir(c.getAttribute("data-d"), c);
+  });
+  document.getElementById("edAdd").addEventListener("click", function(){ linha({}).querySelector("input").focus(); });
+  document.getElementById("edCancel").addEventListener("click", function(){ dlg.close(); });
+  document.getElementById("edSalvar").addEventListener("click", function(){
+    var acoes = [];
+    lista.querySelectorAll(".ed-row").forEach(function(r){ var s=r.querySelectorAll("select"); var t=r.querySelector("input").value.trim(); if (t) acoes.push({texto:t, tipo:s[0].value, trilha:s[1].value}); });
+    msg.textContent = "Salvando...";
+    post({op:"salvar_dia", data:diaAtual, fg:document.getElementById("edFg").value, fa:document.getElementById("edFa").value, acoes:acoes}).then(function(j){
+      if (!j.ok){ msg.textContent = j.error === "senha" ? "Senha expirou, saia e entre de novo." : "Não salvou. Tenta de novo."; return; }
+      dados.dias[diaAtual] = {data:diaAtual, fg:j.dia.fg, fa:j.dia.fa};
+      dados.acoes[diaAtual] = j.dia.acoes;
+      render(); dlg.close();
+    }).catch(function(){ msg.textContent = "Sem conexão. Não salvou."; });
+  });
+
+  carregar();
+})();
+</script>
+<script>
+/* --- abas editáveis (Geral, Orgânico, Datas e motivos) --- */
+(function(){
+  var API="/api/plano", abas=document.querySelector(".abas"); if(!abas) return;
+  var panes=[].slice.call(document.querySelectorAll(".pane[id^='pane-']"));
+  var btn=document.createElement("button"); btn.type="button"; btn.className="ed-btn ed-btn--dir"; btn.textContent="✎ Editar abas"; abas.appendChild(btn);
+  var bar=document.createElement("div"); bar.className="abas-bar";
+  bar.innerHTML='<span>Modo edição das abas: clique em qualquer texto e escreva. Enter cria uma linha nova; apagar todo o texto de um item some com ele. Vale pra todas as abas.</span><span><button class="cancel" type="button">Cancelar</button> <button class="salvar" type="button">Salvar</button></span>';
+  abas.parentNode.insertBefore(bar, abas.nextSibling);
+  var snap={};
+  function limpar(node){ node.querySelectorAll("[contenteditable]").forEach(function(e){ e.removeAttribute("contenteditable"); }); return node.innerHTML; }
+  function limpoDe(html){ var d=document.createElement("div"); d.innerHTML=html; return limpar(d); }
+  function senha(){ try{ return sessionStorage.getItem("plano_senha"); }catch(e){ return null; } }
+  function modo(on){ document.body.classList.toggle("abas-editando",on); panes.forEach(function(p){ p.contentEditable=on?"true":"false"; }); btn.style.display=on?"none":""; }
+  btn.addEventListener("click",function(){ window.planoSenhaOk(function(){ panes.forEach(function(p){ snap[p.id]=p.innerHTML; }); modo(true); }); });
+  bar.querySelector(".cancel").addEventListener("click",function(){ panes.forEach(function(p){ if(snap[p.id]!==undefined) p.innerHTML=snap[p.id]; }); modo(false); });
+  bar.querySelector(".salvar").addEventListener("click",function(){
+    var b=this; b.textContent="Salvando...";
+    var envios=panes.filter(function(p){ return limpar(p.cloneNode(true)) !== limpoDe(snap[p.id]||""); }).map(function(p){
+      return fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha:senha(),op:"salvar_doc",chave:p.id,valor:limpar(p.cloneNode(true))})}).then(function(r){return r.json();});
+    });
+    Promise.all(envios).then(function(rs){
+      b.textContent="Salvar";
+      if(rs.every(function(j){return j.ok;})) modo(false);
+      else alert(rs.some(function(j){return j.error==="senha";})?"Senha expirou. Saia e entre de novo.":"Alguma aba não salvou. Tenta de novo.");
+    }).catch(function(){ b.textContent="Salvar"; alert("Sem conexão. Não salvou."); });
+  });
+  fetch(API,{cache:"no-store"}).then(function(r){return r.json();}).then(function(j){
+    if(!j.ok||!j.docs||document.body.classList.contains("abas-editando")) return;
+    Object.keys(j.docs).forEach(function(k){ if(k.indexOf("pane-")!==0) return; var el=document.getElementById(k); if(el && typeof j.docs[k]==="string") el.innerHTML=j.docs[k]; });
+  }).catch(function(){});
 })();
 </script>
 </body></html>
