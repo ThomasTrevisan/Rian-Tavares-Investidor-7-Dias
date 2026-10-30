@@ -4,7 +4,12 @@
 // 2) Repassa pro webhook da Reportana (best-effort), URL em REPORTANA_WEBHOOK_URL.
 // O lead so e considerado perdido se as DUAS coisas falharem.
 
-export async function onRequestPost({ request, env }) {
+const MANYCHAT_WA_ATIVO = false;
+const MANYCHAT_FLUXO_BLACK = "content20261029015314_293326";
+const MANYCHAT_API = "https://api.manychat.com/fb";
+const SOURCE_TESTE = "lp-black-rian-teste";
+
+export async function onRequestPost({ request, env, waitUntil }) {
   let body;
   try {
     body = await request.json();
@@ -63,11 +68,60 @@ export async function onRequestPost({ request, env }) {
     } catch (e) {}
   }
 
+  // 3) Black: dispara no WhatsApp o fluxo de onboarding do ManyChat.
+  // So inscricao nova (quem ja estava inscrito nao recebe). Token na env var MANYCHAT_API_TOKEN (Secret, repo publico).
+  // Desligado ate o teste com o numero do Thomas. Teste avulso: source "lp-black-rian-teste" + teste_whatsapp: true.
+  let manychat = null;
+  const ehTeste = lead.source === SOURCE_TESTE;
+  const testeWa = ehTeste && body.teste_whatsapp === true;
+  let jaInscrito = false;
+  if (ehBlack && !ehTeste && lead.phone && env.DB) {
+    try {
+      const r = await env.DB.prepare(
+        "SELECT count(*) AS n FROM leads WHERE source LIKE 'lp-black%' AND source != ? AND replace(replace(replace(phone,' ',''),'-',''),'+','') = ?"
+      ).bind(SOURCE_TESTE, lead.phone.replace(/\D/g, "")).first();
+      jaInscrito = r && r.n > 1; // > 1 porque a linha de agora ja foi gravada acima
+    } catch (e) {}
+  }
+  if (env.MANYCHAT_API_TOKEN && lead.phone && ((MANYCHAT_WA_ATIVO && ehBlack && !ehTeste && !jaInscrito) || testeWa)) {
+    const envio = dispararOnboarding(env.MANYCHAT_API_TOKEN, lead).catch(e => ({ ok: false, etapa: "rede", erro: String(e) }));
+    if (testeWa) manychat = await envio;          // no teste espera, pra mostrar o resultado
+    else if (waitUntil) waitUntil(envio);         // na LP nao atrasa o formulario
+    else manychat = await envio;
+  }
+
   // Sucesso se guardamos em algum lugar (local OU Reportana) = nao perde lead
   if (savedLocal || reportanaOk) {
-    return json({ ok: true, savedLocal: savedLocal, reportanaOk: reportanaOk });
+    return json({ ok: true, savedLocal: savedLocal, reportanaOk: reportanaOk, manychat: manychat });
   }
   return json({ ok: false, error: "not_saved", savedLocal: savedLocal, reportanaOk: reportanaOk }, 502);
+}
+
+// Cria o contato de WhatsApp no ManyChat e manda o fluxo de onboarding.
+// Devolve { ok, etapa, ... } pra dar pra ver no teste onde parou.
+async function dispararOnboarding(token, lead) {
+  const headers = { "Authorization": "Bearer " + token, "Content-Type": "application/json", "Accept": "application/json" };
+  const wa = "+" + lead.phone.replace(/\D/g, "");
+
+  // Quem ja era contato de WhatsApp no ManyChat volta "This WhatsApp ID already exists" e fica sem o fluxo:
+  // a API nao busca contato pelo WhatsApp (testado no ManyChat da Thaize em 28/10/2026).
+  const cria = await fetch(MANYCHAT_API + "/subscriber/createSubscriber", {
+    method: "POST", headers,
+    body: JSON.stringify({ first_name: lead.name || "", whatsapp_phone: wa, consent_phrase: "Inscricao na Black dos Investimentos pela pagina de captacao" })
+  });
+  const c = await cria.json().catch(() => ({}));
+  if (c.status !== "success" || !c.data) {
+    const erro = JSON.stringify(c.details || c.message || cria.status);
+    return { ok: false, etapa: /already exists/.test(erro) ? "ja_existe" : "contato", erro };
+  }
+  const id = c.data.id;
+
+  const envia = await fetch(MANYCHAT_API + "/sending/sendFlow", {
+    method: "POST", headers, body: JSON.stringify({ subscriber_id: id, flow_ns: MANYCHAT_FLUXO_BLACK })
+  });
+  const e = await envia.json().catch(() => ({}));
+  if (e.status === "success") return { ok: true, etapa: "enviado", subscriber_id: id };
+  return { ok: false, etapa: "fluxo", subscriber_id: id, erro: e.message || e.details || envia.status };
 }
 
 function json(obj, status) {
