@@ -84,7 +84,9 @@ export async function onRequestPost({ request, env, waitUntil }) {
     } catch (e) {}
   }
   if (env.MANYCHAT_API_TOKEN && lead.phone && ((MANYCHAT_WA_ATIVO && ehBlack && !ehTeste && !jaInscrito) || testeWa)) {
-    const envio = dispararOnboarding(env.MANYCHAT_API_TOKEN, lead).catch(e => ({ ok: false, etapa: "rede", erro: String(e) }));
+    // no teste, subscriber_id no corpo reenvia o fluxo pra um contato que ja existe
+    const idTeste = testeWa && body.subscriber_id ? String(body.subscriber_id) : null;
+    const envio = dispararOnboarding(env.MANYCHAT_API_TOKEN, lead, idTeste).catch(e => ({ ok: false, etapa: "rede", erro: String(e) }));
     if (testeWa) manychat = await envio;          // no teste espera, pra mostrar o resultado
     else if (waitUntil) waitUntil(envio);         // na LP nao atrasa o formulario
     else manychat = await envio;
@@ -99,9 +101,10 @@ export async function onRequestPost({ request, env, waitUntil }) {
 
 // Cria o contato de WhatsApp no ManyChat e manda o fluxo de onboarding.
 // Devolve { ok, etapa, ... } pra dar pra ver no teste onde parou.
-async function dispararOnboarding(token, lead) {
+async function dispararOnboarding(token, lead, idExistente) {
   const headers = { "Authorization": "Bearer " + token, "Content-Type": "application/json", "Accept": "application/json" };
   const wa = "+" + lead.phone.replace(/\D/g, "");
+  if (idExistente) return enviarFluxo(headers, idExistente);
 
   // Quem ja era contato de WhatsApp no ManyChat volta "This WhatsApp ID already exists" e fica sem o fluxo:
   // a API nao busca contato pelo WhatsApp (testado no ManyChat da Thaize em 28/10/2026).
@@ -114,8 +117,10 @@ async function dispararOnboarding(token, lead) {
     const erro = JSON.stringify(c.details || c.message || cria.status);
     return { ok: false, etapa: /already exists/.test(erro) ? "ja_existe" : "contato", erro };
   }
-  const id = c.data.id;
+  return enviarFluxo(headers, c.data.id);
+}
 
+async function enviarFluxo(headers, id) {
   const envia = await fetch(MANYCHAT_API + "/sending/sendFlow", {
     method: "POST", headers, body: JSON.stringify({ subscriber_id: id, flow_ns: MANYCHAT_FLUXO_BLACK })
   });
