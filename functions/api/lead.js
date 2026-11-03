@@ -4,7 +4,7 @@
 // 2) Repassa pro webhook da Reportana (best-effort), URL em REPORTANA_WEBHOOK_URL.
 // O lead so e considerado perdido se as DUAS coisas falharem.
 
-const MANYCHAT_WA_ATIVO = false;
+const MANYCHAT_WA_ATIVO = true;
 const MANYCHAT_FLUXO_BLACK = "content20261029015314_293326";
 const MANYCHAT_API = "https://api.manychat.com/fb";
 const SOURCE_TESTE = "lp-black-rian-teste";
@@ -70,7 +70,7 @@ export async function onRequestPost({ request, env, waitUntil }) {
 
   // 3) Black: dispara no WhatsApp o fluxo de onboarding do ManyChat.
   // So inscricao nova (quem ja estava inscrito nao recebe). Token na env var MANYCHAT_API_TOKEN (Secret, repo publico).
-  // Desligado ate o teste com o numero do Thomas. Teste avulso: source "lp-black-rian-teste" + teste_whatsapp: true.
+  // Ligado a pedido do Thomas depois do teste com video. Teste avulso: source "lp-black-rian-teste" + teste_whatsapp: true.
   let manychat = null;
   const ehTeste = lead.source === SOURCE_TESTE;
   const testeWa = ehTeste && body.teste_whatsapp === true;
