@@ -215,7 +215,13 @@ const brl = n => "R$ " + Math.round(n).toLocaleString("pt-BR");
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 // Captacao da Black do Rian: abre 27/10, fecha na live de abertura 16/11 as 20h.
-const META = null; // metas da captacao do Rian ainda nao definidas: o bloco de meta fica escondido
+// Meta organica (Thomas, 03/11): 20 dias de captacao, 28/10 a 16/11. Pago sem meta (pago: null).
+const META = {
+  start: "2026-10-28T00:00:00-03:00", end: "2026-11-16T20:00:00-03:00", dias: 20, live: "16/11 às 20h", fimTxt: "16/11",
+  organico: { leads: 4017, dia: 201, conv: 6, vendas: 241, fat: 300527 },
+  pago: null,
+  ticket: 1247
+};
 
 async function loadMeta(){
   if(!META) return;
@@ -252,11 +258,11 @@ function blocoMeta(nome, real, m, decorrido, total, extra){
   h += '<div class="meta-big">'+fmt(real)+' <span>/ '+fmt(m.leads)+' leads</span></div>';
   h += '<div class="meta-pctnum">'+pct1(pctMeta)+' da meta · '+dtxt+'</div>';
   h += '<div class="prog"><div class="prog-fill" style="width:'+Math.min(100,pctMeta)+'%"></div><div class="prog-mark" style="left:'+Math.min(100,espPct)+'%" title="onde deveríamos estar agora"></div></div>';
-  h += '<div class="prog-cap"><span>esperado agora: '+fmt(esperado)+'</span><span>'+fmt(m.leads)+' até 09/11</span></div>';
+  h += '<div class="prog-cap"><span>esperado agora: '+fmt(esperado)+'</span><span>'+fmt(m.leads)+' até '+META.fimTxt+'</span></div>';
   h += '<div class="meta-tiles">'
     + tile("Ritmo real", fmt(Math.round(ritmo))+"/dia", "meta "+fmt(m.dia)+"/dia")
     + tile("Precisa agora", precisa ? fmt(precisa)+"/dia" : "meta batida", "pra bater "+fmt(m.leads))
-    + tile("Projeção 09/11", fmt(proj), pct1(proj / m.leads * 100)+" da meta")
+    + tile("Projeção "+META.fimTxt, fmt(proj), pct1(proj / m.leads * 100)+" da meta")
     + tile("Vendas projetadas", fmt(vendasProj), "meta "+fmt(m.vendas)+" ("+m.conv+"% da lista)")
     + '</div>';
   h += '<div class="meta-sub" style="margin-top:10px">Faturamento líquido no ritmo atual: <b style="color:var(--ink)">'+brl(fatProj)+'</b> · meta '+brl(m.fat)+(extra||"")+'</div>';
@@ -275,14 +281,14 @@ function renderMeta(d){
   const decorrido = Math.max(0, Math.min(Date.now(), fim) - ini), span = fim - ini;
   const dia = Math.min(META.dias, Math.floor(decorrido / 86400000) + 1);
   let h = '<section class="meta">';
-  h += '<div class="meta-head" style="margin-bottom:6px"><h2>Captação da Black · dia '+dia+' de '+META.dias+'</h2><span class="pill pill-warn">Super Live '+META.live+'</span></div>';
-  h += '<div class="meta-sub" style="margin-bottom:16px">Total: <b style="color:var(--ink)">'+fmt(total)+'</b> de '+fmt(META.organico.leads+META.pago.leads)+' leads · meta de '+fmt(META.organico.vendas+META.pago.vendas)+' vendas e '+brl(META.organico.fat+META.pago.fat)+' líquidos</div>';
+  h += '<div class="meta-head" style="margin-bottom:6px"><h2>Captação da Black · dia '+dia+' de '+META.dias+'</h2><span class="pill pill-warn">Live de abertura '+META.live+'</span></div>';
+  h += '<div class="meta-sub" style="margin-bottom:16px">Total: <b style="color:var(--ink)">'+fmt(total)+'</b> leads · meta orgânica de '+fmt(META.organico.leads)+' leads, '+fmt(META.organico.vendas)+' vendas e '+brl(META.organico.fat)+' líquidos</div>';
   h += '<div class="meta-grid">';
   h += blocoMeta("orgânico", organico, META.organico, decorrido, span, "");
-  h += blocoMeta("pago", pago, META.pago, decorrido, span,
-        '<br>Investimento previsto '+brl(META.pago.invest)+' · CPL máximo R$ 9,51 · ROAS 10. CPL real: gasto do gerenciador ÷ '+fmt(pago)+' leads pagos.');
+  if (META.pago) h += blocoMeta("pago", pago, META.pago, decorrido, span, "");
+  else h += '<div class="meta-col"><div class="meta-head"><h2>Pago (anúncios)</h2></div><div class="meta-big">'+fmt(pago)+' <span>leads</span></div><div class="meta-pctnum">Sem meta de pago definida.</div></div>';
   h += '</div>';
-  h += '<div class="meta-sub" style="margin-top:12px">Pago = utm_medium pago/paid/cpc; o resto conta como orgânico. Ritmo e projeção usam o tempo corrido desde 20/10 às 09h03. Ticket líquido médio das metas: '+brl(META.ticket)+'.</div>';
+  h += '<div class="meta-sub" style="margin-top:12px">Pago = utm_medium pago/paid/cpc; o resto conta como orgânico (bio, ManyChat, direto). Ritmo e projeção usam o tempo corrido desde 28/10 (20 dias até a live). Os orgânicos de 26 e 27/10 contam no total. Ticket líquido médio da meta: '+brl(META.ticket)+'.</div>';
   h += '</section>';
   box.innerHTML = h;
 }
@@ -310,9 +316,9 @@ function msg(t, s){ app.innerHTML = '<div class="msg"><b>'+t+'</b><br>'+s+'</div
 
 // ===================== PAINEL DO RIAN (visao simples) =====================
 // Orgânico em destaque, total, gráfico de leads por dia e o pago separado embaixo.
-// Sem meta definida (META null): mostra só os números, sem ritmo nem "faltam".
-// Captacao: abre 27/10, live de abertura 16/11 as 20h.
-const CAP = { start: "2026-10-27T00:00:00-03:00", end: "2026-11-16T20:00:00-03:00", dias: 21 };
+// Meta só do orgânico (META.pago null): o total e o pago mostram só os números.
+// Ritmo da meta: 28/10 a 16/11 as 20h (20 dias). O gráfico e as médias contam desde 27/10.
+const CAP = META ? { start: META.start, end: META.end, dias: META.dias } : { start: "2026-10-27T00:00:00-03:00", end: "2026-11-16T20:00:00-03:00", dias: 21 };
 function renderThaize(d){
   const DAY = 86400000;
   const ini = new Date(CAP.start).getTime(), fim = new Date(CAP.end).getTime();
@@ -327,13 +333,15 @@ function renderThaize(d){
     dias.push({ dia, organico: o.organico || 0, pago: o.pago || 0, total: (o.organico||0) + (o.pago||0) });
   }
   const soma = k => dias.reduce((a,b)=>a+b[k],0);
+  const diasMedia = Math.max(1, dias.length); // média por dia desde 27/10
   const org = soma("organico"), pag = soma("pago"), tot = org + pag;
   const hoje = dias[dias.length-1] || {organico:0,pago:0,total:0};
   const ontem = dias.length > 1 ? dias[dias.length-2] : {organico:0,pago:0,total:0};
   const M = META || null;
-  const metaOrg = M ? M.organico.leads : 0, metaPag = M ? M.pago.leads : 0, metaTot = metaOrg + metaPag;
-  const diaOrg = M ? M.organico.dia : 0, diaPag = M ? M.pago.dia : 0, diaTot = diaOrg + diaPag;
-  const mediaOrg = org / decorridoDias, mediaPag = pag / decorridoDias, mediaTot = tot / decorridoDias;
+  const comPago = !!(M && M.pago);
+  const metaOrg = M ? M.organico.leads : 0, metaPag = comPago ? M.pago.leads : 0, metaTot = comPago ? metaOrg + metaPag : 0;
+  const diaOrg = M ? M.organico.dia : 0, diaPag = comPago ? M.pago.dia : 0, diaTot = comPago ? diaOrg + diaPag : 0;
+  const mediaOrg = org / diasMedia, mediaPag = pag / diasMedia, mediaTot = tot / diasMedia;
   const esperado = (meta) => Math.round(meta * Math.min(1, (agora - ini) / (fim - ini)));
   const pill = (real, meta) => {
     if (!meta) return '';
@@ -377,7 +385,7 @@ function renderThaize(d){
   h += '</section>';
 
   // ---- GRAFICO ----
-  h += '<section class="th-graf"><h2>Leads por dia</h2>' + grafico(dias, diaTot) + '<div class="th-leg"><span><i class="lg-t"></i>Total</span><span><i class="lg-o"></i>Orgânico</span>'+(diaTot ? '<span><i class="lg-m"></i>Meta do dia ('+fmt(diaTot)+')</span>' : '')+'</div></section>';
+  h += '<section class="th-graf"><h2>Leads por dia</h2>' + grafico(dias, diaTot || diaOrg) + '<div class="th-leg"><span><i class="lg-t"></i>Total</span><span><i class="lg-o"></i>Orgânico</span>'+(diaTot ? '<span><i class="lg-m"></i>Meta do dia ('+fmt(diaTot)+')</span>' : diaOrg ? '<span><i class="lg-m"></i>Meta orgânica do dia ('+fmt(diaOrg)+')</span>' : '')+'</div></section>';
 
   // ---- PAGO (embaixo) ----
   h += '<section class="meta th th-pago">';
@@ -599,11 +607,11 @@ function card(lbl, big, cap){
 function graficoDias(d){
   const dias = (d.porDiaTipo || []).slice().sort((a,b)=> a.dia < b.dia ? -1 : 1);
   if(!dias.length) return '';
-  const META_DIA = 0; // sem meta diaria definida pro Rian
+  const META_DIA = META ? META.organico.dia : 0; // meta diaria so do organico (o pago nao tem meta)
   const max = Math.max(META_DIA * 1.08, ...dias.map(o=>o.total));
   const muitos = dias.length > 10;
   let h = '<section><h2>Cadastros por dia</h2><div class="dias-wrap"><div class="dias'+(muitos?' muitos':'')+'" id="dias">';
-  if (META_DIA) h += '<div class="meta-linha" style="bottom:'+(META_DIA/max*188)+'px"><span>meta '+fmt(META_DIA)+'/dia</span></div>';
+  if (META_DIA) h += '<div class="meta-linha" style="bottom:'+(META_DIA/max*188)+'px"><span>meta orgânica '+fmt(META_DIA)+'/dia</span></div>';
   for(const o of dias){
     const hoje = o.dia === d.hoje;
     const ho = Math.round(o.organico/max*188), hp = Math.round(o.pago/max*188);
@@ -621,7 +629,7 @@ function ligaGraficoDias(){
   const mostra = el => {
     box.querySelectorAll('.dia').forEach(x=>x.classList.toggle('sel', x===el));
     const o=+el.dataset.o, p=+el.dataset.p, t=+el.dataset.t;
-    tip.innerHTML = '<b>'+el.dataset.d+'</b><br>Total: '+fmt(t)+'<br>Orgânico: '+fmt(o)+'<br>Pago: '+fmt(p);
+    tip.innerHTML = '<b>'+el.dataset.d+'</b><br>Total: '+fmt(t)+'<br>Orgânico: '+fmt(o)+'<br>Pago: '+fmt(p)+(META ? '<br>Orgânico vs meta '+META.organico.dia+': '+(o>=META.organico.dia?'+':'')+fmt(o-META.organico.dia) : '');
     tip.style.display='block';
     const r = el.getBoundingClientRect(), w = box.parentElement.getBoundingClientRect();
     let x = r.left - w.left + r.width/2 - tip.offsetWidth/2; x = Math.max(0, Math.min(x, w.width - tip.offsetWidth));
