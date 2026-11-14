@@ -37,11 +37,13 @@ export async function onRequest(context) {
     const ck = request.headers.get("cookie") || "";
     const forced = (url.searchParams.get("v") || "").toLowerCase();
     const PAGINAS = { b: "/black-b/", c: "/black-c/" };
+    // 14/11: teste encerrado (C ganhou no pago, 9,8% x 8,6%). Todo mundo vai pra C, inclusive quem tinha cookie da B.
+    // ?v=b continua abrindo a B para conferência.
     let bv = (ck.match(/(?:^|;\s*)bk_rian=([bc])/) || [])[1];
     let setCk = false;
     if (PAGINAS[forced]) { bv = forced; setCk = true; }
-    else if (botB) { bv = "b"; }
-    else if (bv !== "b" && bv !== "c") { bv = Math.random() < 0.5 ? "b" : "c"; setCk = true; }
+    else if (botB) { bv = "c"; }
+    else { if (bv !== "c") setCk = true; bv = "c"; }
     const asset = await env.ASSETS.fetch(new URL(PAGINAS[bv], url.origin));
     const h = new Headers();
     h.set("Content-Type", asset.headers.get("Content-Type") || "text/html; charset=utf-8");
