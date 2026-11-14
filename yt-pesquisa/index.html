@@ -74,6 +74,8 @@ td.c{color:var(--mut);width:36px}.r{text-align:right;white-space:nowrap;color:va
 .ft{font-weight:600}.ft small{display:block;color:var(--mut);font-weight:400;font-size:12.5px}
 .ficha ul{margin:0;padding:0 18px 4px 46px;color:var(--ink2);display:grid;gap:6px}.ficha strong{color:var(--ink)}
 .lk{display:inline-block;margin:8px 0 14px 46px;color:var(--gold);font-size:13px}
+@media (max-width:600px){table{min-width:0}.tt img{width:84px;height:47px}td,th{padding:8px}
+th:nth-child(4),td:nth-child(4),th:nth-child(5),td:nth-child(5){display:none}}
 [hidden]{display:none!important}
 footer{color:var(--mut);font-size:12px;margin-top:48px;border-top:1px solid var(--line);padding-top:16px}
 </style></head>
@@ -421,7 +423,8 @@ footer{color:var(--mut);font-size:12px;margin-top:48px;border-top:1px solid var(
 const tabs=[...document.querySelectorAll('nav.tabs button')],panes=[...document.querySelectorAll('.pane')];
 function abre(id){tabs.forEach(t=>t.setAttribute('aria-selected',t.dataset.p===id));panes.forEach(p=>p.hidden=p.id!==id);try{history.replaceState(null,'','#'+id)}catch(e){}}
 tabs.forEach(t=>t.addEventListener('click',()=>{abre(t.dataset.p);window.scrollTo({top:0})}));
-const h=location.hash.slice(1);abre(panes.some(p=>p.id===h)?h:'gringos');
+function peloHash(){const h=location.hash.slice(1);abre(panes.some(p=>p.id===h)?h:'gringos')}
+peloHash();addEventListener('hashchange',peloHash);
 function filtro(box){const inp=box.querySelector('input'),bts=[...box.querySelectorAll('button')],cont=box.querySelector('.cont'),
 itens=[...document.querySelectorAll(box.dataset.alvo)];let lado='todos';
 function f(){const t=inp.value.trim().toLowerCase();let n=0;itens.forEach(i=>{const ok=(lado==='todos'||i.dataset.lado===lado)&&(!t||i.textContent.toLowerCase().includes(t));i.hidden=!ok;if(ok)n++});cont.textContent=n+' de '+itens.length}
