@@ -48,7 +48,7 @@ extra = """<style>
   /* ===== Ajustes da versao do Rian (16/11/2026) ===== */
   .hero-rian .hero-left { max-width: 640px; }
   .hero-price { margin: -18px 0 28px; font-family: 'Inter', sans-serif; font-size: 15px; color: rgba(247, 240, 226, 0.78); }
-  .hero-rian .brand-logo { width: clamp(300px, 30vw, 460px); margin-bottom: 6px; }
+  .hero-rian .brand-logo { width: clamp(280px, 26vw, 400px); margin-bottom: 6px; }
   @media (max-width: 900px) {
     .hero-rian .hero-cta-wrap { display: block; margin-bottom: 0; }
     .hero-rian .hero-cta-wrap .cta { width: 100%; }
@@ -59,7 +59,7 @@ extra = """<style>
     .hero-rian .hero-content { margin-top: -112px; position: relative; z-index: 2; }
     .hero-rian .hero-sub { margin-bottom: 30px; }
     .hero-rian .hero-content .brand { display: block; margin: 0 auto 14px; }
-    .hero-rian .brand-logo { width: min(300px, 78vw); margin: 0 auto; }
+    .hero-rian .brand-logo { width: min(250px, 66vw); margin: 0 auto; }
   }
   /* conversa da AssessorIA dentro do celular (no lugar do video da Vendedor.IA) */
   .chat-mock { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 33px; overflow: hidden; background: #f4efe6; font-family: 'Inter', sans-serif; }
