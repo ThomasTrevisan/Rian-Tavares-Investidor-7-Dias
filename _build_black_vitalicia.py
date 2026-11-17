@@ -74,6 +74,8 @@ extra = """<style>
   .chat-in i { width: 22px; height: 22px; border-radius: 50%; background: #1a1611; }
   @media (max-width: 900px) { .msg { font-size: 11.5px; } }
   .ent-ia { padding-top: 22px; }
+  .ent-ipp { aspect-ratio: auto; padding: 0; display: block; }
+  .ent-ipp img { width: 100% !important; height: auto !important; max-width: none; filter: none !important; }
   /* depoimentos em texto (sem video) */
   .depo-txt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1040px; margin: 0 auto; }
   .depo-txt { padding: 26px 24px; border-radius: 20px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(217, 191, 139, 0.22); text-align: left; }
