@@ -118,3 +118,9 @@
 
 /cronograma-adv/*
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/black-vitalicia
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/black-vitalicia.html
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
