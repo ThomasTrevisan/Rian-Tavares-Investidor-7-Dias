@@ -31,6 +31,15 @@ export async function onRequest(context) {
   // Black 2026 do Rian: teste de LP 50/50 em /black, sem redirect e sticky por cookie (igual a /black da Thaize).
   // B = /black-b/ (clone da /black-v2 da Thaize) x C = /black-c/ (clone da /black-c, modelo Speak Journey).
   // ?v=b|c forca a versao. Cada pagina marca o lead (lp-black-rian-2026-b / -c) e a visita (/black#b / #c).
+  // 17/11: carrinho aberto. /black (captação) e /cronograma mandam tudo pra pagina de compra /black-vitalicia,
+  // mantendo as UTMs. 302 (temporario) pra poder desfazer sem cache preso no navegador.
+  if (path === "/black" || path === "/cronograma") {
+    return new Response(null, {
+      status: 302,
+      headers: { Location: `${url.origin}/black-vitalicia${url.search}`, "Cache-Control": "no-store" },
+    });
+  }
+
   if (path === "/black") {
     const uaB = request.headers.get("user-agent") || "";
     const botB = /bot|crawl|spider|slurp|bing|google|facebookexternalhit|facebot|whatsapp|telegram|discord|preview|embed|lighthouse|pagespeed/i.test(uaB);
