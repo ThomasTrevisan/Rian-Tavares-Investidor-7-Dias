@@ -84,6 +84,22 @@ extra = """<style>
   .depo-note { max-width: 720px; margin: 22px auto 0; text-align: center; font-size: 12.5px; line-height: 1.5; color: rgba(247, 240, 226, 0.55); }
   @media (max-width: 900px) { .depo-txt-grid { grid-template-columns: 1fr; } }
   .orb-5 .orb-center img { object-fit: cover; object-position: center 8%; }
+  /* banner vermelho de urgencia com contador diario (16/11) */
+  .ub-red { position: relative; z-index: 20; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 14px 20px; text-decoration: none; color: #fff;
+    background: linear-gradient(135deg, #c1121f 0%, #8a0c1c 55%, #5e0814 100%); border-bottom: 1px solid rgba(255,255,255,.14);
+    font-family: 'DM Sans', 'Inter', sans-serif; font-size: 18px; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,.4); }
+  .ub-red:hover { filter: brightness(1.08); }
+  .ub-dot { width: 11px; height: 11px; border-radius: 50%; background: #fff; flex-shrink: 0; animation: ubDot 1.4s ease-out infinite; }
+  @keyframes ubDot { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,.7); } 70% { box-shadow: 0 0 0 8px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
+  .ub-timer { display: inline-flex; align-items: center; gap: 3px; font-size: 22px; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: 0; text-shadow: none; flex-shrink: 0; }
+  .ub-box { background: rgba(0,0,0,.32); border: 1px solid rgba(255,255,255,.22); border-radius: 8px; padding: 5px 8px; line-height: 1; min-width: 1.9em; text-align: center; }
+  .ub-sep { opacity: .65; }
+  @media (max-width: 640px) {
+    .ub-red { gap: 10px; padding: 9px 10px; font-size: 13px; letter-spacing: 0; line-height: 1.3; text-align: left; }
+    .ub-dot { display: none; }
+    .ub-timer { font-size: 15px; gap: 1px; }
+    .ub-box { padding: 4px 4px; border-radius: 6px; min-width: 1.6em; }
+  }
   .footer-text { max-width: 760px; margin-left: auto; margin-right: auto; }
 </style>
 </head>"""
