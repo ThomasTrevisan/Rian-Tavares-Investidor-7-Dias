@@ -1,4 +1,4 @@
-# Monta /black-vitalicia.html (pagina de vendas da Black dos Investimentos do Rian, 16/11/2026).
+# Monta /black-vitalicia.html (pagina de vendas da Black Friday do Invista Para Prosperar do Rian, 16/11/2026).
 # Estilo: CSS da /black-vv da Thaize (repo Thaize-Tavares-MB2, black-vv.html, linhas do <head>), sem o video.
 # Corpo: _black_vitalicia_body.html. Rodar: python -I _build_black_vitalicia.py <caminho do black-vv.html da Thaize>
 import re, sys, pathlib
@@ -21,13 +21,13 @@ head = head.replace("<!-- Meta Pixel -->", gtm + "<!-- Meta Pixel -->", 1)
 head = head.replace('href="/favicon.png"', 'href="/favicon-192.png"').replace('sizes="96x96"', 'sizes="192x192"')
 
 meta_old = head[head.index("<title>"): head.index('<link rel="preconnect" href="https://cdn.utmify.com.br"')]
-meta_new = """<title>Black dos Investimentos · Acesso Vitalício | Rian Tavares</title>
-<meta name="description" content="Black dos Investimentos: todos os cursos do Rian e a AssessorIA com acesso vitalício e 12 meses de encontros ao vivo no Clube do Investidor.">
+meta_new = """<title>Black Friday do Invista Para Prosperar · Acesso Vitalício | Rian Tavares</title>
+<meta name="description" content="Black Friday do Invista Para Prosperar: todos os cursos do Rian e a AssessorIA com acesso vitalício e 12 meses de encontros ao vivo no Clube do Investidor.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://lp.riantavares.com.br/black-vitalicia">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rian Tavares">
-<meta property="og:title" content="Black dos Investimentos">
+<meta property="og:title" content="Black Friday do Invista Para Prosperar">
 <meta property="og:description" content="Todos os cursos e a AssessorIA com acesso vitalício e 12 meses de encontros ao vivo com o Rian.">
 <meta property="og:url" content="https://lp.riantavares.com.br/black-vitalicia">
 <meta property="og:image" content="https://lp.riantavares.com.br/img/og-ipp.webp">
