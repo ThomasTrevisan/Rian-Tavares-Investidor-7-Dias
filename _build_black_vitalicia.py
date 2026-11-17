@@ -39,27 +39,26 @@ head = head.replace(meta_old, meta_new)
 # preconnect do vturb (sem video aqui) e preloads das fotos da Thaize
 head = re.sub(r'<link rel="preconnect" href="https://(scripts|cdn)\.converteai\.net" crossorigin>\n', "", head)
 head = head.replace('<link rel="preload" as="image" href="img/hero-desktop.webp?v=2"', '<link rel="preload" as="image" href="/img/black/hero-vitalicia-desktop.webp"')
-head = head.replace('<link rel="preload" as="image" href="img/hero-mobile-black-alunos-v3.webp"', '<link rel="preload" as="image" href="/img/black/hero-b-rian.webp"')
+head = head.replace('<link rel="preload" as="image" href="img/hero-mobile-black-alunos-v3.webp"', '<link rel="preload" as="image" href="/img/black/hero-vitalicia-mobile.webp"')
 # fontes com caminho absoluto (a pagina fica na raiz, mas assim nao quebra com barra no fim)
 head = head.replace("url(fonts/", "url(/fonts/").replace('href="fonts/', 'href="/fonts/')
 head = head.replace('<meta name="theme-color" content="#1a1611">', '<meta name="theme-color" content="#1a1611">')
 
 extra = """<style>
   /* ===== Ajustes da versao do Rian (16/11/2026) ===== */
-  .hero-rian .hero-left { max-width: 640px; }
+  .hero-price-vsl { margin: 12px 0 0; text-align: center; }
   .hero-price { margin: -18px 0 28px; font-family: 'Inter', sans-serif; font-size: 15px; color: rgba(247, 240, 226, 0.78); }
   .hero-rian .brand-logo { width: clamp(280px, 26vw, 400px); margin-bottom: 6px; }
   @media (max-width: 900px) {
-    .hero-rian .hero-cta-wrap { display: block; margin-bottom: 0; }
-    .hero-rian .hero-cta-wrap .cta { width: 100%; }
+    .hero-rian .hero-left > .hero-price { display: none; }
     .hero-price { margin: 12px 0 8px; text-align: center; font-size: 14px; }
-    .hero-rian .hero-bg-mobile { position: relative; overflow: hidden; aspect-ratio: 1200 / 1050; }
-    .hero-rian .hero-bg-mobile img { height: 100%; object-fit: cover; object-position: center 8%; }
-    .hero-rian .hero-bg-mobile::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 45%; background: linear-gradient(180deg, rgba(10,9,8,0), #0a0908 92%); }
-    .hero-rian .hero-content { margin-top: -112px; position: relative; z-index: 2; }
-    .hero-rian .hero-sub { margin-bottom: 30px; }
-    .hero-rian .hero-content .brand { display: block; margin: 0 auto 14px; }
-    .hero-rian .brand-logo { width: min(250px, 66vw); margin: 0 auto; }
+    .hero-rian .hero-bg-mobile { position: relative; overflow: hidden; aspect-ratio: 1365 / 900; }
+    .hero-rian .hero-bg-mobile img { height: 100%; object-fit: cover; object-position: center top; }
+    .hero-rian .hero-bg-mobile::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: linear-gradient(180deg, rgba(10,9,8,0), #0a0908 92%); }
+    .hero-rian .hero-content { margin-top: -64px; position: relative; z-index: 2; }
+    .hero-rian .hero-content .brand { display: none; }
+    .hero-rian .hero-sub { margin-bottom: 0; }
+    .hero-price-vsl { display: none; }
   }
   /* conversa da AssessorIA dentro do celular (no lugar do video da Vendedor.IA) */
   .chat-mock { display: flex; flex-direction: column; width: 100%; height: 100%; border-radius: 33px; overflow: hidden; background: #f4efe6; font-family: 'Inter', sans-serif; }
