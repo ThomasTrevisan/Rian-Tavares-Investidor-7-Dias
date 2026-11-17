@@ -73,8 +73,7 @@ extra = """<style>
   .chat-in { display: flex; align-items: center; justify-content: space-between; margin: 0 10px 14px; padding: 10px 14px; border-radius: 999px; background: #fff; font-size: 12px; color: #9a8f7d; }
   .chat-in i { width: 22px; height: 22px; border-radius: 50%; background: #1a1611; }
   @media (max-width: 900px) { .msg { font-size: 11.5px; } }
-  .ent-ia { display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 40%, rgba(201,169,110,.25), transparent 70%); }
-  .ent-ia img { width: 58% !important; height: auto !important; border-radius: 50%; }
+  .ent-ia { padding-top: 22px; }
   /* depoimentos em texto (sem video) */
   .depo-txt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1040px; margin: 0 auto; }
   .depo-txt { padding: 26px 24px; border-radius: 20px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(217, 191, 139, 0.22); text-align: left; }
