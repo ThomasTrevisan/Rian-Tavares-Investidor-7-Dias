@@ -124,3 +124,9 @@
 
 /black-vitalicia.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/replay-black
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/replay-black.html
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
