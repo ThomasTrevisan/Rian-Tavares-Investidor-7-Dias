@@ -1631,12 +1631,13 @@ fbq('track','PageView');
 <!-- Pagina de vendas da Black Friday do Invista Para Prosperar do Rian (16/11/2026), modelada na /black-vv da Thaize sem o video.
      Todos os botoes de compra usam o mesmo endereco: troque so a constante CHECKOUT no script do fim da pagina. -->
 
-<!-- Banner de urgencia (18/11, pedido do Thomas): "Entre hoje para ganhar bônus surpresas" (a mentoria individual é surpresa, não se anuncia).
+<!-- Banner de urgencia (19/11, pedido do Thomas): "Entre hoje para participar do aulão de alunos às 20h" (aula do Clube do Investidor de 19/11).
+     Antes (18/11): "Entre hoje para ganhar bônus surpresas". Contador até as 20h; depois das 20h conta até 23:59 (a aula fica gravada).
      O contador mira nas 23:59:59 de hoje no horario de Brasilia e reinicia sozinho toda meia-noite. -->
 <a href="https://pay.hub.la/rkh4csUigSsuGzY4mRFJ" class="ub-red js-ck" target="_blank" rel="noopener">
   <span class="ub-dot"></span>
-  <span class="ub-text">ENTRE HOJE PARA GANHAR BÔNUS SURPRESAS</span>
-  <span class="ub-timer" aria-label="Tempo até a meia-noite"><span class="ub-box" data-t="h">--</span><span class="ub-sep">:</span><span class="ub-box" data-t="m">--</span><span class="ub-sep">:</span><span class="ub-box" data-t="s">--</span></span>
+  <span class="ub-text">ENTRE HOJE PARA PARTICIPAR DO AULÃO DE ALUNOS ÀS 20H</span>
+  <span class="ub-timer" aria-label="Tempo até o aulão das 20h"><span class="ub-box" data-t="h">--</span><span class="ub-sep">:</span><span class="ub-box" data-t="m">--</span><span class="ub-sep">:</span><span class="ub-box" data-t="s">--</span></span>
 </a>
 <script>
 (function () {
@@ -1646,6 +1647,8 @@ fbq('track','PageView');
   /* 23:59:59 de hoje no horario de Brasilia (UTC-3), independente do fuso de quem esta vendo */
   function fimDoDiaBR(agora) {
     var d = new Date(agora - 3 * 3600000);
+    var vinte = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 20, 0, 0) + 3 * 3600000;
+    if (agora < vinte) return vinte; /* até o aulão das 20h */
     return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 23, 59, 59) + 3 * 3600000;
   }
   function tick() {
