@@ -1633,6 +1633,7 @@ fbq('track','PageView');
 
 <!-- Banner de urgencia (19/11, pedido do Thomas): "Entre hoje para participar do aulão de alunos às 20h" (aula do Clube do Investidor de 19/11).
      Antes (18/11): "Entre hoje para ganhar bônus surpresas". Contador até as 20h; depois das 20h conta até 23:59 (a aula fica gravada).
+     A partir de 20/11 (Brasília) o script volta sozinho para "ENTRE HOJE PARA GANHAR BÔNUS SURPRESAS" com contador até 23:59.
      O contador mira nas 23:59:59 de hoje no horario de Brasilia e reinicia sozinho toda meia-noite. -->
 <a href="https://pay.hub.la/rkh4csUigSsuGzY4mRFJ" class="ub-red js-ck" target="_blank" rel="noopener">
   <span class="ub-dot"></span>
@@ -1642,13 +1643,20 @@ fbq('track','PageView');
 <script>
 (function () {
   var b = document.querySelector('.ub-red'); if (!b) return;
+  var DIA_AULAO = '2026-11-19'; /* só neste dia o banner fala do aulão; depois volta para os bônus surpresas */
+  var hojeBR = new Date(Date.now() - 3 * 3600000).toISOString().slice(0, 10);
+  var ehAulao = hojeBR === DIA_AULAO;
+  if (!ehAulao) {
+    b.querySelector('.ub-text').textContent = 'ENTRE HOJE PARA GANHAR BÔNUS SURPRESAS';
+    b.querySelector('.ub-timer').setAttribute('aria-label', 'Tempo até a meia-noite');
+  }
   var h = b.querySelector('[data-t="h"]'), m = b.querySelector('[data-t="m"]'), g = b.querySelector('[data-t="s"]');
   function dois(n) { return n < 10 ? '0' + n : '' + n; }
   /* 23:59:59 de hoje no horario de Brasilia (UTC-3), independente do fuso de quem esta vendo */
   function fimDoDiaBR(agora) {
     var d = new Date(agora - 3 * 3600000);
     var vinte = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 20, 0, 0) + 3 * 3600000;
-    if (agora < vinte) return vinte; /* até o aulão das 20h */
+    if (ehAulao && agora < vinte) return vinte; /* até o aulão das 20h */
     return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 23, 59, 59) + 3 * 3600000;
   }
   function tick() {
