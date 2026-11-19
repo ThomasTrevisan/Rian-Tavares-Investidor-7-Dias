@@ -1,5 +1,5 @@
 // Cloudflare Pages Function: recebe o webhook da Hubla do Rian (vendas e reembolsos) e guarda no D1 (tabela hubla_vendas).
-// POST /api/hubla?key=...  O repo é público, então a chave NÃO fica aqui: o código só guarda o SHA-256 dela.
+// POST /api/hubla (autenticado pelo header x-hubla-token da Hubla) ou /api/hubla?key=...  O repo é público, então a chave NÃO fica aqui: o código só guarda o SHA-256 dela.
 // A chave de verdade fica no webhook cadastrado na Hubla e numa cópia local do Thomas (~/.config/rian-hubla/webhook-key).
 // Se um dia existir o Secret HUBLA_WEBHOOK_KEY no Cloudflare, ele vale no lugar do hash.
 // Guardamos só o necessário pro cruzamento com as inscrições (e-mail e telefone ficam no D1, que não é público, como na tabela leads).
@@ -7,13 +7,18 @@
 // Criado em 19/11/2026 para cruzar comprador da Black com o anúncio de captação (ver /api/compradores-black).
 
 const KEY_SHA256 = "69d8b02418f4cb44e8826106cb83d292a97418b773ae2f2e88f2cce9ec06b1f2";
+// Token de Autenticação da integração Webhook da Hubla do Rian (aba Autenticação). A Hubla manda ele no header
+// x-hubla-token de todo aviso, então a URL cadastrada na regra não precisa de chave. Aqui fica só o SHA-256 dele.
+const HUBLA_TOKEN_SHA256 = "632ab9b5f25655bb6ea00b61ec78da42fc8f871e123ffaab620a611b08383078";
 
 async function sha256(s) {
   const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
 }
 
-async function autorizado(url, env) {
+async function autorizado(url, env, request) {
+  const tk = request ? (request.headers.get("x-hubla-token") || "") : "";
+  if (tk && (await sha256(tk)) === HUBLA_TOKEN_SHA256) return true;
   const k = url.searchParams.get("key") || "";
   if (!k) return false;
   if (env.HUBLA_WEBHOOK_KEY) return k === env.HUBLA_WEBHOOK_KEY;
@@ -22,7 +27,7 @@ async function autorizado(url, env) {
 
 export async function onRequestPost({ request, env }) {
   const url = new URL(request.url);
-  if (!(await autorizado(url, env))) return json({ ok: false, error: "unauthorized" }, 401);
+  if (!(await autorizado(url, env, request))) return json({ ok: false, error: "unauthorized" }, 401);
   if (!env.DB) return json({ ok: false, error: "no_db" }, 200);
   const txt = await request.text();
   if (txt.length > 200000) return json({ ok: false, error: "grande_demais" }, 413);
