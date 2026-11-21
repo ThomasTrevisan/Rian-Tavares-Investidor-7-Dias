@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Passeios Japão 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+  button.thumb { border: 0; padding: 0; width: 100%; cursor: pointer; font: inherit; }
+  .thumb.playing iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+  /* Layout: barra fixa com "quem está votando"; uma página só, com um título por cidade e os lugares em cards com vídeo; resultado no fim */
+  :root {
+    --paper: #F2F3F1; --card: #FFFFFF; --ink: #1B1E24; --muted: #5E6672; --line: #D9DDE2; --soft: #E9ECEF;
+    --yes: #2F7A43; --yes-soft: #E2F1E5; --meh: #8A6A12; --meh-soft: #F7EED3; --no: #A63A2E; --no-soft: #F7E3DF;
+    --p-thomas: #2B4C7E; --p-arthur: #B8541A; --p-rodrigo: #7A3B78; --p-bruno: #19789E;
+    --c-tokyo: #2B4C7E; --c-tokyo-soft: #E3EAF4; --c-osaka: #B8541A; --c-osaka-soft: #FBEADC;
+    --c-kyoto: #7A3B78; --c-kyoto-soft: #F3E5F2; --c-takayama: #86592C; --c-takayama-soft: #F3E9DD;
+    --c-nozawa: #19789E; --c-nozawa-soft: #DDF0F7; --c-fuji: #3B7536; --c-fuji-soft: #E4F0E2;
+    --display: "Shippori Mincho B1", "Hiragino Mincho ProN", Georgia, serif;
+    --body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12151B; --card: #1B2029; --ink: #E9ECF0; --muted: #98A2AF; --line: #2C333F; --soft: #252B36;
+      --yes: #7CC98C; --yes-soft: #1C3323; --meh: #E2C063; --meh-soft: #3A3115; --no: #F08A7A; --no-soft: #3D211D;
+      --p-thomas: #8EB0E0; --p-arthur: #F09358; --p-rodrigo: #D69AD3; --p-bruno: #6CC4E6;
+      --c-tokyo: #8EB0E0; --c-tokyo-soft: #22304A; --c-osaka: #F09358; --c-osaka-soft: #3B2618;
+      --c-kyoto: #D69AD3; --c-kyoto-soft: #35223A; --c-takayama: #D6A570; --c-takayama-soft: #33281C;
+      --c-nozawa: #6CC4E6; --c-nozawa-soft: #16303B; --c-fuji: #8CC985; --c-fuji-soft: #1E3220;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12151B; --card: #1B2029; --ink: #E9ECF0; --muted: #98A2AF; --line: #2C333F; --soft: #252B36;
+    --yes: #7CC98C; --yes-soft: #1C3323; --meh: #E2C063; --meh-soft: #3A3115; --no: #F08A7A; --no-soft: #3D211D;
+    --p-thomas: #8EB0E0; --p-arthur: #F09358; --p-rodrigo: #D69AD3; --p-bruno: #6CC4E6;
+    --c-tokyo: #8EB0E0; --c-tokyo-soft: #22304A; --c-osaka: #F09358; --c-osaka-soft: #3B2618;
+    --c-kyoto: #D69AD3; --c-kyoto-soft: #35223A; --c-takayama: #D6A570; --c-takayama-soft: #33281C;
+    --c-nozawa: #6CC4E6; --c-nozawa-soft: #16303B; --c-fuji: #8CC985; --c-fuji-soft: #1E3220;
+    color-scheme: dark;
+  }
+  .tokyo { --city: var(--c-tokyo); --city-soft: var(--c-tokyo-soft); }
+  .osaka { --city: var(--c-osaka); --city-soft: var(--c-osaka-soft); }
+  .kyoto { --city: var(--c-kyoto); --city-soft: var(--c-kyoto-soft); }
+  .takayama { --city: var(--c-takayama); --city-soft: var(--c-takayama-soft); }
+  .nozawa { --city: var(--c-nozawa); --city-soft: var(--c-nozawa-soft); }
+  .fuji { --city: var(--c-fuji); --city-soft: var(--c-fuji-soft); }
+  .rank { --city: var(--ink); --city-soft: var(--soft); }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+  .wrap { max-width: 880px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 80px; }
+  h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; }
+  button { font: inherit; color: inherit; }
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  header { padding-block: 40px 16px; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  header h1 { font-size: clamp(36px, 8vw, 56px); font-weight: 800; line-height: 1.05; margin: 8px 0 10px; }
+  .lede { margin: 0; color: var(--muted); max-width: 60ch; }
+  .how { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-size: 14px; }
+  .how span { display: inline-flex; align-items: center; gap: 6px; }
+
+  .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))) 20px; padding: 10px max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); }
+  .who { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .who .lbl { font-size: 13px; font-weight: 700; color: var(--muted); margin-right: 2px; }
+  .person { border: 2px solid var(--line); background: var(--card); border-radius: 999px; padding: 5px 13px; font-weight: 600; font-size: 14px; cursor: pointer; }
+  .person[aria-pressed="true"] { border-color: var(--pc); background: var(--pc); color: var(--card); }
+  .sync { margin-left: auto; font-size: 12px; color: var(--muted); }
+  .bar { padding-bottom: 10px; }
+  .tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; margin-top: 8px; }
+  .tabs button { appearance: none; border: 0; background: none; font-size: 15px; font-weight: 600; color: var(--muted); padding: 10px 11px 9px; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--city); }
+  .tabs .count { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 4px; font-variant-numeric: tabular-nums; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .city-chip { font-size: 11px; font-weight: 700; letter-spacing: .03em; color: var(--city); background: var(--city-soft); border-radius: 4px; padding: 1px 7px; white-space: nowrap; }
+  .tag-ok { font-size: 11px; font-weight: 700; color: var(--yes); background: var(--yes-soft); border-radius: 4px; padding: 1px 7px; white-space: nowrap; }
+  .notes { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px 16px; font-size: 15px; }
+  .notes p { margin: 10px 0; }
+  .progress { font-size: 14px; color: var(--muted); margin: 14px 0 0; }
+  .row .t { display: block; margin-top: 3px; }
+  .rank-list .n small .city-chip { margin-right: 2px; }
+  section.city { margin-top: 44px; scroll-margin-top: 70px; }
+  section.rank { scroll-margin-top: 70px; margin-top: 44px; }
+  .city-title { font-size: clamp(28px, 6vw, 38px); font-weight: 800; color: var(--city); border-top: 4px solid var(--city); padding-top: 14px; }
+  .city-sub { margin: 4px 0 16px; color: var(--muted); max-width: 66ch; }
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .jump a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--city); border-radius: 8px; padding: 5px 11px; }
+  .status { font-size: 11px; font-weight: 700; border-radius: 4px; padding: 1px 7px; }
+  .status.st-roteiro { color: var(--city); background: var(--city-soft); }
+  .status.st-novo { color: var(--meh); background: var(--meh-soft); }
+  .status.st-decidido { color: var(--yes); background: var(--yes-soft); }
+  .card.st-decidido { border: 2px solid var(--yes); }
+  .decided { font-size: 13px; font-weight: 600; color: var(--yes); }
+  .rank-list li .score { color: var(--city); }
+  .prompt { background: var(--card); border: 2px dashed var(--line); border-radius: 12px; padding: 12px 16px; margin-bottom: 18px; font-size: 15px; }
+  .panel-head h2 { font-size: clamp(28px, 6vw, 38px); font-weight: 800; color: var(--city); }
+  .panel-head p { margin: 6px 0 0; color: var(--muted); max-width: 66ch; }
+  .note { margin-top: 14px; background: var(--city-soft); border-radius: 12px; padding: 12px 16px; font-size: 15px; }
+  .note b { color: var(--city); }
+  h3.sec { font-family: var(--body); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+  .thumb { position: relative; display: block; background: var(--city-soft); text-decoration: none; }
+  .thumb img { display: block; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .thumb .len { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.78); color: #fff; font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 4px; font-variant-numeric: tabular-nums; }
+  .thumb .play { position: absolute; left: 8px; bottom: 8px; background: rgba(0,0,0,.78); color: #fff; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .vid { font-size: 12px; color: var(--muted); line-height: 1.35; }
+  .vid a { color: inherit; }
+  .card h4 { margin: 2px 0 0; font-size: 18px; font-weight: 700; line-height: 1.3; }
+  .tag-list { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 6px; white-space: nowrap; }
+  .card p { margin: 0; font-size: 14.5px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .meta span { font-size: 12px; background: var(--soft); border-radius: 999px; padding: 2px 9px; }
+  .card .vote-row { margin-top: auto; padding-top: 8px; }
+
+  .vote-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .votes { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .votes button { border: 0; background: var(--card); padding: 7px 11px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--muted); }
+  .votes button + button { border-left: 1px solid var(--line); }
+  .votes button:disabled { cursor: not-allowed; opacity: .55; }
+  .votes button[aria-pressed="true"][data-v="q"] { background: var(--yes-soft); color: var(--yes); }
+  .votes button[aria-pressed="true"][data-v="t"] { background: var(--meh-soft); color: var(--meh); }
+  .votes button[aria-pressed="true"][data-v="p"] { background: var(--no-soft); color: var(--no); }
+  .dots { display: inline-flex; gap: 4px; }
+  .dot { width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 700; display: inline-grid; place-items: center; border: 2px dashed var(--line); color: var(--muted); }
+  .dot.q { background: var(--pc); border: 2px solid var(--pc); color: var(--card); }
+  .dot.t { border: 2px solid var(--pc); color: var(--pc); background: var(--card); }
+  .dot.p { border: 2px solid var(--line); color: var(--muted); text-decoration: line-through; background: var(--soft); }
+
+  .rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .row { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 14px; align-items: center; }
+  .row .t { font-weight: 700; }
+  .row .d { font-size: 11px; font-weight: 700; color: var(--muted); background: var(--soft); border-radius: 4px; padding: 1px 7px; white-space: nowrap; }
+  .row .s { display: block; font-size: 14px; color: var(--muted); }
+
+  .nope { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .nope li { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-size: 14.5px; }
+  .nope b { display: block; }
+
+  .rank-city { margin-top: 22px; }
+  .rank-city h3 { font-family: var(--display); font-size: 22px; font-weight: 800; color: var(--city); margin: 0 0 8px; }
+  .rank-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .rank-list .n small { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-top: 2px; }
+  .rank-list li { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 10px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+  .score { font-weight: 800; font-size: 18px; font-variant-numeric: tabular-nums; text-align: center; color: var(--city); }
+  .rank-list .n { font-weight: 600; min-width: 0; }
+  .rank-list .n small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+  .empty { color: var(--muted); font-size: 14px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
+  .btn { border: 1px solid var(--ink); background: var(--ink); color: var(--paper); border-radius: 10px; padding: 9px 16px; font-weight: 600; cursor: pointer; }
+  .btn.ghost { background: var(--card); color: var(--ink); border-color: var(--line); }
+  #copy-out { width: 100%; min-height: 140px; margin-top: 10px; font: 13px/1.4 ui-monospace, Menlo, monospace; border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: var(--card); color: var(--ink); }
+  .toast { font-size: 13px; color: var(--yes); }
+  footer { margin-top: 48px; font-size: 13px; color: var(--muted); text-align: center; }
+  footer a { color: inherit; }
+
+  @media (max-width: 640px) {
+    .cards { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; }
+    .sync { margin-left: 0; width: 100%; }
+    .rank-list li { grid-template-columns: 36px minmax(0, 1fr); }
+    .rank-list li .dots { grid-column: 2; }
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Japão 2027 · 4 amigos · decidir juntos</div>
+    <h1>Passeios: o que cada um quer?</h1>
+    <p class="lede">Os lugares famosos que ainda não estão no roteiro, cada um com um vídeo do YouTube. Toque na foto pra assistir aqui mesmo. Escolha seu nome e marque o que você quer. No fim da página, o Resultado mostra o que mais gente quer.</p>
+    <div class="how"><span><span class="dot q" style="--pc:var(--p-thomas)">T</span> Quero</span><span><span class="dot t" style="--pc:var(--p-thomas)">T</span> Tanto faz</span><span><span class="dot p">T</span> Passo</span><span><span class="dot">T</span> Ainda não votou</span></div>
+  </header>
+
+  <div class="bar">
+    <div class="who" role="group" aria-label="Quem está votando">
+      <span class="lbl">Sou:</span>
+      <span id="people"></span>
+      <span class="sync" id="sync" aria-live="polite">Conectando…</span>
+    </div>
+  </div>
+
+  <div id="prompt" class="prompt">Toque no seu nome ali em cima pra começar a votar. Dá pra ver os votos dos outros sem escolher.</div>
+  <main id="main"></main>
+
+  <footer>Roteiro dia a dia em <a href="https://claude.ai/artifact/8YHxpfJhStdSCqe1q1ZTrs" target="_blank" rel="noopener">Roteiro Japão 2027</a>. Preços aproximados, pesquisados em novembro de 2026.</footer>
+</div>
+
+<script>
+const DATA = {"cities": [{"id": "toquio", "name": "Tóquio", "cls": "tokyo", "intro": "O que mais aparece nas listas de Tóquio e ainda não está no roteiro."}, {"id": "bate-voltas", "name": "Bate-voltas de Tóquio", "cls": "fuji", "intro": "Cada um ocupa um dia inteiro. Entraria no lugar de Kamakura (27/02) ou do dia de Nakano (28/02)."}, {"id": "osaka", "name": "Osaka", "cls": "osaka", "intro": "Em Osaka o roteiro já pega quase tudo que é famoso. Sobrou um."}, {"id": "kyoto", "name": "Kyoto", "cls": "kyoto", "intro": "Os clássicos de Kyoto que ficaram de fora dos 4 dias."}, {"id": "takayama", "name": "Takayama", "cls": "takayama", "intro": "Os dois disputam o domingo 21/02 com Shirakawa-go ou mudam a rota pra neve."}, {"id": "neve", "name": "Neve e Nagano", "cls": "nozawa", "intro": "Os macacos, Shibu Onsen e Zenkō-ji ficam juntos, no caminho de volta pra Tóquio na quinta 25/02."}], "items": {"toquio": [{"id": "harrypotter", "name": "Estúdio do Harry Potter (Warner Bros.)", "why": "Os cenários e figurinos originais dos filmes: o Salão Principal, o Beco Diagonal e o Expresso de Hogwarts. É diferente do parque da Universal, que tem brinquedos. Ingresso com data, comprado antes.", "time": "4h", "cost": "~¥6.500", "status": "novo", "when": "Tóquio 2, 30 min de Shinjuku", "lista": false, "video": {"id": "E8-5E9v27w0", "title": "Harry Potter Tokyo Studio Tour - Is It Worth It?", "len": "6:41", "views": "188 mil", "ch": "STEFATTY"}}, {"id": "odaiba", "name": "Odaiba e o Gundam gigante", "why": "A ilha na baía com o Gundam de 20 m, vista da Rainbow Bridge e shoppings. Fica do lado do teamLab.", "time": "2h", "cost": "Grátis", "status": "novo", "when": "Dia 4, junto com o teamLab", "lista": false, "video": {"id": "P4zbEbScTyA", "title": "Top Things to do in Odaiba: Gundam, Museums & Tokyo Bay", "len": "5:32", "views": "131 mil", "ch": "Tokyo Cheapo"}}, {"id": "disneyland", "name": "Tokyo Disneyland", "why": "O parque clássico, com o castelo da Cinderela, Splash Mountain e Big Thunder Mountain. Vocês já vão na DisneySea e na Universal, então seria o terceiro dia de parque. Só vale se todo mundo curte parque.", "time": "Dia inteiro", "cost": "~¥10.000", "status": "novo", "when": "Tóquio 1, no lugar de um dia de cidade", "lista": false, "video": {"id": "1BZVdPm3IGw", "title": "Tokyo Disneyland: Everything to Know Before Visiting", "len": "5:02", "views": "207 mil", "ch": "Tokyo Cheapo"}}, {"id": "pokemon", "name": "Pokémon Center + Nintendo Tokyo", "why": "As lojas oficiais da Pokémon e da Nintendo lado a lado no Shibuya Parco, com itens que só existem lá.", "time": "1h", "cost": "Grátis (fora as compras)", "status": "novo", "when": "Dia 2, em Shibuya", "lista": false, "video": {"id": "js-q1oQr28o", "title": "Shopping at Shibuya PARCO: Nintendo, Street Fighter, Pokémon, Godzilla, SEGA, Mario | Japan Vlog", "len": "25:18", "views": "171 mil", "ch": "KILL ONLY TIME"}}], "bate-voltas": [{"id": "hakone", "name": "Hakone", "why": "O bate-volta mais famoso de Tóquio: banho termal, vale vulcânico com ovo preto e barco pirata no lago com o Fuji ao fundo.", "time": "Dia inteiro", "cost": "~¥6.000 com passe", "status": "novo", "when": "No lugar de Kamakura", "lista": false, "video": {"id": "sQAa7zMFJKE", "title": "A Classic Day Trip To Hakone from Tokyo", "len": "8:38", "views": "745 mil", "ch": "Japan Guide"}}, {"id": "nikko", "name": "Nikko", "why": "Templos dourados no meio da floresta de cedros, Patrimônio da Humanidade. 2h de trem.", "time": "Dia inteiro", "cost": "~¥6.000", "status": "novo", "when": "No lugar de Kamakura", "lista": false, "video": {"id": "UafvbZeMToI", "title": "Nikko: The TOP Nature Trip from Tokyo with Mountains, Shrines & Temples!", "len": "7:41", "views": "131 mil", "ch": "Tokyo Cheapo"}}, {"id": "yokohama", "name": "Yokohama", "why": "O museu do Cup Noodles, onde vocês montam o próprio copo, e a maior Chinatown do Japão. 30 min de trem.", "time": "Meio dia", "cost": "~¥2.000", "status": "novo", "when": "Tóquio 2", "lista": false, "video": {"id": "BVbPjNJtv5M", "title": "THE Yokohama Guide: Family-Friendly Fun, from Cup Noodles to Chinatown!", "len": "28:02", "views": "62 mil", "ch": "PiQtour Japan"}}], "osaka": [{"id": "kaiyukan", "name": "Aquário Kaiyukan", "why": "Um dos maiores aquários do mundo, com tubarão-baleia num tanque de 9 m de fundo.", "time": "2h a 3h", "cost": "~¥2.700", "status": "novo", "when": "Dia 9, no lugar de Umeda", "lista": false, "video": {"id": "t3LknJi3mqs", "title": "OSAKA AQUARIUM KAIYUKAN: Japan Travel Guide | Things to do in Osaka 🇯🇵", "len": "6:16", "views": "89 mil", "ch": "Remi Shimazu"}}], "kyoto": [{"id": "nintendo", "name": "Museu da Nintendo + Uji", "why": "O museu oficial da Nintendo, com jogos gigantes pra jogar, em Uji, a capital do matcha. Ingresso por sorteio, uns 3 meses antes: se quiserem, tem que se inscrever logo.", "time": "Meio dia", "cost": "¥3.300 o museu", "status": "novo", "when": "Dia 14, antes de Fushimi", "lista": false, "video": {"id": "8OSdWoshHp8", "title": "The New NINTENDO MUSEUM in Kyoto! A Must-Visit on Your Next Japan Trip! | Walking Tour & Guide 2025", "len": "33:55", "views": "550 mil", "ch": "Tour From Home TV"}}, {"id": "nijo", "name": "Castelo Nijō", "why": "O palácio do xogum, Patrimônio da Humanidade, com o piso que \"canta\" pra denunciar ninja. A 10 min da casa.", "time": "1h30", "cost": "¥1.300", "status": "novo", "when": "Qualquer manhã", "lista": false, "video": {"id": "mhw5Egux8dU", "title": "Squeaky Floor Castle Japan  - Nijo Castle in Kyoto", "len": "3:28", "views": "25 mil", "ch": "Amy Moncure"}}, {"id": "ginkakuji", "name": "Pavilhão Prateado + Caminho do Filósofo", "why": "O templo irmão do Pavilhão Dourado e a caminhada de 2 km pela beira do canal até ele.", "time": "2h", "cost": "¥500", "status": "novo", "when": "Dia 12, com Higashiyama", "lista": false, "video": {"id": "UFZCAb6GzuI", "title": "Tranquil Temples in Kyoto - Ginkakuji and the Philosophers Path - Japan Vlog 2024", "len": "11:47", "views": "3,5 mil", "ch": "JandyTravel"}}], "takayama": [{"id": "shinhotaka", "name": "Teleférico Shinhotaka", "why": "O único teleférico de dois andares do Japão, subindo até 2.156 m no meio dos Alpes nevados. Fica a 1h30 de ônibus, então ocupa o domingo no lugar de Shirakawa-go.", "time": "Dia inteiro", "cost": "~¥3.300 + ônibus", "status": "novo", "when": "Domingo 21/02", "lista": false, "video": {"id": "Bogz_hfMHRE", "title": "JAPAN HIDDEN GEM: Day trip from Takayama to Shinhotaka ropeway", "len": "9:40", "views": "18 mil", "ch": "Twosome Travellers"}}, {"id": "kanazawa", "name": "Kanazawa", "why": "Jardim Kenroku-en, um dos 3 mais bonitos do Japão, bairro das gueixas e mercado de frutos do mar. De Shirakawa-go são 1h15 de ônibus, e de lá sai trem-bala direto pra perto de Togari.", "time": "Dia inteiro", "cost": "Barato", "status": "novo", "when": "Segunda 22/02, no caminho pra neve", "lista": false, "video": {"id": "NOfHCBA8Kss", "title": "Top 5 Things to do in Kanazawa", "len": "8:41", "views": "410 mil", "ch": "Japan Guide"}}], "neve": [{"id": "esqui-nozawa", "name": "Esquiar em Nozawa Onsen", "why": "Uma das estações mais famosas do Japão, com pistas longas que descem até o vilarejo. Tem área pra iniciante, mas é maior, mais cheia, e o passe é mais caro que em Togari.", "time": "Dia inteiro", "cost": "Passe mais caro + táxi ~¥3.000", "status": "novo", "when": "Quarta 24/02, em vez de só passear por lá", "lista": false, "video": {"id": "b7zTqk5G0dM", "title": "Nozawa Onsen Ski Resort Review | 野沢温泉", "len": "8:21", "views": "143 mil", "ch": "Jonathan B. Roy"}}, {"id": "macacos", "name": "Macacos de Jigokudani", "why": "Macacos selvagens no banho termal no meio da neve. Fevereiro é a melhor época, e o vídeo tem 2,4 milhões de views.", "time": "3h a 4h", "cost": "~¥800", "status": "novo", "when": "Quinta 25/02", "lista": false, "video": {"id": "dbzHHzn6zB4", "title": "Japanese Snow Monkey Hot Spring Experience | Nagano ★ ONLY in JAPAN", "len": "14:33", "views": "2,4 mi", "ch": "ONLY in JAPAN * John Daub"}}, {"id": "shibu", "name": "Shibu Onsen", "why": "A cidadezinha de lanternas que lembra \"A Viagem de Chihiro\", com 9 banhos públicos. Fica do lado dos macacos.", "time": "1h a 2h", "cost": "Grátis", "status": "novo", "when": "Quinta 25/02, com os macacos", "lista": false, "video": {"id": "yUM_ckaSgqY", "title": "渋温泉の街並 : Walking Around Shibu Onsen Hot Spring", "len": "9:31", "views": "639 mil", "ch": "Anna Film Production"}}, {"id": "zenkoji", "name": "Templo Zenkō-ji", "why": "Templo de 1.400 anos em Nagano, com um túnel escuro embaixo do altar onde se procura a \"chave do paraíso\".", "time": "1h", "cost": "~¥1.200", "status": "novo", "when": "Quinta 25/02, antes do trem-bala", "lista": false, "video": {"id": "yUURIYAFhF8", "title": "Zenkoji temple, the theme park of Buddhism [Deep Japan] 善光寺", "len": "14:02", "views": "6,5 mil", "ch": "Deep Japan By the Last Samurai"}}]}, "naoRola": [["Go-kart de rua (estilo Mario Kart)", "O Japão não aceita a carteira internacional (PID) brasileira, então brasileiro não pode dirigir."], ["Torneio de sumô", "Não tem torneio em fevereiro. O de Osaka só começa em março."], ["Oedo Onsen Monogatari (Odaiba)", "Fechou em 2021. O Spa World de Osaka cumpre esse papel."], ["Trem romântico de Sagano (Kyoto)", "Fica parado no inverno e só volta a rodar em março."]], "thumbs": {}, "noteList": [["Só o que ainda falta decidir.", "O que já está certo (DisneySea, Universal, esqui em Togari, Museu Ghibli e o resto do roteiro) ficou de fora. Aqui só entram lugares famosos de verdade, que aparecem em toda lista do Japão."]]};
+const PEOPLE = [["thomas","Thomas"],["arthur","Arthur"],["rodrigo","Rodrigo"],["bruno","Bruno"]];
+const LABEL = { q: "Quero", t: "Tanto faz", p: "Passo" };
+const SCORE = { q: 2, t: 1, p: 0 };
+const STATUS = { roteiro: "No roteiro", novo: "Sugestão nova", decidido: "Decidido: vamos" };
+
+let me = null;
+try { me = localStorage.getItem("passeios-me"); } catch (e) {}
+if (!PEOPLE.some(p => p[0] === me)) me = null;
+let localPicks = {};
+try { localPicks = JSON.parse(localStorage.getItem("passeios-picks") || "{}") || {}; } catch (e) { localPicks = {}; }
+const votes = { thomas: {}, arthur: {}, rodrigo: {}, bruno: {} };
+if (me && localPicks[me]) votes[me] = { ...localPicks[me] };
+
+let mode = "loading";
+let PLAYING = null;
+let dirty = false, writing = false, timer = null;
+
+const ITEMS = {};
+for (const c of DATA.cities) for (const i of DATA.items[c.id]) ITEMS[i.id] = { ...i, city: c.id };
+const VOTABLE = Object.values(ITEMS).filter(i => i.status !== "decidido");
+
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v;
+    else if (k === "text") e.textContent = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) e.setAttribute(k, v === true ? "" : v);
+  }
+  for (const k of kids) if (k != null) e.append(k);
+  return e;
+}
+function setSync(text) { document.getElementById("sync").textContent = text; }
+
+function renderPeople() {
+  const box = document.getElementById("people");
+  box.replaceChildren(...PEOPLE.map(([id, name]) => el("button", {
+    class: "person", type: "button", "aria-pressed": String(me === id), style: `--pc: var(--p-${id})`, text: name,
+    onclick: () => { me = id; try { localStorage.setItem("passeios-me", id); } catch (e) {} if (localPicks[id] && !Object.keys(votes[id]).length) votes[id] = { ...localPicks[id] }; renderAll(); }
+  })));
+  box.style.display = "contents";
+  document.getElementById("prompt").hidden = !!me;
+}
+
+function dotsFor(itemId) {
+  return el("span", { class: "dots" }, ...PEOPLE.map(([id, name]) => {
+    const v = votes[id][itemId];
+    return el("span", { class: "dot" + (v ? " " + v : ""), style: `--pc: var(--p-${id})`, title: `${name}: ${v ? LABEL[v] : "ainda não votou"}`, text: name[0] });
+  }));
+}
+
+function voteRow(item) {
+  if (item.status === "decidido") return el("div", { class: "vote-row", "data-vr": item.id }, el("span", { class: "decided", text: "Já está decidido, não precisa votar." }));
+  const mine = me ? votes[me][item.id] : null;
+  const btns = ["q", "t", "p"].map(v => el("button", {
+    type: "button", "data-v": v, "aria-pressed": String(mine === v), disabled: !me,
+    text: LABEL[v], onclick: () => vote(item.id, v)
+  }));
+  return el("div", { class: "vote-row", "data-vr": item.id }, el("div", { class: "votes", role: "group", "aria-label": "Seu voto" }, ...btns), dotsFor(item.id));
+}
+
+function card(n) {
+  const url = "https://www.youtube.com/watch?v=" + n.video.id;
+  const statusText = n.status === "novo" ? `Encaixa: ${n.when}` : `${STATUS[n.status]} · ${n.when}`;
+  return el("article", { class: "card st-" + n.status },
+    PLAYING === n.video.id
+      ? el("div", { class: "thumb playing" }, el("iframe", { src: "https://www.youtube-nocookie.com/embed/" + n.video.id + "?autoplay=1&rel=0&playsinline=1", title: n.video.title, allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", allowfullscreen: true, loading: "lazy" }))
+      : el("button", { class: "thumb", type: "button", "aria-label": "Assistir aqui: " + n.video.title, onclick: () => { PLAYING = n.video.id; renderAll(); } },
+          el("img", { src: "https://i.ytimg.com/vi/" + n.video.id + "/mqdefault.jpg", alt: "", loading: "lazy" }),
+          el("span", { class: "play", text: "▶ Assistir" }),
+          el("span", { class: "len", text: n.video.len })),
+    el("div", { class: "card-body" },
+      el("div", { class: "chips" }, el("span", { class: "status st-" + n.status, text: statusText }), n.lista ? el("span", { class: "tag-list", text: "lista de vocês" }) : null),
+      el("h4", { text: n.name }),
+      el("p", { text: n.why }),
+      el("div", { class: "meta" }, el("span", { text: "⏱ " + n.time }), el("span", { text: n.cost })),
+      el("div", { class: "vid" }, "“" + n.video.title + "” · " + n.video.ch + " · " + n.video.views + " views · ", el("a", { href: url, target: "_blank", rel: "noopener", text: "abrir no YouTube" })),
+      voteRow(n)));
+}
+
+function ranking() {
+  const list = VOTABLE.map(i => {
+    const vs = PEOPLE.map(([p]) => votes[p][i.id]).filter(Boolean);
+    return { i, n: vs.length, s: vs.reduce((a, v) => a + SCORE[v], 0), q: vs.filter(v => v === "q").length };
+  }).filter(x => x.n).sort((a, b) => b.s - a.s || b.q - a.q);
+  const out = el("textarea", { id: "copy-out", readonly: true, hidden: true, "aria-label": "Suas escolhas em texto" });
+  const toast = el("span", { class: "toast", "aria-live": "polite" });
+  return el("section", { class: "rank", id: "resultado" },
+    el("h2", { class: "city-title", text: "Resultado" }),
+    el("p", { class: "city-sub", text: "Quero vale 2 pontos, Tanto faz vale 1, Passo vale 0. Só aparece o que alguém já votou." }),
+    list.length ? el("ol", { class: "rank-list" }, ...list.map(x => el("li", { class: DATA.cities.find(c => c.id === x.i.city).cls },
+      el("span", { class: "score", text: String(x.s) }),
+      el("span", { class: "n" }, x.i.name, el("small", { text: `${DATA.cities.find(c => c.id === x.i.city).name} · ${x.q} quer${x.q === 1 ? "" : "em"}` })),
+      dotsFor(x.i.id)))) : el("p", { class: "empty", text: "Ninguém votou ainda." }),
+    el("div", { class: "actions" }, el("button", { class: "btn", type: "button", disabled: !me, text: me ? "Copiar minhas escolhas pro grupo" : "Escolha seu nome pra copiar suas escolhas", onclick: () => copyMine(out, toast) }), toast), out);
+}
+
+function copyMine(out, toast) {
+  const name = PEOPLE.find(p => p[0] === me)[1];
+  const lines = [`Passeios Japão: escolhas do ${name}`];
+  for (const c of DATA.cities) {
+    const mine = DATA.items[c.id].filter(i => votes[me][i.id]);
+    if (!mine.length) continue;
+    lines.push("", c.name.toUpperCase());
+    for (const v of ["q", "t", "p"]) {
+      const names = mine.filter(i => votes[me][i.id] === v).map(i => i.name);
+      if (names.length) lines.push(`${LABEL[v]}: ${names.join(", ")}`);
+    }
+  }
+  const text = lines.join("\n");
+  out.value = text; out.hidden = false;
+  const fallback = () => { out.focus(); out.select(); toast.textContent = "Texto selecionado: copie e cole no grupo."; };
+  try { navigator.clipboard.writeText(text).then(() => { toast.textContent = "Copiado. É só colar no grupo."; }, fallback); } catch (e) { fallback(); }
+}
+
+function renderAll() {
+  renderPeople();
+  const kids = [el("div", { class: "notes" }, ...DATA.noteList.map(([b, t]) => el("p", {}, el("b", { text: b + " " }), t)))];
+  if (me) {
+    const done = VOTABLE.filter(i => votes[me][i.id]).length;
+    kids.push(el("p", { class: "progress", text: `Você marcou ${done} de ${VOTABLE.length}.` }));
+  }
+  for (const c of DATA.cities) {
+    kids.push(el("section", { class: "city " + c.cls, id: c.id },
+      el("h2", { class: "city-title", text: c.name }),
+      el("p", { class: "city-sub", text: c.intro }),
+      el("div", { class: "cards" }, ...DATA.items[c.id].map(card))));
+  }
+  kids.push(el("section", { class: "city rank" }, el("h2", { class: "city-title", text: "Famosos que não dá pra fazer" }),
+    el("ul", { class: "nope" }, ...DATA.naoRola.map(([t, d]) => el("li", {}, el("b", { text: t }), d)))));
+  kids.push(ranking());
+  const main = document.getElementById("main");
+  const y = window.scrollY;
+  main.replaceChildren(...kids);
+  window.scrollTo(0, y);
+}
+
+function softRender(ids) {
+  for (const id of ids || Object.keys(ITEMS)) document.querySelectorAll('[data-vr="' + id + '"]').forEach(n => n.replaceWith(voteRow(ITEMS[id])));
+  const p = document.querySelector(".progress");
+  if (p && me) p.textContent = `Você marcou ${VOTABLE.filter(i => votes[me][i.id]).length} de ${VOTABLE.length}.`;
+  const r = document.getElementById("resultado");
+  if (r) r.replaceWith(ranking());
+}
+
+function vote(itemId, v) {
+  if (!me) return;
+  const mine = { ...votes[me] };
+  if (mine[itemId] === v) delete mine[itemId]; else mine[itemId] = v;
+  votes[me] = mine; localPicks[me] = mine;
+  try { localStorage.setItem("passeios-picks", JSON.stringify(localPicks)); } catch (e) {}
+  softRender([itemId]);
+  dirty = true; clearTimeout(timer); timer = setTimeout(flush, 700); setSync("Salvando…");
+}
+
+async function flush() {
+  if (writing || !dirty || !me) return;
+  writing = true; dirty = false;
+  const who = me, picks = { ...votes[who] };
+  try {
+    const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pessoa: who, picks }) });
+    if (!r.ok) throw new Error(String(r.status));
+    setSync("Salvo pra todo mundo");
+  } catch (e) {
+    dirty = true; setSync("Sem conexão agora. Seu voto fica guardado aqui e tento de novo.");
+    setTimeout(flush, 5000);
+  } finally {
+    writing = false;
+    if (dirty && !writing) setTimeout(flush, 800);
+  }
+}
+
+const API = "/api/japao-votos";
+async function load() {
+  try {
+    const r = await fetch(API, { cache: "no-store" });
+    if (!r.ok) throw new Error(String(r.status));
+    const d = await r.json();
+    for (const [p, picks] of Object.entries(d.votos || {})) {
+      if (!votes[p]) continue;
+      if (p === me && (dirty || writing)) continue;
+      votes[p] = { ...picks };
+    }
+    if (mode === "loading") { mode = "shared"; setSync("Votos de todos ao vivo"); }
+    if (me && Object.keys(localPicks[me] || {}).length && !Object.keys((d.votos || {})[me] || {}).length) { votes[me] = { ...localPicks[me] }; dirty = true; flush(); }
+    softRender();
+  } catch (e) {
+    if (mode === "loading") setSync("Não consegui carregar os votos. Tente recarregar a página.");
+  }
+}
+
+renderAll();
+load();
+setInterval(() => { if (!document.hidden) load(); }, 20000);
+</script>
+
+</body>
+</html>
