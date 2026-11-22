@@ -1714,8 +1714,8 @@ fbq('track','PageView');
     <p class="vsl-sub">Ela vai encerrar em breve. É a primeira e única vez que farei isso.</p>
     <p class="vsl-assista">ASSISTA O VÍDEO ABAIXO <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></p>
     <div class="vsl-video">
-      <vturb-smartplayer id="vid-6a658a3270d97a6b7dd4ee20" style="display: block; margin: 0 auto; width: 100%;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
-      <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/5ab6965b-6268-4b7f-885a-aac5dae85715/players/6a658a3270d97a6b7dd4ee20/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
+      <vturb-smartplayer id="vid-6b024f553c1cdea412104d1a" style="display: block; margin: 0 auto; width: 100%;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+      <script type="text/javascript">var s=document.createElement("script");s.src="https://scripts.converteai.net/5ab6965b-6268-4b7f-885a-aac5dae85715/players/6b024f553c1cdea412104d1a/v4/player.js",s.async=!0,document.head.appendChild(s);</script>
     </div>
     <p class="vsl-som"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>Confira se o som do seu celular está ligado</p>
   </div>
@@ -2043,12 +2043,12 @@ fbq('track','PageView');
   })();
 </script>
 <script>
-  /* libera o bloco .esconder quando a pessoa chega em 254s do vídeo (?revelar=N para testar) */
+  /* libera o bloco .esconder quando a pessoa chega em 1410s do vídeo (?revelar=N para testar) */
   (function () {
     var q = new URLSearchParams(location.search);
     var seg = parseInt(q.get("revelar") || "", 10);
     var teste = seg > 0;
-    if (!teste) seg = 254;
+    if (!teste) seg = 1410;
     var p = document.querySelector("vturb-smartplayer");
     if (p) p.addEventListener("player:ready", function () {
       try { p.displayHiddenElements(seg, [".esconder"], { persist: !teste }); } catch (e) {}

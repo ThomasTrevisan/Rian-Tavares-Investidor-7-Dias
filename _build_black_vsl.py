@@ -9,8 +9,8 @@ html = pathlib.Path(sys.argv[1]).read_text(encoding="utf-8")
 
 CK = "https://pay.hub.la/rkh4csUigSsuGzY4mRFJ?lpv=black-vsl"
 WA = "https://wa.me/5511955056319?text=Oi%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20a%20Black%20dos%20Investimentos"
-VID = "6a658a3270d97a6b7dd4ee20"
-REVELAR = 254  # 4:14, quando o Rian fala "pelo preço que você encontra aqui embaixo"
+VID = "6b024f553c1cdea412104d1a"
+REVELAR = 1410  # 23:30, tempo do botão passado pelo Thomas em 21/11 (gravação da live, "link liberado" aos 23:27)
 
 
 def troca(velho, novo, n=1):
