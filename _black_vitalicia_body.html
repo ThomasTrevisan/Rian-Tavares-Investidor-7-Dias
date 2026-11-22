@@ -5,14 +5,14 @@
 <!-- Pagina de vendas da Black Friday do Invista Para Prosperar do Rian (16/11/2026), modelada na /black-vv da Thaize sem o video.
      Todos os botoes de compra usam o mesmo endereco: troque so a constante CHECKOUT no script do fim da pagina. -->
 
-<!-- Banner de urgencia (20/11, pedido do Thomas): "Ganhe a gravação de todos os aulões do Clube do Investidor", contador até 23:59.
+<!-- Banner de urgencia (22/11, pedido do Thomas): bônus Ebook Investindo no Exterior, contador até 23:59.
      Antes: 19/11 "Entre hoje para participar do aulão de alunos às 20h".
      Antes (18/11): "Entre hoje para ganhar bônus surpresas". Contador até as 20h; depois das 20h conta até 23:59 (a aula fica gravada).
      A partir de 20/11 (Brasília) o script volta sozinho para "ENTRE HOJE PARA GANHAR BÔNUS SURPRESAS" com contador até 23:59.
      O contador mira nas 23:59:59 de hoje no horario de Brasilia e reinicia sozinho toda meia-noite. -->
 <a href="https://pay.hub.la/rkh4csUigSsuGzY4mRFJ" class="ub-red js-ck" target="_blank" rel="noopener">
   <span class="ub-dot"></span>
-  <span class="ub-text">GANHE A GRAVAÇÃO DE TODOS OS AULÕES DO CLUBE DO INVESTIDOR</span>
+  <span class="ub-text">ENTRE HOJE E GANHE O EBOOK "INVESTINDO NO EXTERIOR"</span>
   <span class="ub-timer" aria-label="Tempo até a meia-noite"><span class="ub-box" data-t="h">--</span><span class="ub-sep">:</span><span class="ub-box" data-t="m">--</span><span class="ub-sep">:</span><span class="ub-box" data-t="s">--</span></span>
 </a>
 <script>
@@ -22,7 +22,7 @@
   var hojeBR = new Date(Date.now() - 3 * 3600000).toISOString().slice(0, 10);
   var ehAulao = hojeBR === DIA_AULAO;
   if (!ehAulao) {
-    b.querySelector('.ub-text').textContent = 'GANHE A GRAVAÇÃO DE TODOS OS AULÕES DO CLUBE DO INVESTIDOR';
+    b.querySelector('.ub-text').textContent = 'ENTRE HOJE E GANHE O EBOOK "INVESTINDO NO EXTERIOR"';
     b.querySelector('.ub-timer').setAttribute('aria-label', 'Tempo até a meia-noite');
   }
   var h = b.querySelector('[data-t="h"]'), m = b.querySelector('[data-t="m"]'), g = b.querySelector('[data-t="s"]');
