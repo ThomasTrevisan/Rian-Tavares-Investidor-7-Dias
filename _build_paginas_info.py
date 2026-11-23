@@ -30,7 +30,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent
 LP = 'https://lp.riantavares.com.br'
-WHATS_SUPORTE = None  # número do suporte confirmado pelo Thomas, só dígitos com 55 (ex.: '5511999999999')
+WHATS_SUPORTE = '5511955056319'  # suporte ao aluno confirmado pelo Thomas em 23/11/2026
 
 SAMEAS = ['https://www.instagram.com/falecomrian/', 'https://www.youtube.com/@falecomrian', 'https://www.riantavares.com.br/']
 PESSOA_ID = f'{LP}/quem-e-rian-tavares/#rian'
