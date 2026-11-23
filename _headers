@@ -130,3 +130,41 @@
 
 /replay-black.html
   Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+# 23/11/2026 SEO: paginas de informacao (geradas por _build_paginas_info.py)
+/quem-e-rian-tavares/*
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/cursos-rian-tavares/*
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+/atendimento/*
+  Cache-Control: public, max-age=0, s-maxage=300, must-revalidate
+
+# 23/11/2026 SEO: paineis, pesquisas e testes internos fora do Google (nao mexe em pagina de venda nem de captacao)
+/painel-black/*
+  X-Robots-Tag: noindex, nofollow
+
+/painel-black-compradores/*
+  X-Robots-Tag: noindex, nofollow
+
+/painel-oadv/*
+  X-Robots-Tag: noindex, nofollow
+
+/painel-rian/*
+  X-Robots-Tag: noindex, nofollow
+
+/yt-pesquisa/*
+  X-Robots-Tag: noindex, nofollow
+
+/japao/*
+  X-Robots-Tag: noindex, nofollow
+
+/plano
+  X-Robots-Tag: noindex, nofollow
+
+/plano.html
+  X-Robots-Tag: noindex, nofollow
+
+/ipp-alunos/preview-*
+  X-Robots-Tag: noindex, nofollow
